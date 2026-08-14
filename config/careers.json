@@ -1,0 +1,488 @@
+{
+  "_comment": "SPEC §4 + §50. Seed career model. Every 0-10 dimension here is a SEED marked with a confidence. The job-market engine (§31) overwrites demand/shortage/coding/sponsorship/employer_quality with MEASURED values from real postings wherever the keyword match yields enough evidence. Seeds that are never corroborated stay flagged ESTIMATED and are shown as such in reports.",
+  "scale_note": "All dimensions 0-10. 5 = unremarkable. Salary dimensions are ORDINAL positioning, not currency - actual currency figures live in salary_observations with sources.",
+  "min_postings_for_measured": 12,
+
+  "careers": [
+    {
+      "id": "ai_gov_fs",
+      "name": "AI Governance / AI Risk Manager - Financial Services",
+      "tier": 1,
+      "seed_rank": 1,
+      "keywords": ["ai governance", "ai risk", "responsible ai", "model risk", "algorithmic risk", "ai assurance"],
+      "context_keywords": ["bank", "financial", "insurance", "capital markets", "fintech", "payments"],
+      "banking_adjacency": 10,
+      "coding_expected": 2,
+      "dimensions": {
+        "salary_potential": 8,
+        "job_demand": 7,
+        "job_security": 8,
+        "shortage": 8,
+        "ai_resilience": 9,
+        "international_mobility": 7,
+        "career_ceiling": 9,
+        "employer_quality": 9,
+        "industry_growth": 9
+      },
+      "purpose_dimensions": {
+        "international_org_pathway": 4,
+        "policy_relevance": 6,
+        "sustainability_relevance": 2,
+        "global_impact_reach": 5
+      },
+      "confidence": "ESTIMATED",
+      "rationale": "EU AI Act Annex III high-risk obligations deferred to Dec 2027 by the Digital Omnibus (in force 27 Jul 2026) - the hiring wave is ahead, not behind. Banking is the most heavily regulated adopter. Seed rank 1 because the applicant's 10 years of banking domain is directly reusable.",
+      "risks": ["Newest of the tracks - title inflation and role instability are real.", "Some employers fold this into existing model-risk teams and require quantitative validation skills, which would violate the non-coding constraint."]
+    },
+    {
+      "id": "ai_gov_general",
+      "name": "AI Governance / Responsible AI Manager (cross-industry)",
+      "tier": 1,
+      "seed_rank": 2,
+      "keywords": ["ai governance", "responsible ai", "ai ethics", "trustworthy ai", "ai assurance", "ai compliance"],
+      "context_keywords": [],
+      "banking_adjacency": 6,
+      "coding_expected": 2,
+      "dimensions": {
+        "salary_potential": 7,
+        "job_demand": 7,
+        "job_security": 7,
+        "shortage": 8,
+        "ai_resilience": 9,
+        "international_mobility": 8,
+        "career_ceiling": 8,
+        "employer_quality": 8,
+        "industry_growth": 9
+      },
+      "purpose_dimensions": {
+        "international_org_pathway": 6,
+        "policy_relevance": 8,
+        "sustainability_relevance": 3,
+        "global_impact_reach": 7
+      },
+      "confidence": "ESTIMATED",
+      "rationale": "Broader employer base than the FS-specific track, but the applicant loses his domain premium outside banking.",
+      "risks": ["Most exposed to saturation: the supply of newly-certified AI governance generalists is rising faster than the supply of regulated-industry veterans."]
+    },
+    {
+      "id": "tech_risk_dora",
+      "name": "Technology Risk / ICT Operational Resilience Manager",
+      "tier": 1,
+      "seed_rank": 3,
+      "keywords": ["technology risk", "ict risk", "operational resilience", "dora", "third party risk", "it risk"],
+      "context_keywords": ["bank", "financial", "insurance", "payments"],
+      "banking_adjacency": 10,
+      "coding_expected": 1,
+      "dimensions": {
+        "salary_potential": 7,
+        "job_demand": 8,
+        "job_security": 9,
+        "shortage": 7,
+        "ai_resilience": 8,
+        "international_mobility": 7,
+        "career_ceiling": 8,
+        "employer_quality": 9,
+        "industry_growth": 7
+      },
+      "purpose_dimensions": {
+        "international_org_pathway": 3,
+        "policy_relevance": 5,
+        "sustainability_relevance": 2,
+        "global_impact_reach": 3
+      },
+      "confidence": "ESTIMATED",
+      "rationale": "DORA has applied since Jan 2025 - this demand is PRESENT TENSE, not forecast. Lower glamour than AI governance but a far more established job family, which usually means a higher hire probability for a career changer.",
+      "risks": ["Less 'AI' brand value.", "Can drift toward infrastructure/technical depth in some organisations."]
+    },
+    {
+      "id": "ai_compliance",
+      "name": "AI Compliance Officer",
+      "tier": 1,
+      "seed_rank": 4,
+      "keywords": ["ai compliance", "ai regulatory", "ai act", "algorithmic accountability", "ai policy compliance"],
+      "context_keywords": ["bank", "financial", "regulated"],
+      "banking_adjacency": 9,
+      "coding_expected": 1,
+      "dimensions": {
+        "salary_potential": 7,
+        "job_demand": 6,
+        "job_security": 8,
+        "shortage": 7,
+        "ai_resilience": 9,
+        "international_mobility": 6,
+        "career_ceiling": 7,
+        "employer_quality": 8,
+        "industry_growth": 8
+      },
+      "purpose_dimensions": {
+        "international_org_pathway": 4,
+        "policy_relevance": 7,
+        "sustainability_relevance": 2,
+        "global_impact_reach": 4
+      },
+      "confidence": "ESTIMATED",
+      "rationale": "Compliance-officer framing maps most literally onto the applicant's existing job family.",
+      "risks": ["Often a sub-title inside a larger compliance function rather than a standalone career ladder."]
+    },
+    {
+      "id": "ai_risk_reg_gov",
+      "name": "AI Risk & Regulatory Governance Manager",
+      "tier": 1,
+      "seed_rank": 5,
+      "keywords": ["ai risk", "regulatory governance", "ai regulation", "ai oversight", "ai risk framework"],
+      "context_keywords": ["bank", "financial", "regulator", "supervisor"],
+      "banking_adjacency": 9,
+      "coding_expected": 2,
+      "dimensions": {
+        "salary_potential": 7,
+        "job_demand": 6,
+        "job_security": 8,
+        "shortage": 7,
+        "ai_resilience": 9,
+        "international_mobility": 7,
+        "career_ceiling": 8,
+        "employer_quality": 8,
+        "industry_growth": 8
+      },
+      "purpose_dimensions": {
+        "international_org_pathway": 6,
+        "policy_relevance": 8,
+        "sustainability_relevance": 2,
+        "global_impact_reach": 6
+      },
+      "confidence": "ESTIMATED",
+      "rationale": "Includes the supervisory/regulator side (central banks, competent authorities) which is a genuine and often overlooked employer set for this profile.",
+      "risks": ["Regulator salaries are typically below private sector.", "Many supervisory roles are nationality- or EU-citizenship-restricted."]
+    },
+
+    {
+      "id": "cyber_grc",
+      "name": "Cybersecurity GRC Manager",
+      "tier": 2,
+      "seed_rank": 6,
+      "keywords": ["cyber grc", "security governance", "information security governance", "security risk", "security compliance", "iso 27001", "nis2"],
+      "context_keywords": [],
+      "banking_adjacency": 7,
+      "coding_expected": 2,
+      "dimensions": {
+        "salary_potential": 7,
+        "job_demand": 9,
+        "job_security": 9,
+        "shortage": 8,
+        "ai_resilience": 8,
+        "international_mobility": 9,
+        "career_ceiling": 8,
+        "employer_quality": 8,
+        "industry_growth": 8
+      },
+      "purpose_dimensions": {
+        "international_org_pathway": 5,
+        "policy_relevance": 5,
+        "sustainability_relevance": 2,
+        "global_impact_reach": 4
+      },
+      "confidence": "ESTIMATED",
+      "rationale": "The deepest, most globally portable non-coding technology-governance job market that exists today. NIS2 transposition plus DORA plus ISO 27001 refresh cycles sustain it. This is the strongest challenger to the AI-governance hypothesis (§33) and must be re-tested every run.",
+      "risks": ["Employers frequently expect CISSP/CISM, which take real time.", "Some GRC roles slide into hands-on security engineering."]
+    },
+    {
+      "id": "ciso_track",
+      "name": "Cybersecurity Governance / CISO track",
+      "tier": 2,
+      "seed_rank": 7,
+      "keywords": ["ciso", "head of information security", "security strategy", "security leadership"],
+      "context_keywords": [],
+      "banking_adjacency": 6,
+      "coding_expected": 3,
+      "dimensions": {
+        "salary_potential": 9,
+        "job_demand": 6,
+        "job_security": 8,
+        "shortage": 7,
+        "ai_resilience": 8,
+        "international_mobility": 7,
+        "career_ceiling": 10,
+        "employer_quality": 9,
+        "industry_growth": 7
+      },
+      "purpose_dimensions": {
+        "international_org_pathway": 3,
+        "policy_relevance": 4,
+        "sustainability_relevance": 1,
+        "global_impact_reach": 3
+      },
+      "confidence": "ESTIMATED",
+      "rationale": "Highest ceiling in tier 2, but it is a 10-15 year destination, not an entry point, and most CISOs come up through technical security.",
+      "risks": ["Realistically unreachable without a prior decade inside security. Treat as a ceiling, not a target."]
+    },
+    {
+      "id": "data_ai_gov",
+      "name": "Data & AI Governance Manager",
+      "tier": 2,
+      "seed_rank": 8,
+      "keywords": ["data governance", "data quality", "data management", "ai governance", "data stewardship", "master data"],
+      "context_keywords": ["bank", "financial"],
+      "banking_adjacency": 9,
+      "coding_expected": 2,
+      "dimensions": {
+        "salary_potential": 6,
+        "job_demand": 8,
+        "job_security": 8,
+        "shortage": 6,
+        "ai_resilience": 7,
+        "international_mobility": 7,
+        "career_ceiling": 7,
+        "employer_quality": 8,
+        "industry_growth": 7
+      },
+      "purpose_dimensions": {
+        "international_org_pathway": 4,
+        "policy_relevance": 5,
+        "sustainability_relevance": 2,
+        "global_impact_reach": 4
+      },
+      "confidence": "ESTIMATED",
+      "rationale": "Directly continuous with his customer-data-management experience. BCBS 239 and GDPR keep this permanently funded in banks.",
+      "risks": ["Salary ceiling is lower than AI risk or cyber.", "Occasionally requires SQL fluency - check each posting."]
+    },
+    {
+      "id": "fincrime_ai",
+      "name": "AI-enabled Financial Crime / AML / KYC Manager",
+      "tier": 2,
+      "seed_rank": 9,
+      "keywords": ["financial crime", "aml", "kyc", "anti-money laundering", "sanctions", "transaction monitoring", "fraud"],
+      "context_keywords": ["ai", "model", "analytics", "automation"],
+      "banking_adjacency": 10,
+      "coding_expected": 2,
+      "dimensions": {
+        "salary_potential": 7,
+        "job_demand": 9,
+        "job_security": 9,
+        "shortage": 6,
+        "ai_resilience": 7,
+        "international_mobility": 8,
+        "career_ceiling": 8,
+        "employer_quality": 9,
+        "industry_growth": 7
+      },
+      "purpose_dimensions": {
+        "international_org_pathway": 7,
+        "policy_relevance": 6,
+        "sustainability_relevance": 2,
+        "global_impact_reach": 6
+      },
+      "confidence": "ESTIMATED",
+      "rationale": "HIGHEST TRANSITION PROBABILITY of any track here: it is the only one where he already has 10 years of the core competency and would be hired FOR his existing CV rather than despite it. AMLA (the EU AML Authority, seated in Frankfurt) is a structural demand driver.",
+      "risks": ["Lower AI-resilience than pure governance tracks: alert triage and screening are being automated.", "Risk of being hired into the same job he already has, in a different currency - the AI/model-governance overlay is what prevents that."]
+    },
+    {
+      "id": "tech_risk_compliance",
+      "name": "Technology Risk & Compliance Manager",
+      "tier": 2,
+      "seed_rank": 10,
+      "keywords": ["technology compliance", "it compliance", "technology risk", "it audit", "controls testing", "sox itgc"],
+      "context_keywords": ["bank", "financial"],
+      "banking_adjacency": 9,
+      "coding_expected": 1,
+      "dimensions": {
+        "salary_potential": 6,
+        "job_demand": 8,
+        "job_security": 8,
+        "shortage": 5,
+        "ai_resilience": 6,
+        "international_mobility": 7,
+        "career_ceiling": 7,
+        "employer_quality": 8,
+        "industry_growth": 6
+      },
+      "purpose_dimensions": {
+        "international_org_pathway": 3,
+        "policy_relevance": 4,
+        "sustainability_relevance": 2,
+        "global_impact_reach": 3
+      },
+      "confidence": "ESTIMATED",
+      "rationale": "The Big-4 volume-hiring entry door. Not glamorous, but it is the highest-probability first European employer.",
+      "risks": ["Commoditised - salary progression depends on escaping into a specialism within 3 years."]
+    },
+
+    {
+      "id": "ai_policy",
+      "name": "AI Policy Manager",
+      "tier": 3,
+      "seed_rank": 11,
+      "keywords": ["ai policy", "technology policy", "digital policy", "public policy ai", "policy advisor"],
+      "context_keywords": [],
+      "banking_adjacency": 3,
+      "coding_expected": 1,
+      "dimensions": {
+        "salary_potential": 5,
+        "job_demand": 4,
+        "job_security": 6,
+        "shortage": 5,
+        "ai_resilience": 9,
+        "international_mobility": 6,
+        "career_ceiling": 8,
+        "employer_quality": 7,
+        "industry_growth": 7
+      },
+      "purpose_dimensions": {
+        "international_org_pathway": 9,
+        "policy_relevance": 10,
+        "sustainability_relevance": 4,
+        "global_impact_reach": 9
+      },
+      "confidence": "ESTIMATED",
+      "rationale": "The purpose-maximising track (§53). Strong UN/OECD/World Bank pathway.",
+      "risks": ["Thin job market. Heavily credentialist - often expects a policy/law master's from a small set of schools, plus prior public-sector or think-tank experience. Non-EU nationals are excluded from many EU institution roles. Salary well below private sector."]
+    },
+    {
+      "id": "digital_gov",
+      "name": "Digital Governance Manager",
+      "tier": 3,
+      "seed_rank": 12,
+      "keywords": ["digital governance", "digital transformation governance", "technology governance"],
+      "context_keywords": [],
+      "banking_adjacency": 6,
+      "coding_expected": 1,
+      "dimensions": {
+        "salary_potential": 5, "job_demand": 4, "job_security": 6, "shortage": 4,
+        "ai_resilience": 7, "international_mobility": 5, "career_ceiling": 6,
+        "employer_quality": 6, "industry_growth": 5
+      },
+      "purpose_dimensions": {"international_org_pathway": 6, "policy_relevance": 6, "sustainability_relevance": 3, "global_impact_reach": 5},
+      "confidence": "ESTIMATED",
+      "rationale": "Vague as a job title; the term appears more in programme marketing than in job postings.",
+      "risks": ["Weak title recognition with recruiters. Verify against real postings before betting on it."]
+    },
+    {
+      "id": "ai_ethics",
+      "name": "Responsible Technology / AI Ethics Manager",
+      "tier": 3,
+      "seed_rank": 13,
+      "keywords": ["ai ethics", "responsible technology", "ethical ai", "tech ethics", "algorithmic fairness"],
+      "context_keywords": [],
+      "banking_adjacency": 3,
+      "coding_expected": 2,
+      "dimensions": {
+        "salary_potential": 5, "job_demand": 3, "job_security": 5, "shortage": 5,
+        "ai_resilience": 8, "international_mobility": 6, "career_ceiling": 6,
+        "employer_quality": 7, "industry_growth": 5
+      },
+      "purpose_dimensions": {"international_org_pathway": 8, "policy_relevance": 8, "sustainability_relevance": 4, "global_impact_reach": 8},
+      "confidence": "ESTIMATED",
+      "rationale": "High purpose value, weak labour market. Big Tech ethics teams contracted sharply after 2023.",
+      "risks": ["Most exposed to cost-cutting of any track here. Ethics roles are discretionary spend; governance roles are regulatory spend. Prefer the latter."]
+    },
+    {
+      "id": "fincrime_intel",
+      "name": "Financial Crime Intelligence Manager",
+      "tier": 3,
+      "seed_rank": 14,
+      "keywords": ["financial crime intelligence", "fiu", "sanctions intelligence", "investigations", "typologies"],
+      "context_keywords": ["bank", "financial", "law enforcement"],
+      "banking_adjacency": 9,
+      "coding_expected": 1,
+      "dimensions": {
+        "salary_potential": 6, "job_demand": 6, "job_security": 8, "shortage": 5,
+        "ai_resilience": 7, "international_mobility": 6, "career_ceiling": 7,
+        "employer_quality": 8, "industry_growth": 6
+      },
+      "purpose_dimensions": {"international_org_pathway": 8, "policy_relevance": 6, "sustainability_relevance": 2, "global_impact_reach": 7},
+      "confidence": "ESTIMATED",
+      "rationale": "Strong pathway to UNODC, Egmont Group, FATF-adjacent bodies and AMLA.",
+      "risks": ["Many roles require security clearance or nationality."]
+    },
+    {
+      "id": "regtech_gov",
+      "name": "RegTech Governance Manager",
+      "tier": 3,
+      "seed_rank": 15,
+      "keywords": ["regtech", "regulatory technology", "compliance technology", "suptech"],
+      "context_keywords": ["bank", "financial", "fintech"],
+      "banking_adjacency": 9,
+      "coding_expected": 3,
+      "dimensions": {
+        "salary_potential": 6, "job_demand": 5, "job_security": 6, "shortage": 5,
+        "ai_resilience": 6, "international_mobility": 7, "career_ceiling": 7,
+        "employer_quality": 7, "industry_growth": 7
+      },
+      "purpose_dimensions": {"international_org_pathway": 3, "policy_relevance": 5, "sustainability_relevance": 2, "global_impact_reach": 4},
+      "confidence": "ESTIMATED",
+      "rationale": "His digitisation + compliance combination is an unusually exact fit for RegTech vendor product/solutions roles.",
+      "risks": ["Vendor-side roles drift toward pre-sales or solution engineering, which raises coding expectations."]
+    },
+    {
+      "id": "model_risk_gov",
+      "name": "Model Risk Governance Specialist",
+      "tier": 3,
+      "seed_rank": 16,
+      "keywords": ["model risk", "model governance", "model validation", "model lifecycle", "sr 11-7"],
+      "context_keywords": ["bank", "financial"],
+      "banking_adjacency": 10,
+      "coding_expected": 3,
+      "dimensions": {
+        "salary_potential": 8, "job_demand": 7, "job_security": 9, "shortage": 7,
+        "ai_resilience": 8, "international_mobility": 7, "career_ceiling": 8,
+        "employer_quality": 9, "industry_growth": 7
+      },
+      "purpose_dimensions": {"international_org_pathway": 3, "policy_relevance": 5, "sustainability_relevance": 2, "global_impact_reach": 3},
+      "confidence": "ESTIMATED",
+      "rationale": "RBI's draft Model Risk Management guidance makes this the internal hook at Union Bank. The GOVERNANCE side (inventory, lifecycle, policy, challenge) is genuinely non-coding.",
+      "risks": ["CRITICAL: model VALIDATION is quantitative and violates the non-coding constraint; model GOVERNANCE does not. The two are often advertised under the same title. Every posting and programme must be checked for which one it means."]
+    },
+    {
+      "id": "privacy_ai_gov",
+      "name": "Privacy / AI Governance Manager",
+      "tier": 3,
+      "seed_rank": 17,
+      "keywords": ["privacy", "data protection", "gdpr", "dpo", "privacy engineering", "cipp"],
+      "context_keywords": [],
+      "banking_adjacency": 8,
+      "coding_expected": 1,
+      "dimensions": {
+        "salary_potential": 6, "job_demand": 7, "job_security": 8, "shortage": 5,
+        "ai_resilience": 8, "international_mobility": 8, "career_ceiling": 7,
+        "employer_quality": 8, "industry_growth": 6
+      },
+      "purpose_dimensions": {"international_org_pathway": 5, "policy_relevance": 7, "sustainability_relevance": 2, "global_impact_reach": 5},
+      "confidence": "ESTIMATED",
+      "rationale": "Mature, portable, genuinely non-coding, and the IAPP credential ladder (CIPP/E then AIGP) is the cheapest credible entry route into AI governance.",
+      "risks": ["Mature market means less shortage premium. Often expects a law background."]
+    },
+    {
+      "id": "sustainable_finance",
+      "name": "Sustainable Finance / Climate Risk Manager",
+      "tier": 3,
+      "seed_rank": 18,
+      "keywords": ["sustainable finance", "climate risk", "esg", "csrd", "green finance", "transition risk"],
+      "context_keywords": ["bank", "financial", "insurance"],
+      "banking_adjacency": 8,
+      "coding_expected": 2,
+      "dimensions": {
+        "salary_potential": 6, "job_demand": 5, "job_security": 6, "shortage": 5,
+        "ai_resilience": 8, "international_mobility": 7, "career_ceiling": 7,
+        "employer_quality": 8, "industry_growth": 5
+      },
+      "purpose_dimensions": {"international_org_pathway": 9, "policy_relevance": 8, "sustainability_relevance": 10, "global_impact_reach": 9},
+      "confidence": "ESTIMATED",
+      "rationale": "Best purpose-to-salary ratio of the tier-3 tracks and a strong World Bank / IFC / development-bank pathway.",
+      "risks": ["ESG hiring cooled markedly after 2024 and the EU Omnibus package scaled back CSRD scope. Do not assume the 2021-2023 growth curve continues - this is exactly the kind of assumption §33 exists to kill."]
+    }
+  ],
+
+  "arbitrage_combinations": {
+    "_comment": "SPEC §32. Combinations where the applicant's existing CV is an unusual advantage. Scored on rarity x demand x transferability, not on absolute salary.",
+    "combos": [
+      {"id": "bank_aigov", "name": "Banking + AI Governance", "components": ["ai_gov_fs"], "rarity": 9, "transferability": 8},
+      {"id": "bank_airisk", "name": "Banking + AI Risk", "components": ["ai_risk_reg_gov", "model_risk_gov"], "rarity": 9, "transferability": 8},
+      {"id": "bank_dora", "name": "Banking + DORA / NIS2 operational resilience", "components": ["tech_risk_dora"], "rarity": 7, "transferability": 9},
+      {"id": "bank_cybergrc", "name": "Banking + Cyber GRC", "components": ["cyber_grc"], "rarity": 6, "transferability": 9},
+      {"id": "bank_fincrime_ai", "name": "Banking + Financial Crime + AI", "components": ["fincrime_ai"], "rarity": 8, "transferability": 10},
+      {"id": "pay_aigov", "name": "Payments + AI Governance", "components": ["ai_gov_fs"], "rarity": 10, "transferability": 7},
+      {"id": "aml_rai", "name": "AML + Responsible AI", "components": ["fincrime_ai", "ai_gov_general"], "rarity": 9, "transferability": 8},
+      {"id": "finreg_ai", "name": "Financial Regulation + AI", "components": ["ai_compliance", "ai_risk_reg_gov"], "rarity": 8, "transferability": 7},
+      {"id": "kyc_datagov", "name": "KYC/customer data + Data & AI Governance", "components": ["data_ai_gov"], "rarity": 7, "transferability": 9}
+    ]
+  }
+}

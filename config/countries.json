@@ -1,0 +1,276 @@
+{
+  "_comment": "SPEC §13 + §23 + §29. TWO KINDS OF DATA LIVE HERE, and they must never be confused: (a) 0-10 ordinal sub-scores, which are explicit editorial judgements for THIS applicant - they are opinions and are labelled ESTIMATED; (b) the `visa` block, which contains FACTS (salary thresholds, stay-back durations) that require a government source URL and a checked date. Facts without a source must read DATA NOT VERIFIED. Never promote (a) into (b).",
+
+  "verification_policy": {
+    "fact_fields": ["post_study_work_months", "skilled_threshold_eur", "skilled_threshold_local", "pr_years"],
+    "required_for_fact": ["source_url", "checked", "source_type"],
+    "stale_after_days": 90
+  },
+
+  "countries": [
+    {
+      "code": "IE",
+      "name": "Ireland",
+      "tier": "priority",
+      "currency": "EUR",
+      "scores": {
+        "salary": 8, "job_demand": 8, "visa_friendliness": 8, "post_study_work": 8,
+        "pr_pathway": 7, "english_accessibility": 10, "cost_of_living": 3, "tuition": 4,
+        "banking_finance_ecosystem": 10, "ai_ecosystem": 8, "cybersecurity_ecosystem": 8,
+        "regulatory_ecosystem": 10, "international_hiring": 9, "quality_of_life": 7, "stability": 8
+      },
+      "scores_confidence": "ESTIMATED",
+      "scores_rationale": "Highest regulatory-ecosystem score of any country here: the Central Bank of Ireland supervises a very large share of EU-passported financial entities, and almost every US tech and financial firm runs its EMEA compliance function from Dublin. English-native removes the single biggest barrier the applicant faces in NL/DE/FR. Marked down hard on cost of living (Dublin housing) and on tuition.",
+      "visa": {
+        "student_visa": {"exists": true, "name": "Stamp 2", "confidence": "PROBABLY CORRECT"},
+        "post_study_work_months": {"value": 24, "confidence": "PROBABLY CORRECT", "name": "Third Level Graduate Programme (Stamp 1G), master's level", "source_url": null, "checked": null, "source_type": null, "note": "NEEDS VERIFICATION against irishimmigration.ie before any application decision."},
+        "skilled_route": {"name": "Critical Skills Employment Permit", "confidence": "PROBABLY CORRECT"},
+        "skilled_threshold_eur": {"value": 40904, "condition": "with a degree relevant to the role", "confidence": "PROBABLY CORRECT", "source_url": null, "checked": "2026-08", "source_type": "carried from ai-governance-career/CLAUDE.md - NOT re-verified here"},
+        "skilled_threshold_eur_alt": {"value": 68911, "condition": "without a relevant degree", "confidence": "PROBABLY CORRECT", "source_url": null, "checked": "2026-08", "source_type": "carried from ai-governance-career/CLAUDE.md - NOT re-verified here"},
+        "pr_years": {"value": 5, "confidence": "ESTIMATED", "source_url": null, "checked": null},
+        "sponsorship_difficulty": "moderate",
+        "flag": "GREEN",
+        "why_flag": "English-speaking, 2-year stay-back at master's level, and the permit threshold gap (EUR 40,904 vs EUR 68,911) is the single strongest financial argument for doing the master's at all.",
+        "critical_note": "THE DECISIVE VARIABLE FOR THIS APPLICANT. A B.Tech in Biotechnology is unlikely to be judged 'relevant' to a governance role, which would push him to the EUR 68,911 bar - a salary level he will not reach as a career changer. An Irish master's in a relevant field is what moves him to the EUR 40,904 bar. Verify the current figures and the relevance test before committing."
+      }
+    },
+    {
+      "code": "NL",
+      "name": "Netherlands",
+      "tier": "priority",
+      "currency": "EUR",
+      "scores": {
+        "salary": 8, "job_demand": 8, "visa_friendliness": 9, "post_study_work": 9,
+        "pr_pathway": 7, "english_accessibility": 8, "cost_of_living": 4, "tuition": 6,
+        "banking_finance_ecosystem": 8, "ai_ecosystem": 8, "cybersecurity_ecosystem": 7,
+        "regulatory_ecosystem": 8, "international_hiring": 9, "quality_of_life": 8, "stability": 8
+      },
+      "scores_confidence": "ESTIMATED",
+      "scores_rationale": "The orientation year (zoekjaar) plus a REDUCED highly-skilled-migrant salary threshold for recent graduates is the most mechanically favourable graduate-to-work conversion in Europe. English-taught master's are abundant and cheaper than Ireland or the UK. Marked down on english_accessibility relative to Ireland because Dutch is still expected in many domestic bank compliance roles.",
+      "visa": {
+        "student_visa": {"exists": true, "name": "MVV + residence permit for study", "confidence": "PROBABLY CORRECT"},
+        "post_study_work_months": {"value": 12, "confidence": "PROBABLY CORRECT", "name": "Orientation year (zoekjaar) - usable within 3 years of graduating", "source_url": null, "checked": null, "source_type": null, "note": "NEEDS VERIFICATION against ind.nl."},
+        "skilled_route": {"name": "Highly Skilled Migrant (kennismigrant)", "confidence": "PROBABLY CORRECT"},
+        "skilled_threshold_eur": {"value": 71304, "condition": "age 30+, approx annual equivalent of the monthly gross threshold excl. holiday allowance", "confidence": "ESTIMATED", "source_url": null, "checked": "2026-08", "source_type": "DERIVED from EUR 5,942/mo figure in ai-governance-career/CLAUDE.md - arithmetic estimate, NOT an official annual figure"},
+        "reduced_graduate_threshold": {"value": null, "confidence": "UNKNOWN", "note": "DATA NOT VERIFIED. A materially lower threshold exists for holders of a recent Dutch degree / zoekjaar holders. This is decisive for the NL case and MUST be verified against ind.nl before ranking NL."},
+        "pr_years": {"value": 5, "confidence": "ESTIMATED", "source_url": null, "checked": null},
+        "sponsorship_difficulty": "low",
+        "flag": "GREEN",
+        "why_flag": "Recognised-sponsor system is employer-friendly and widely used; the reduced graduate threshold is the mechanism that makes a career-changer hire affordable."
+      }
+    },
+    {
+      "code": "DE",
+      "name": "Germany",
+      "tier": "priority",
+      "currency": "EUR",
+      "scores": {
+        "salary": 8, "job_demand": 8, "visa_friendliness": 8, "post_study_work": 9,
+        "pr_pathway": 8, "english_accessibility": 5, "cost_of_living": 6, "tuition": 10,
+        "banking_finance_ecosystem": 9, "ai_ecosystem": 7, "cybersecurity_ecosystem": 7,
+        "regulatory_ecosystem": 9, "international_hiring": 7, "quality_of_life": 7, "stability": 8
+      },
+      "scores_confidence": "ESTIMATED",
+      "scores_rationale": "Tuition scores 10 because public universities charge only semester contributions - the ROI ceiling here is structurally higher than anywhere else on this list. 18-month post-study job search is the longest in the EU. Frankfurt hosts the ECB, EBA-adjacent bodies and AMLA (the EU Anti-Money Laundering Authority), which is directly on this applicant's axis. The binding constraint is language: english_accessibility 5 reflects that most German bank compliance and risk roles genuinely require German, even when the job ad is in English.",
+      "visa": {
+        "student_visa": {"exists": true, "name": "National visa for study purposes", "confidence": "PROBABLY CORRECT"},
+        "post_study_work_months": {"value": 18, "confidence": "PROBABLY CORRECT", "name": "Residence permit to seek employment after graduating", "source_url": null, "checked": null, "source_type": null, "note": "NEEDS VERIFICATION."},
+        "skilled_route": {"name": "EU Blue Card", "confidence": "PROBABLY CORRECT"},
+        "skilled_threshold_eur": {"value": 50700, "condition": "standard Blue Card", "confidence": "PROBABLY CORRECT", "source_url": null, "checked": "2026-08", "source_type": "carried from ai-governance-career/CLAUDE.md - NOT re-verified"},
+        "skilled_threshold_eur_alt": {"value": 45934, "condition": "shortage occupation / recent graduate reduced rate", "confidence": "PROBABLY CORRECT", "source_url": null, "checked": "2026-08", "source_type": "carried from ai-governance-career/CLAUDE.md - NOT re-verified"},
+        "pr_years": {"value": 3, "confidence": "ESTIMATED", "note": "Blue Card holders can qualify for settlement faster, with a language condition."},
+        "sponsorship_difficulty": "low",
+        "flag": "AMBER",
+        "why_flag": "Immigration mechanics are excellent and tuition is near-zero, but German-language expectations in compliance/risk roles are the real gate. GREEN on paper, AMBER in practice for a non-German speaker."
+      }
+    },
+    {
+      "code": "BE",
+      "name": "Belgium",
+      "tier": "priority",
+      "currency": "EUR",
+      "scores": {
+        "salary": 7, "job_demand": 6, "visa_friendliness": 6, "post_study_work": 6,
+        "pr_pathway": 6, "english_accessibility": 6, "cost_of_living": 6, "tuition": 8,
+        "banking_finance_ecosystem": 7, "ai_ecosystem": 6, "cybersecurity_ecosystem": 6,
+        "regulatory_ecosystem": 10, "international_hiring": 8, "quality_of_life": 7, "stability": 7
+      },
+      "scores_confidence": "ESTIMATED",
+      "scores_rationale": "Brussels is the single best location on earth for EU AI Act and digital-regulation POLICY work - hence regulatory_ecosystem 10. But the private-sector risk/compliance job market is much smaller than IE/NL/DE, and many EU-institution roles are restricted to EU nationals, which caps the upside for an Indian national.",
+      "visa": {
+        "student_visa": {"exists": true, "name": "Type D student visa", "confidence": "PROBABLY CORRECT"},
+        "post_study_work_months": {"value": 12, "confidence": "ESTIMATED", "name": "Search year / orientation year", "source_url": null, "checked": null, "note": "NEEDS VERIFICATION - regional competence (Flanders/Wallonia/Brussels) complicates this."},
+        "skilled_route": {"name": "Single Permit / EU Blue Card", "confidence": "PROBABLY CORRECT"},
+        "skilled_threshold_eur": {"value": null, "confidence": "UNKNOWN", "note": "DATA NOT VERIFIED - thresholds are set regionally and differ across Flanders, Wallonia and Brussels."},
+        "pr_years": {"value": 5, "confidence": "ESTIMATED"},
+        "sponsorship_difficulty": "moderate",
+        "flag": "AMBER",
+        "why_flag": "Unbeatable for policy proximity, mediocre for private-sector hiring volume and administratively fragmented."
+      }
+    },
+    {
+      "code": "LU",
+      "name": "Luxembourg",
+      "tier": "priority",
+      "currency": "EUR",
+      "scores": {
+        "salary": 10, "job_demand": 6, "visa_friendliness": 7, "post_study_work": 6,
+        "pr_pathway": 5, "english_accessibility": 8, "cost_of_living": 3, "tuition": 7,
+        "banking_finance_ecosystem": 10, "ai_ecosystem": 5, "cybersecurity_ecosystem": 6,
+        "regulatory_ecosystem": 9, "international_hiring": 8, "quality_of_life": 7, "stability": 9
+      },
+      "scores_confidence": "ESTIMATED",
+      "scores_rationale": "Highest salaries in the EU and a fund-administration and private-banking sector that runs on AML/KYC - the applicant's exact competency. Extremely small absolute job market and very few master's programmes, so opportunity depth is thin. French is often expected.",
+      "visa": {
+        "student_visa": {"exists": true, "confidence": "PROBABLY CORRECT"},
+        "post_study_work_months": {"value": 12, "confidence": "ESTIMATED", "note": "NEEDS VERIFICATION."},
+        "skilled_route": {"name": "EU Blue Card / salaried worker permit", "confidence": "PROBABLY CORRECT"},
+        "skilled_threshold_eur": {"value": null, "confidence": "UNKNOWN", "note": "DATA NOT VERIFIED."},
+        "pr_years": {"value": 5, "confidence": "ESTIMATED"},
+        "sponsorship_difficulty": "moderate",
+        "flag": "AMBER",
+        "why_flag": "Best AML salary market in Europe; almost no domestic study options, so realistically a post-graduation destination rather than a study destination."
+      }
+    },
+    {
+      "code": "GB",
+      "name": "United Kingdom",
+      "tier": "priority",
+      "currency": "GBP",
+      "scores": {
+        "salary": 8, "job_demand": 9, "visa_friendliness": 5, "post_study_work": 6,
+        "pr_pathway": 5, "english_accessibility": 10, "cost_of_living": 3, "tuition": 2,
+        "banking_finance_ecosystem": 10, "ai_ecosystem": 9, "cybersecurity_ecosystem": 9,
+        "regulatory_ecosystem": 9, "international_hiring": 8, "quality_of_life": 7, "stability": 6
+      },
+      "scores_confidence": "ESTIMATED",
+      "scores_rationale": "Deepest governance/risk job market in Europe and the only one where 1-year master's degrees are standard, which halves opportunity cost. Scored down hard on visa_friendliness, tuition and pr_pathway: international-student policy has tightened repeatedly, the Graduate Route has been under active review, salary thresholds rose sharply, and the settlement qualifying period has been subject to proposed extension. High reward, highest policy risk.",
+      "visa": {
+        "student_visa": {"exists": true, "name": "Student visa", "confidence": "PROBABLY CORRECT"},
+        "post_study_work_months": {"value": 18, "confidence": "ESTIMATED", "name": "Graduate Route", "source_url": null, "checked": null, "note": "DATA NOT VERIFIED AND ACTIVELY VOLATILE. The Graduate Route duration has been subject to reduction proposals. Verify against gov.uk immediately before relying on it - this single number materially changes the UK case."},
+        "skilled_route": {"name": "Skilled Worker visa", "confidence": "PROBABLY CORRECT"},
+        "skilled_threshold_local": {"value": 41700, "currency": "GBP", "condition": "general threshold, plus the occupation-specific going rate, plus RQF6 skill level", "confidence": "PROBABLY CORRECT", "source_url": null, "checked": "2026-08", "source_type": "carried from ai-governance-career/CLAUDE.md - NOT re-verified"},
+        "pr_years": {"value": 5, "confidence": "ESTIMATED", "note": "Subject to proposed extension. DATA NOT VERIFIED."},
+        "sponsorship_difficulty": "high",
+        "flag": "AMBER",
+        "why_flag": "Best job market, worst and most volatile immigration policy, worst cost. The going-rate requirement on top of the GBP 41,700 floor is what actually blocks career-changer hires."
+      }
+    },
+    {
+      "code": "CH",
+      "name": "Switzerland",
+      "tier": "priority",
+      "currency": "CHF",
+      "scores": {
+        "salary": 10, "job_demand": 6, "visa_friendliness": 2, "post_study_work": 4,
+        "pr_pathway": 3, "english_accessibility": 6, "cost_of_living": 2, "tuition": 9,
+        "banking_finance_ecosystem": 10, "ai_ecosystem": 8, "cybersecurity_ecosystem": 7,
+        "regulatory_ecosystem": 8, "international_hiring": 5, "quality_of_life": 9, "stability": 10
+      },
+      "scores_confidence": "ESTIMATED",
+      "scores_rationale": "World-leading salaries and very low public tuition, but non-EU/EFTA nationals face hard federal and cantonal quotas plus a labour-market priority test that requires the employer to prove no EU candidate exists. For a career changer with no local network this is close to disqualifying, whatever the salary.",
+      "visa": {
+        "student_visa": {"exists": true, "confidence": "PROBABLY CORRECT"},
+        "post_study_work_months": {"value": 6, "confidence": "ESTIMATED", "note": "NEEDS VERIFICATION."},
+        "skilled_route": {"name": "Work permit under third-country national quota", "confidence": "PROBABLY CORRECT"},
+        "skilled_threshold_local": {"value": null, "confidence": "UNKNOWN", "note": "DATA NOT VERIFIED - no single national threshold; assessed case by case against local market wage."},
+        "pr_years": {"value": 10, "confidence": "ESTIMATED"},
+        "sponsorship_difficulty": "very high",
+        "flag": "RED",
+        "why_flag": "Quotas plus labour-market priority for EU nationals. Excellent destination, poor probability."
+      }
+    },
+    {
+      "code": "DK", "name": "Denmark", "tier": "priority", "currency": "DKK",
+      "scores": {"salary": 8, "job_demand": 6, "visa_friendliness": 5, "post_study_work": 5, "pr_pathway": 4, "english_accessibility": 8, "cost_of_living": 3, "tuition": 3, "banking_finance_ecosystem": 6, "ai_ecosystem": 6, "cybersecurity_ecosystem": 6, "regulatory_ecosystem": 7, "international_hiring": 6, "quality_of_life": 9, "stability": 9},
+      "scores_confidence": "ESTIMATED",
+      "scores_rationale": "High quality of life and good English, but non-EU tuition is high, the establishment card is short, and the finance sector is modest. Danish is expected for most compliance roles.",
+      "visa": {"post_study_work_months": {"value": 6, "confidence": "ESTIMATED", "note": "Establishment card. NEEDS VERIFICATION."}, "skilled_route": {"name": "Pay Limit Scheme / Positive List"}, "skilled_threshold_local": {"value": null, "confidence": "UNKNOWN", "note": "DATA NOT VERIFIED."}, "pr_years": {"value": 8, "confidence": "ESTIMATED"}, "sponsorship_difficulty": "moderate", "flag": "AMBER", "why_flag": "Short stay-back window relative to how long a career-changer job search takes."}
+    },
+    {
+      "code": "SE", "name": "Sweden", "tier": "priority", "currency": "SEK",
+      "scores": {"salary": 6, "job_demand": 5, "visa_friendliness": 7, "post_study_work": 7, "pr_pathway": 6, "english_accessibility": 8, "cost_of_living": 5, "tuition": 4, "banking_finance_ecosystem": 6, "ai_ecosystem": 7, "cybersecurity_ecosystem": 6, "regulatory_ecosystem": 6, "international_hiring": 6, "quality_of_life": 8, "stability": 8},
+      "scores_confidence": "ESTIMATED",
+      "scores_rationale": "Reasonable immigration mechanics, but salaries for risk/compliance are notably lower than IE/NL/LU while cost of living is not, which weakens ROI.",
+      "visa": {"post_study_work_months": {"value": 12, "confidence": "ESTIMATED", "note": "NEEDS VERIFICATION."}, "skilled_route": {"name": "Work permit"}, "skilled_threshold_local": {"value": null, "confidence": "UNKNOWN", "note": "DATA NOT VERIFIED - maintenance requirement tied to a share of median salary."}, "pr_years": {"value": 4, "confidence": "ESTIMATED"}, "sponsorship_difficulty": "moderate", "flag": "AMBER", "why_flag": "Fine immigration, weak salary-to-cost ratio for this career."}
+    },
+    {
+      "code": "NO", "name": "Norway", "tier": "priority", "currency": "NOK",
+      "scores": {"salary": 8, "job_demand": 4, "visa_friendliness": 5, "post_study_work": 5, "pr_pathway": 5, "english_accessibility": 7, "cost_of_living": 2, "tuition": 3, "banking_finance_ecosystem": 5, "ai_ecosystem": 5, "cybersecurity_ecosystem": 5, "regulatory_ecosystem": 5, "international_hiring": 4, "quality_of_life": 9, "stability": 9},
+      "scores_confidence": "ESTIMATED",
+      "scores_rationale": "Norway introduced tuition fees for non-EEA students in 2023, removing its main advantage. Small job market, Norwegian usually required, and outside the EU single market.",
+      "visa": {"post_study_work_months": {"value": 12, "confidence": "ESTIMATED", "note": "Job-seeker permit. NEEDS VERIFICATION."}, "skilled_threshold_local": {"value": null, "confidence": "UNKNOWN", "note": "DATA NOT VERIFIED."}, "pr_years": {"value": 3, "confidence": "ESTIMATED"}, "sponsorship_difficulty": "moderate", "flag": "AMBER", "why_flag": "Small market, non-EU, now charges tuition. Weak case."}
+    },
+    {
+      "code": "FI", "name": "Finland", "tier": "priority", "currency": "EUR",
+      "scores": {"salary": 6, "job_demand": 4, "visa_friendliness": 8, "post_study_work": 8, "pr_pathway": 6, "english_accessibility": 7, "cost_of_living": 6, "tuition": 5, "banking_finance_ecosystem": 5, "ai_ecosystem": 6, "cybersecurity_ecosystem": 7, "regulatory_ecosystem": 6, "international_hiring": 5, "quality_of_life": 9, "stability": 8},
+      "scores_confidence": "ESTIMATED",
+      "scores_rationale": "Genuinely generous post-study residence rules and scholarships that often cut tuition by half, but a thin finance sector and strong Finnish-language expectations in domestic roles.",
+      "visa": {"post_study_work_months": {"value": 24, "confidence": "ESTIMATED", "note": "Extended post-study residence permit. NEEDS VERIFICATION."}, "skilled_threshold_local": {"value": null, "confidence": "UNKNOWN", "note": "DATA NOT VERIFIED."}, "pr_years": {"value": 4, "confidence": "ESTIMATED"}, "sponsorship_difficulty": "low", "flag": "GREEN", "why_flag": "Immigration is friendly; the job market, not the visa, is the constraint."}
+    },
+    {
+      "code": "FR", "name": "France", "tier": "priority", "currency": "EUR",
+      "scores": {"salary": 7, "job_demand": 6, "visa_friendliness": 6, "post_study_work": 6, "pr_pathway": 5, "english_accessibility": 4, "cost_of_living": 5, "tuition": 7, "banking_finance_ecosystem": 8, "ai_ecosystem": 8, "cybersecurity_ecosystem": 7, "regulatory_ecosystem": 8, "international_hiring": 6, "quality_of_life": 7, "stability": 6},
+      "scores_confidence": "ESTIMATED",
+      "scores_rationale": "Strong banking sector (BNP, SG, Credit Agricole) and Paris hosts the OECD and ESMA-adjacent bodies. French is required for most compliance roles - english_accessibility 4 is the binding constraint.",
+      "visa": {"post_study_work_months": {"value": 12, "confidence": "ESTIMATED", "note": "APS - recherche d'emploi. NEEDS VERIFICATION."}, "skilled_route": {"name": "Talent Passport"}, "skilled_threshold_eur": {"value": null, "confidence": "UNKNOWN", "note": "DATA NOT VERIFIED - tied to a multiple of SMIC."}, "pr_years": {"value": 5, "confidence": "ESTIMATED"}, "sponsorship_difficulty": "moderate", "flag": "AMBER", "why_flag": "Language is the gate, not the visa."}
+    },
+    {
+      "code": "AT", "name": "Austria", "tier": "priority", "currency": "EUR",
+      "scores": {"salary": 7, "job_demand": 5, "visa_friendliness": 5, "post_study_work": 6, "pr_pathway": 5, "english_accessibility": 5, "cost_of_living": 6, "tuition": 8, "banking_finance_ecosystem": 6, "ai_ecosystem": 5, "cybersecurity_ecosystem": 5, "regulatory_ecosystem": 7, "international_hiring": 5, "quality_of_life": 9, "stability": 8},
+      "scores_confidence": "ESTIMATED",
+      "scores_rationale": "Vienna hosts UNODC and IAEA, which matters for the purpose track (§52). Low tuition. German required for most private-sector roles; the points-based Red-White-Red card is administratively heavy.",
+      "visa": {"post_study_work_months": {"value": 12, "confidence": "ESTIMATED", "note": "NEEDS VERIFICATION."}, "skilled_route": {"name": "Red-White-Red Card"}, "skilled_threshold_eur": {"value": null, "confidence": "UNKNOWN", "note": "DATA NOT VERIFIED."}, "pr_years": {"value": 5, "confidence": "ESTIMATED"}, "sponsorship_difficulty": "moderate", "flag": "AMBER", "why_flag": "Good for international-organisation proximity, weak for private-sector English-language hiring."}
+    },
+
+    {
+      "code": "US", "name": "United States", "tier": "secondary", "currency": "USD",
+      "scores": {"salary": 10, "job_demand": 9, "visa_friendliness": 2, "post_study_work": 5, "pr_pathway": 2, "english_accessibility": 10, "cost_of_living": 3, "tuition": 1, "banking_finance_ecosystem": 10, "ai_ecosystem": 10, "cybersecurity_ecosystem": 10, "regulatory_ecosystem": 8, "international_hiring": 6, "quality_of_life": 6, "stability": 6},
+      "scores_confidence": "ESTIMATED",
+      "scores_rationale": "Best salaries and deepest market on earth, wrecked for this applicant by immigration mechanics. Non-STEM master's give 12 months OPT and then require winning an H-1B lottery. Governance/policy programmes are usually NOT STEM-designated, so the 24-month STEM extension typically does not apply - and the coding-free programmes he wants are exactly the ones that lose it. Tuition scores 1: USD 60-100k+ against a lottery outcome is the worst risk-adjusted spend on this list. Green-card backlog for Indian nationals is measured in decades.",
+      "visa": {"post_study_work_months": {"value": 12, "confidence": "ESTIMATED", "name": "OPT (36 months only if STEM-designated)", "note": "NEEDS VERIFICATION per programme - STEM designation is programme-specific and decisive."}, "skilled_route": {"name": "H-1B (lottery)"}, "skilled_threshold_local": {"value": null, "confidence": "UNKNOWN", "note": "DATA NOT VERIFIED - prevailing wage varies by role and location."}, "pr_years": {"value": null, "confidence": "UNKNOWN", "note": "Employment-based green card backlog for Indian nationals is extreme. DATA NOT VERIFIED but directionally severe."}, "sponsorship_difficulty": "very high", "flag": "RED", "why_flag": "Lottery-gated work authorisation plus the highest cost on this list. Cannot be recommended as a primary bet for an Indian national in a non-STEM field."}
+    },
+    {
+      "code": "CA", "name": "Canada", "tier": "secondary", "currency": "CAD",
+      "scores": {"salary": 6, "job_demand": 6, "visa_friendliness": 6, "post_study_work": 8, "pr_pathway": 8, "english_accessibility": 10, "cost_of_living": 5, "tuition": 4, "banking_finance_ecosystem": 8, "ai_ecosystem": 7, "cybersecurity_ecosystem": 6, "regulatory_ecosystem": 7, "international_hiring": 7, "quality_of_life": 8, "stability": 8},
+      "scores_confidence": "ESTIMATED",
+      "scores_rationale": "Still the clearest study-to-PR pipeline in the English-speaking world, but 2024-2025 study-permit caps, PGWP field-of-study eligibility restrictions and reduced immigration targets have degraded it substantially. Salaries for risk/compliance are materially below the US and below Ireland.",
+      "visa": {"post_study_work_months": {"value": 36, "confidence": "ESTIMATED", "name": "PGWP - duration depends on programme length AND field-of-study eligibility", "note": "NEEDS VERIFICATION. PGWP field-of-study eligibility lists have changed and can exclude business/governance programmes at some institution types. This is decisive - verify per programme."}, "skilled_route": {"name": "Express Entry / CEC"}, "skilled_threshold_local": {"value": null, "confidence": "UNKNOWN", "note": "DATA NOT VERIFIED - points-based, no fixed salary floor."}, "pr_years": {"value": 3, "confidence": "ESTIMATED"}, "sponsorship_difficulty": "moderate", "flag": "AMBER", "why_flag": "Best PR odds, weakest salary of the English-speaking options, and policy has moved against international students two years running."}
+    },
+    {
+      "code": "AU", "name": "Australia", "tier": "secondary", "currency": "AUD",
+      "scores": {"salary": 8, "job_demand": 7, "visa_friendliness": 5, "post_study_work": 7, "pr_pathway": 6, "english_accessibility": 10, "cost_of_living": 4, "tuition": 3, "banking_finance_ecosystem": 8, "ai_ecosystem": 6, "cybersecurity_ecosystem": 7, "regulatory_ecosystem": 8, "international_hiring": 6, "quality_of_life": 8, "stability": 8},
+      "scores_confidence": "ESTIMATED",
+      "scores_rationale": "Strong salaries, a real AML/CTF compliance market (AUSTRAC reforms extended obligations to new sectors) and good English. Offset by high tuition, tightened student-visa settings, and geographic isolation that limits onward mobility to Europe.",
+      "visa": {"post_study_work_months": {"value": 24, "confidence": "ESTIMATED", "name": "Temporary Graduate visa (subclass 485)", "note": "NEEDS VERIFICATION - age limits apply and have been tightened; the applicant's age is a live risk factor here."}, "skilled_route": {"name": "Skills in Demand / employer sponsored"}, "skilled_threshold_local": {"value": null, "confidence": "UNKNOWN", "note": "DATA NOT VERIFIED."}, "pr_years": {"value": 4, "confidence": "ESTIMATED"}, "sponsorship_difficulty": "moderate", "flag": "AMBER", "why_flag": "AGE IS A SPECIFIC RISK: subclass 485 has an upper age limit and the applicant graduated in 2015. Verify eligibility before spending anything."}
+    },
+    {
+      "code": "SG", "name": "Singapore", "tier": "secondary", "currency": "SGD",
+      "scores": {"salary": 8, "job_demand": 7, "visa_friendliness": 4, "post_study_work": 3, "pr_pathway": 3, "english_accessibility": 10, "cost_of_living": 3, "tuition": 5, "banking_finance_ecosystem": 10, "ai_ecosystem": 8, "cybersecurity_ecosystem": 8, "regulatory_ecosystem": 9, "international_hiring": 7, "quality_of_life": 8, "stability": 9},
+      "scores_confidence": "ESTIMATED",
+      "scores_rationale": "MAS is one of the most sophisticated AI-governance regulators in the world (FEAT principles, Veritas) and the AML/private-banking compliance market is deep. But there is no meaningful post-study work visa - graduates must win an Employment Pass immediately, assessed on a points framework that favours local hiring. No stay-back safety net.",
+      "visa": {"post_study_work_months": {"value": 0, "confidence": "ESTIMATED", "note": "No general post-study job-search visa comparable to the EU. Short social visit pass only. NEEDS VERIFICATION."}, "skilled_route": {"name": "Employment Pass (COMPASS points framework)"}, "skilled_threshold_local": {"value": null, "confidence": "UNKNOWN", "note": "DATA NOT VERIFIED - EP minimum qualifying salary rises with age, which disadvantages a 30s-age career changer."}, "pr_years": {"value": null, "confidence": "UNKNOWN"}, "sponsorship_difficulty": "high", "flag": "AMBER", "why_flag": "Excellent market, no safety net. Failure to land a job before graduation means leaving. Also: EP salary floors rise with age, which works against this applicant specifically."}
+    },
+    {
+      "code": "AE", "name": "United Arab Emirates", "tier": "secondary", "currency": "AED",
+      "scores": {"salary": 8, "job_demand": 6, "visa_friendliness": 7, "post_study_work": 5, "pr_pathway": 2, "english_accessibility": 9, "cost_of_living": 5, "tuition": 5, "banking_finance_ecosystem": 8, "ai_ecosystem": 6, "cybersecurity_ecosystem": 6, "regulatory_ecosystem": 6, "international_hiring": 8, "quality_of_life": 6, "stability": 7},
+      "scores_confidence": "ESTIMATED",
+      "scores_rationale": "Tax-free salaries and DIFC/ADGM are real financial-regulation hubs with genuine AML demand; large Indian professional community lowers the social barrier. But there is effectively no permanent residency or citizenship - employment is sponsor-tied, so it builds capital, not security or a second passport. Weak onward mobility to Europe.",
+      "visa": {"post_study_work_months": {"value": 12, "confidence": "ESTIMATED", "note": "Post-study options exist including Golden Visa routes for high achievers. NEEDS VERIFICATION."}, "skilled_route": {"name": "Employer-sponsored work permit"}, "skilled_threshold_local": {"value": null, "confidence": "UNKNOWN", "note": "DATA NOT VERIFIED."}, "pr_years": {"value": null, "confidence": "UNKNOWN", "note": "No conventional PR/citizenship pathway. Golden Visa is long-term residence, not permanent residency."}, "sponsorship_difficulty": "low", "flag": "AMBER", "why_flag": "Good money now, no permanence, poor bridge to Europe. Fails the international-mobility objective even though it passes the salary test."}
+    },
+    {
+      "code": "NZ", "name": "New Zealand", "tier": "secondary", "currency": "NZD",
+      "scores": {"salary": 5, "job_demand": 3, "visa_friendliness": 7, "post_study_work": 7, "pr_pathway": 6, "english_accessibility": 10, "cost_of_living": 5, "tuition": 5, "banking_finance_ecosystem": 4, "ai_ecosystem": 4, "cybersecurity_ecosystem": 4, "regulatory_ecosystem": 5, "international_hiring": 4, "quality_of_life": 9, "stability": 8},
+      "scores_confidence": "ESTIMATED",
+      "scores_rationale": "Pleasant and relatively open, but the financial-services governance market is very small and salaries are the lowest of the English-speaking options. Poor fit for a career maximising income and mobility.",
+      "visa": {"post_study_work_months": {"value": 36, "confidence": "ESTIMATED", "note": "Post-study work visa, duration by qualification level. NEEDS VERIFICATION."}, "skilled_threshold_local": {"value": null, "confidence": "UNKNOWN", "note": "DATA NOT VERIFIED."}, "pr_years": {"value": 5, "confidence": "ESTIMATED"}, "sponsorship_difficulty": "moderate", "flag": "AMBER", "why_flag": "Open door into a small room."}
+    },
+    {
+      "code": "IN", "name": "India", "tier": "home", "currency": "INR",
+      "scores": {"salary": 3, "job_demand": 8, "visa_friendliness": 10, "post_study_work": 10, "pr_pathway": 10, "english_accessibility": 10, "cost_of_living": 9, "tuition": 9, "banking_finance_ecosystem": 8, "ai_ecosystem": 7, "cybersecurity_ecosystem": 7, "regulatory_ecosystem": 7, "international_hiring": 6, "quality_of_life": 5, "stability": 6},
+      "scores_confidence": "ESTIMATED",
+      "scores_rationale": "Included deliberately as the DO-NOTHING BASELINE, not as a study destination. Every foreign programme must beat staying put and pivoting internally via Big-4 India or a global bank GCC. Salary scores 3 in absolute EUR terms but cost of living scores 9, so real disposable income is far better than the salary score suggests. This is the honest comparator that stops the engine recommending an expensive foreign degree that loses to a free internal move.",
+      "visa": {"post_study_work_months": {"value": null, "confidence": "VERIFIED", "note": "Not applicable - home country."}, "skilled_route": {"name": "Not applicable"}, "pr_years": {"value": 0, "confidence": "VERIFIED"}, "sponsorship_difficulty": "none", "flag": "GREEN", "why_flag": "No immigration risk at all. The baseline every other option must beat."}
+    }
+  ]
+}

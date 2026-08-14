@@ -1,0 +1,24 @@
+# --- secrets: never commit, whatever the filename ---------------------------
+# ~/Movies/.env holds live LinkedIn OAuth, YouTube refresh, Gemini, ElevenLabs
+# and Pexels credentials. Nothing of that shape may ever enter this repo.
+.env
+.env.*
+*.env
+*token*
+*secret*
+*credential*
+*.pem
+*.key
+
+# --- generated artefacts (all regenerable by `python3 run_daily.py`) ---------
+data/masters.db
+data/masters.db-journal
+site/
+cache/
+run.log
+
+# --- os / editor ------------------------------------------------------------
+.DS_Store
+__pycache__/
+*.pyc
+.venv/

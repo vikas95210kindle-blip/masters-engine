@@ -1,0 +1,126 @@
+{
+  "_comment": "SPEC §16 - fully configurable weighting. Overall score components must sum to 1.0. Penalties are applied AFTER the weighted sum and are absolute point deductions.",
+
+  "overall": {
+    "career_value": 0.25,
+    "personal_fit": 0.20,
+    "admission_probability": 0.15,
+    "salary_potential": 0.10,
+    "job_security": 0.10,
+    "ai_resilience": 0.05,
+    "country_immigration": 0.05,
+    "roi": 0.05,
+    "university_quality": 0.05
+  },
+
+  "penalties": {
+    "_comment": "SPEC §16. hard_coding_violation of -100 is intended to floor the score at/near zero.",
+    "hard_coding_violation": -100,
+    "major_prerequisite_mismatch": -50,
+    "poor_career_alignment": -30,
+    "poor_visa_situation": -20,
+    "extreme_cost_weak_roi": -15
+  },
+
+  "penalty_thresholds": {
+    "_comment": "Tunable trigger points for the penalties above. extreme_cost_tuition_eur is the point at which a programme counts as expensive. weak_roi_ratio is judged against the §14 ratio, whose numerator is GROSS salary over the horizon - so a ratio of 4.0 still means roughly a quarter of five years' gross earnings goes on the degree. Anything below that is genuinely weak, not merely unimpressive.",
+    "extreme_cost_tuition_eur": 35000,
+    "weak_roi_ratio": 4.0,
+    "poor_career_alignment_below": 10
+  },
+
+  "career_score": {
+    "_comment": "SPEC §11. Component weights within Career Score; normalised to 100.",
+    "salary_potential": 1.5,
+    "job_demand": 1.5,
+    "job_security": 1.2,
+    "shortage": 1.0,
+    "ai_resilience": 1.2,
+    "international_mobility": 1.2,
+    "career_ceiling": 1.2,
+    "employer_quality": 0.8,
+    "industry_growth": 1.0
+  },
+
+  "personal_fit": {
+    "_comment": "SPEC §12. Component weights within Personal Fit; normalised to 100.",
+    "academic_eligibility": 1.3,
+    "work_experience_relevance": 1.6,
+    "existing_skills": 1.2,
+    "domain_advantage": 1.4,
+    "career_alignment": 1.4,
+    "admission_probability": 1.0,
+    "non_coding_fit": 1.6,
+    "international_mobility": 0.9
+  },
+
+  "country_score": {
+    "_comment": "SPEC §13. Each sub-score is 0-10 in countries.json.",
+    "salary": 1.2,
+    "job_demand": 1.3,
+    "visa_friendliness": 1.4,
+    "post_study_work": 1.4,
+    "pr_pathway": 1.1,
+    "english_accessibility": 1.3,
+    "cost_of_living": 0.7,
+    "tuition": 0.7,
+    "banking_finance_ecosystem": 1.3,
+    "ai_ecosystem": 0.9,
+    "cybersecurity_ecosystem": 0.8,
+    "regulatory_ecosystem": 1.2,
+    "international_hiring": 1.1,
+    "quality_of_life": 0.6,
+    "stability": 0.6
+  },
+
+  "application_priority": {
+    "_comment": "SPEC §47. Weighted blend; deadline urgency is computed from days remaining.",
+    "programme_quality": 0.20,
+    "personal_fit": 0.25,
+    "admission_probability": 0.25,
+    "career_value": 0.20,
+    "deadline_urgency": 0.10
+  },
+
+  "money_vs_purpose": {
+    "_comment": "SPEC §53. Two separate scores plus a balanced blend using profile.preferences.balance.",
+    "money": {
+      "salary_potential": 0.40,
+      "job_demand": 0.20,
+      "career_ceiling": 0.25,
+      "employer_quality": 0.15
+    },
+    "purpose": {
+      "international_org_pathway": 0.35,
+      "policy_relevance": 0.25,
+      "sustainability_relevance": 0.15,
+      "global_impact_reach": 0.25
+    }
+  },
+
+  "admission_probability_points": {
+    "_comment": "Maps the §15 band to a 0-100 number for use in the weighted overall score.",
+    "HIGH": 90,
+    "MEDIUM-HIGH": 72,
+    "MEDIUM": 52,
+    "LOW": 28,
+    "VERY LOW": 8
+  },
+
+  "roi": {
+    "_comment": "SPEC §14. opportunity_cost_annual_eur is the salary foregone while studying. Stated as an assumption, not a fact.",
+    "opportunity_cost_annual_eur": 14000,
+    "opportunity_cost_source": "ASSUMPTION - approximate current Union Bank of India total compensation converted to EUR. Update in config; not a verified figure.",
+    "horizon_years": 5,
+    "discount_rate": 0.05
+  },
+
+  "deadline_urgency_days": {
+    "_comment": "SPEC §24 buckets, in days remaining.",
+    "critical": 7,
+    "urgent": 14,
+    "soon": 30,
+    "approaching": 60,
+    "watch": 90
+  }
+}
