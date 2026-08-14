@@ -5,17 +5,10 @@
 #
 # repo-name defaults to masters-engine.
 #
-# Git will prompt for credentials on the first push:
-#   Username: your GitHub username
-#   Password: a Personal Access Token (NOT your GitHub password - GitHub stopped
-#             accepting passwords for git in 2021)
-# The osxkeychain helper is already configured, so you are asked only once.
-#
-# Make a token at:
-#   github.com -> Settings -> Developer settings -> Personal access tokens
-#   -> Fine-grained tokens -> Generate new token
-#   Repository access: only the masters-engine repo
-#   Permissions: Contents = Read and write     (that is the only one needed)
+# Authentication is by SSH key - no token, no password typed anywhere.
+# The public key must already be added at:
+#   github.com -> Settings -> SSH and GPG keys -> New SSH key
+# The matching private key lives at ~/.ssh/id_ed25519 and never leaves this Mac.
 
 set -euo pipefail
 cd "$(dirname "$0")"
@@ -28,7 +21,7 @@ if [ -z "$USER_NAME" ]; then
   exit 1
 fi
 
-URL="https://github.com/${USER_NAME}/${REPO}.git"
+URL="git@github.com:${USER_NAME}/${REPO}.git"
 
 # Refuse to push if anything credential-shaped somehow got tracked.
 if git ls-files | grep -qiE "\.env$|\.env\.|(^|/)[^/]*(token|secret|credential)[^/]*$"; then
@@ -46,6 +39,20 @@ if git remote | grep -q "^origin$"; then
 else
   git remote add origin "$URL"
   echo "origin added -> $URL"
+fi
+
+echo "verifying SSH auth to github.com…"
+AUTH=$(ssh -o BatchMode=yes -o ConnectTimeout=10 -T git@github.com 2>&1 || true)
+if echo "$AUTH" | grep -q "successfully authenticated"; then
+  echo "  ok: $AUTH"
+else
+  echo "  SSH auth not working yet. GitHub said:"
+  echo "  $AUTH"
+  echo
+  echo "  Add this public key at github.com -> Settings -> SSH and GPG keys:"
+  echo
+  cat ~/.ssh/id_ed25519.pub
+  exit 1
 fi
 
 echo "pushing…"
