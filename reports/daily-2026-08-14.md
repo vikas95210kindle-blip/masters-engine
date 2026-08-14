@@ -1,6 +1,6 @@
 # GLOBAL MASTER'S INTELLIGENCE REPORT
 
-**2026-08-14** · run `daily-20260814-063134` · 14 programmes scored · 1438 real job postings analysed
+**2026-08-14** · run `daily-20260814-222639` · 14 programmes scored · 1438 real job postings analysed
 
 > Scores are computed from the profile, the verified programme records and measured job-market evidence. Fields marked DATA NOT VERIFIED were not found on an official page and were **not** estimated in their place.
 
@@ -10,14 +10,14 @@
 |---|---|---|---|---|---|---|---|---|---|---|---|---|
 | 1 | MSc (Cybersecurity Risk Management) | University of Galway | IE | Cybersecurity GRC Manage | **79.6** | 74.3 | HIGH | EUR 21,640 | 2/5 | GREEN | ROLLING (ROLLING) | 🟢 APPLY NOW |
 | 2 | MSc in Cybersecurity Management (TU441) | TU Dublin | IE | Cybersecurity GRC Manage | **78.4** | 72.4 | HIGH | EUR 21,750 | 2/5 | GREEN | UNKNOWN (UNKNOWN) | 🟢 APPLY NOW |
-| 3 | MSc Ethical and Responsible Artificial Intel | Ulster University | GB | AI Governance / Responsi | **75.5** | 71.3 | HIGH | DATA NOT VERIFIED | 1/5 | AMBER | UNKNOWN (UNKNOWN) | 🟢 APPLY NOW |
+| 3 | MSc Ethical and Responsible Artificial Intel | Ulster University | GB | AI Governance / Responsi | **75.1** | 71.3 | HIGH | DATA NOT VERIFIED | 1/5 | AMBER | UNKNOWN (UNKNOWN) | 🟢 APPLY NOW |
 | 4 | Master of Public Policy (digital governance  | Hertie School | DE | AI Risk & Regulatory Gov | **71.4** | 68.4 | MEDIUM-HIGH | DATA NOT VERIFIED | 2/5 | AMBER | UNKNOWN (UNKNOWN) | 🟢 STRONG APPLY |
-| 5 | Advanced Master of Laws in Technology Govern | University of Amsterdam | NL | AI Governance / Responsi | **70.9** | 70.2 | MEDIUM | DATA NOT VERIFIED | 0/5 | GREEN | ROLLING (ROLLING) | 🟢 STRONG APPLY |
-| 6 | Data and Artificial Intelligence Ethics MSc | University of Edinburgh | GB | AI Governance / Responsi | **70.7** | 68.9 | MEDIUM | DATA NOT VERIFIED | 1/5 | AMBER | PAST CYCLE - REOPENS (263 days) | 🟢 STRONG APPLY |
+| 5 | Advanced Master of Laws in Technology Govern | University of Amsterdam | NL | AI Governance / Responsi | **70.5** | 70.2 | MEDIUM | DATA NOT VERIFIED | 0/5 | GREEN | ROLLING (ROLLING) | 🟢 STRONG APPLY |
+| 6 | Data and Artificial Intelligence Ethics MSc | University of Edinburgh | GB | AI Governance / Responsi | **70.3** | 68.9 | MEDIUM | DATA NOT VERIFIED | 1/5 | AMBER | PAST CYCLE - REOPENS (263 days) | 🟢 STRONG APPLY |
 | 7 | MSc Information Management - Strategy and Go | Tilburg University | NL | Data & AI Governance Man | **63.6** | 59.2 | MEDIUM | DATA NOT VERIFIED | 2/5 | GREEN | UNKNOWN (UNKNOWN) | 🟡 CONSIDER |
-| 8 | MSc in Compliance | University College Dublin | IE | AI-enabled Financial Cri | **60.3** | 83.0 | HIGH | EUR 14,060 | 0/5 | GREEN | OPEN NOW (35 days) | 🟡 CONSIDER |
-| 9 | European Master in Law, Data and Artificial  | Dublin City University | IE | AI Governance / Responsi | **59.4** | 69.5 | HIGH | EUR 41,838 | 2/5 | GREEN | PAST CYCLE - REOPENS (288 days) | 🟡 CONSIDER |
-| 10 | Executive Master Compliance & Integrity Mana | Vrije Universiteit Amsterd | NL | AI-enabled Financial Cri | **56.2** | 78.4 | MEDIUM-HIGH | EUR 20,995 | 0/5 | GREEN | UNKNOWN (UNKNOWN) | 🟡 CONSIDER |
+| 8 | MSc in Compliance | University College Dublin | IE | AI-enabled Financial Cri | **60.5** | 83.0 | HIGH | EUR 14,060 | 0/5 | GREEN | OPEN NOW (35 days) | 🟡 CONSIDER |
+| 9 | European Master in Law, Data and Artificial  | Dublin City University | IE | AI Governance / Responsi | **59.0** | 69.5 | HIGH | EUR 41,838 | 2/5 | GREEN | PAST CYCLE - REOPENS (288 days) | 🟡 CONSIDER |
+| 10 | Executive Master Compliance & Integrity Mana | Vrije Universiteit Amsterd | NL | AI-enabled Financial Cri | **56.5** | 78.4 | MEDIUM-HIGH | EUR 20,995 | 0/5 | GREEN | UNKNOWN (UNKNOWN) | 🟡 CONSIDER |
 
 ### Detailed reasoning — top 3
 
@@ -41,8 +41,8 @@
 
 #### 3. MSc Ethical and Responsible Artificial Intelligence — Ulster University
 
-- **Overall 75.5** (career value 81.4 · personal fit 71.3 · admission HIGH · country 73.3 · university 55.0)
-- **Money score 78.6 / Purpose score 63.0 / Balanced 73.9** (§53)
+- **Overall 75.1** (career value 79.8 · personal fit 71.3 · admission HIGH · country 73.3 · university 55.0)
+- **Money score 76.4 / Purpose score 63.0 / Balanced 72.4** (§53)
 - **Why you:** You already have roughly 10 years of banking experience covering KYC/AML, payments, compliance and process digitisation. This programme's own material uses the same vocabulary you work in (compliance, governance, risk), so your experience reads as directly relevant rather than as a career detour. It adds governance and risk expertise at coding intensity 1/5 (minimal technical literacy), so it does not require you to become a programmer. It feeds the 'AI Governance / Responsible AI Manager (cross-industry)' track, where your banking background scores 6/10 on domain adjacency. It carries a 18-month post-study work route, which is the actual mechanism by which this becomes a European job rather than a European qualification. The combination that results — 10 years of regulated banking plus a governance qualification — is rare. Most people in AI governance have one or the other.
 - **Admission reasoning:** academic background accepted
 - **Risks:** CRITICAL CAVEAT: this is a PART-TIME programme. Part-time study generally does not confer a UK student visa or Graduate Route eligibility. If so, it carries the same problem as the IOB MSc - good content, no immigration value. Verify mode and visa eligibility first. Official page blocked automated fetch.
@@ -54,7 +54,12 @@ _None this run — the corpus is unchanged since the last load._
 
 ## 3. 📈 RANKING CHANGES
 
-_No previous run to compare against. Baseline established today._
+- **MSc Ethical and Responsible Artificial Intelligence** — 75.5 → 75.1 (-0.4)
+- **Advanced Master of Laws in Technology Governance (Advanced LLM)** — 70.9 → 70.5 (-0.4)
+- **Data and Artificial Intelligence Ethics MSc** — 70.7 → 70.3 (-0.4)
+- **MSc in Compliance** — 60.3 → 60.5 (+0.2)
+- **European Master in Law, Data and Artificial Intelligence (EMILDAI)** — 59.4 → 59.0 (-0.4)
+- **Executive Master Compliance & Integrity Management** — 56.2 → 56.5 (+0.3)
 
 ## 4. ⏰ DEADLINES
 
@@ -105,18 +110,18 @@ _No previous run to compare against. Baseline established today._
 
 | Career | Postings | Coding demanded | Master's demanded | Top employers |
 |---|---|---|---|---|
-| Privacy / AI Governance Manager | 259 | 16% | 2% | EY, JPMorganChase, Revolut |
-| AI Governance / Responsible AI Manager | 225 | 15% | 8% | EY, Capgemini Invent, Accenture in India |
-| Cybersecurity GRC Manager | 193 | 3% | 3% | JPMorganChase, Deloitte, Capgemini |
-| AI-enabled Financial Crime / AML / KYC | 141 | 25% | 5% | Stripe, Monzo, Bank of America |
-| Technology Risk / ICT Operational Resi | 138 | 15% | 8% | JPMorganChase, EY, Deloitte |
-| AI Governance / AI Risk Manager - Fina | 111 | 29% | 8% | EY, Monzo, Capgemini |
-| Data & AI Governance Manager | 81 | 32% | 5% | EY, Methods, Checkout.com |
-| Technology Risk & Compliance Manager | 73 | 0% | 7% | JPMorganChase, EY, Northern Trust |
-| Model Risk Governance Specialist | 55 | 57% | 18% | Monzo, Methods, JPMorganChase |
-| Cybersecurity Governance / CISO track | 54 | 7% | 10% | OpenAI, Gemeente Eindhoven, Coca-Cola Europa |
-| AI Compliance Officer | 45 | 12% | 25% | Checkout.com, JPMorganChase, Light & Wonder |
-| AI Risk & Regulatory Governance Manage | 45 | 9% | 20% | RES, Methods, Lloyds Banking Group |
+| Privacy / AI Governance Manager | 452 | 18% | 3% | EY, Revolut, JPMorganChase |
+| Cybersecurity GRC Manager | 332 | 6% | 4% | Deloitte, JPMorganChase, Capgemini |
+| AI Governance / Responsible AI Manager | 304 | 18% | 4% | EY, Capgemini Invent, Accenture in India |
+| AI-enabled Financial Crime / AML / KYC | 298 | 17% | 3% | JPMorganChase, EY, Deloitte |
+| Technology Risk / ICT Operational Resi | 237 | 20% | 6% | EY, JPMorganChase, Deloitte |
+| AI Governance / AI Risk Manager - Fina | 193 | 34% | 6% | EY, BNY, JPMorganChase |
+| Data & AI Governance Manager | 143 | 29% | 4% | Deloitte, EY, Deutsche Bank |
+| Technology Risk & Compliance Manager | 122 | 7% | 7% | JPMorganChase, EY, Northern Trust |
+| Cybersecurity Governance / CISO track | 105 | 8% | 7% | CSC, OpenAI, Gemeente Eindhoven |
+| Model Risk Governance Specialist | 99 | 63% | 14% | JPMorganChase, Monzo, BNY |
+| Financial Crime Intelligence Manager | 86 | 21% | 0% | Bank of America, Deloitte, Revolut |
+| AI Risk & Regulatory Governance Manage | 85 | 22% | 4% | RES, Methods, Lloyds Banking Group |
 
 ## 8. 🚨 RISKS AND CHALLENGES TO YOUR ASSUMPTIONS (§33)
 
@@ -124,30 +129,26 @@ _No previous run to compare against. Baseline established today._
 
 Seed #1 is 'AI Governance / AI Risk Manager - Financial Services'. Highest scoring is 'Cybersecurity GRC Manager' (81.7 vs 80.7). This is the §33 check firing - review it rather than dismissing it.
 
-**RISK — Digital Governance Manager is skewed to senior hiring**
-
-46% of matched postings are director/exec level. Demand exists, but not at the level he can enter at. Raw posting counts overstate the opportunity here.
-
 **RISK — Model Risk Governance Specialist demands coding more often than assumed**
 
-57% of postings with a readable description show coding signals (sample 21). The seed assumed this was a low-code track. Treat programmes feeding only into it with caution.
+63% of postings with a readable description show coding signals (sample 97). The seed assumed this was a low-code track. Treat programmes feeding only into it with caution.
 
-**DECISION INPUT — A master's is named in 7% of postings that state a degree**
+**DECISION INPUT — A master's is named in 5% of postings that state a degree**
 
-Sample of 269 postings. If this stays low, the master's is being bought as an IMMIGRATION instrument (visa threshold + stay-back), not as an employer requirement - which is a valid reason, but a different one, and it should be judged on that basis.
+Sample of 1143 postings. If this stays low, the master's is being bought as an IMMIGRATION instrument (visa threshold + stay-back), not as an employer requirement - which is a valid reason, but a different one, and it should be judged on that basis.
 
 ## 9. 🎲 CAREER ARBITRAGE (§32)
 
 | Combination | Score | Rarity | Transferability | Measured postings |
 |---|---|---|---|---|
-| Banking + Financial Crime + AI | 84.1 | 8/10 | 10/10 | 141 |
-| Banking + AI Governance | 84.0 | 9/10 | 8/10 | 111 |
-| Payments + AI Governance | 84.0 | 10/10 | 7/10 | 111 |
-| AML + Responsible AI | 83.7 | 9/10 | 8/10 | 366 |
-| Banking + Cyber GRC | 81.5 | 6/10 | 9/10 | 193 |
-| Banking + AI Risk | 80.9 | 9/10 | 8/10 | 100 |
-| Banking + DORA / NIS2 operational resilience | 80.4 | 7/10 | 9/10 | 138 |
-| Financial Regulation + AI | 74.9 | 8/10 | 7/10 | 90 |
+| Banking + AI Governance | 85.3 | 9/10 | 8/10 | 193 |
+| Payments + AI Governance | 85.3 | 10/10 | 7/10 | 193 |
+| Banking + Financial Crime + AI | 84.1 | 8/10 | 10/10 | 298 |
+| Banking + AI Risk | 83.8 | 9/10 | 8/10 | 184 |
+| AML + Responsible AI | 83.7 | 9/10 | 8/10 | 602 |
+| Banking + Cyber GRC | 81.5 | 6/10 | 9/10 | 332 |
+| Banking + DORA / NIS2 operational resilience | 80.4 | 7/10 | 9/10 | 237 |
+| Financial Regulation + AI | 79.3 | 8/10 | 7/10 | 157 |
 
 ## 10. 🎯 TODAY'S THREE ACTIONS
 
@@ -218,7 +219,7 @@ Sample of 269 postings. If this stays low, the master's is being bought as an IM
 
 The deepest, most globally portable non-coding technology-governance job market that exists today. NIS2 transposition plus DORA plus ISO 27001 refresh cycles sustain it. This is the strongest challenger to the AI-governance hypothesis (§33) and must be re-tested every run.
 
-Measured evidence: 193 matched postings; coding demanded in 3% of those with a readable description; a master's named in 3%.
+Measured evidence: 332 matched postings; coding demanded in 6% of those with a readable description; a master's named in 4%.
 
 ---
 
