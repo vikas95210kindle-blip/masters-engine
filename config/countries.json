@@ -43,7 +43,20 @@
           "finding": "AI governance, technology risk, information security, compliance and data protection roles DO NOT appear on the Critical Skills Occupations List. The nearest entries are SOC 2423 'management consultants and business analysts specialising in big data analytics with skills in IT, data mining, modelling, and advanced maths' and SOC 2424 'business and financial project management professionals specialising in finance & investment analytics, risk analytics, credit, fraud analytics'.",
           "why_it_matters": "Both nearest matches are QUANTITATIVE ANALYTICS roles - precisely the coding careers the profile excludes. He cannot reach the Critical Skills route by doing the job he actually wants to do. The EUR 40,904 tier is therefore probably unavailable to him.",
           "consequence": "The realistic path is the GENERAL Employment Permit at EUR 34,009 with a recent Irish degree - which is LOWER than every Critical Skills tier. The degree still pays for itself; it just routes through a different permit. The costs of that route are (a) a Labour Market Needs Test the employer must run, and (b) 5 years to long-term residency rather than the faster Stamp 4 that Critical Skills holders reach.",
-          "still_to_verify": "Whether compliance/risk/governance occupations appear on the INELIGIBLE List. If they do, the General Employment Permit route closes too and the Ireland thesis needs rebuilding. This is now the single most important open question about Ireland."
+          "ineligible_list_checked": {
+            "_comment": "Checked 2026-08-16 against the Ineligible List of Occupations (effective 13 May 2026, SI 213 of 2026).",
+            "result": "ROUTE OPEN. Compliance officer, regulatory affairs, risk manager/analyst, information security/cyber security, data protection officer, business analyst and management consultant are all ABSENT from the Ineligible List. The General Employment Permit route to his target occupations is therefore available.",
+            "confidence": "PROBABLY CORRECT",
+            "confidence_note": "Read via a page summary rather than an entry-by-entry reading of the full SI. The list uses SOC 2010 codes and contains exceptions nested inside broader categories. What binds at application time is how the DEPARTMENT classifies the actual job title on the actual contract - not how the role is described in a job ad. Confirm the specific SOC code once a real offer exists.",
+            "source_url": "https://enterprise.gov.ie/en/what-we-do/workplace-and-skills/employment-permits/employment-permit-eligibility/ineligible-categories-of-employment/",
+            "checked": "2026-08-16"
+          },
+          "title_trap": {
+            "_comment": "The sharpest practical finding of this whole exercise.",
+            "finding": "His CURRENT job family is on the INELIGIBLE list. '4121 Credit controllers' and '4124 Finance officers' are both excluded, and those are precisely the SOC codes that banking-operations and collections work maps to.",
+            "why_it_matters": "The pivot from banking operations into governance/risk is not only a salary and interest question - it is a PERMIT ELIGIBILITY question. A role titled 'Finance Officer' or anything classified as credit control cannot get an Irish employment permit at all, at any salary. A role titled 'Compliance Officer', 'Risk Analyst' or 'Information Security Analyst' can.",
+            "how_to_apply": "When an Irish offer eventually arrives, the JOB TITLE ON THE CONTRACT is a permit-critical term, not a cosmetic one. Negotiate it deliberately. This is worth more than a few thousand euro of salary."
+          }
         },
         "pr_years": {"value": 5, "confidence": "VERIFIED", "source_url": "https://enterprise.gov.ie/en/what-we-do/workplace-and-skills/employment-permits/permit-types/general-employment-permit/", "checked": "2026-08-16", "note": "5 years on a General Employment Permit before long-term residency can be applied for. Critical Skills holders reach Stamp 4 considerably faster, but that route looks unavailable for his target occupation."},
         "sponsorship_difficulty": "moderate",
