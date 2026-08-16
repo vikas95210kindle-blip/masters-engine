@@ -22,6 +22,16 @@
     "extreme_cost_weak_roi": -15
   },
 
+  "filters": {
+    "_comment": "User-requested prestige filter. NOTE THE TENSION: SPEC §30 says career fit must be able to beat ranking, and the measured evidence says a master's is named in only ~5% of real postings - so employer demand for prestige is weak for THIS career. The filter is therefore applied as a visible gate with the excluded programmes still listed, not as a silent deletion. Set enforce_rank_filter to false to restore pure career-fit ranking.",
+    "enforce_rank_filter": true,
+    "min_university_rank": 50,
+    "unranked_treated_as": 9999,
+    "rank_source": "ESTIMATED - QS ranks in programmes.seed.json were carried in from general knowledge and have NOT been verified against qs.com this run. Verify before treating the filter output as authoritative.",
+    "require_scholarship_for_indians": false,
+    "require_international_eligible": true
+  },
+
   "penalty_thresholds": {
     "_comment": "Tunable trigger points for the penalties above. extreme_cost_tuition_eur is the point at which a programme counts as expensive. weak_roi_ratio is judged against the §14 ratio, whose numerator is GROSS salary over the horizon - so a ratio of 4.0 still means roughly a quarter of five years' gross earnings goes on the degree. Anything below that is genuinely weak, not merely unimpressive.",
     "extreme_cost_tuition_eur": 35000,

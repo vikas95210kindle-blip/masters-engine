@@ -279,12 +279,13 @@ def daily_report(ctx):
     # 1. Top 10
     A("## 1. 🔥 TOP 10 PROGRAMMES TO APPLY TO")
     A("")
-    A("| # | Programme | University | Country | Career | Overall | Fit | Admission | Tuition | Coding | Visa | Deadline | Recommendation |")
-    A("|---|---|---|---|---|---|---|---|---|---|---|---|---|")
+    A("| # | Programme | University | Rank | Country | Career | Overall | Fit | Admission | Tuition | Coding | Visa | Deadline | Recommendation |")
+    A("|---|---|---|---|---|---|---|---|---|---|---|---|---|---|")
     for i, r in enumerate(ranked[:10], 1):
         p, s = r["programme"], r["scored"]
-        A("| %d | %s | %s | %s | %s | **%.1f** | %.1f | %s | %s | %d/5 | %s | %s | %s %s |"
+        A("| %d | %s | %s | %s | %s | %s | **%.1f** | %.1f | %s | %s | %d/5 | %s | %s | %s %s |"
           % (i, p["name"][:44], (r.get("university") or {}).get("name", "—")[:26],
+             ("#%d" % s["university_rank"]) if s.get("university_rank") else "unranked",
              p["country_code"], (r.get("career") or {}).get("name", "—").split(" - ")[0][:24],
              s["overall"], s["personal_fit"], s["admission_band"],
              _fmt_money(p.get("tuition_eur")), s["eligibility"]["coding_band"],

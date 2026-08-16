@@ -63,9 +63,16 @@ def prog(**over):
     return p
 
 
-def score(p, cid="cyber_grc", cc="IE"):
+def score(p, cid="cyber_grc", cc="IE", weights=None):
     return scoring.score_programme(
-        p, PROFILE, career(cid), as_row(COUNTRIES[cc]), None, WEIGHTS)
+        p, PROFILE, career(cid), as_row(COUNTRIES[cc]), None, weights or WEIGHTS)
+
+
+def no_rank_filter():
+    """Weights with the prestige gate off, for testing merit in isolation."""
+    w = copy.deepcopy(WEIGHTS)
+    w.setdefault("filters", {})["enforce_rank_filter"] = False
+    return w
 
 
 # --------------------------------------------------------------------------
@@ -172,7 +179,9 @@ class TestFit(unittest.TestCase):
                  curriculum=["AI governance", "Risk management", "Regulation and compliance",
                              "AI ethics", "Audit and assurance"],
                  grad_outcomes="AI governance manager, risk manager, compliance officer")
-        s = score(p, "ai_gov_fs")
+        # Merit is judged with the prestige gate off — a governance programme at
+        # an unremarkable university must still score well on its own terms.
+        s = score(p, "ai_gov_fs", weights=no_rank_filter())
         self.assertGreaterEqual(s["overall"], 60,
                                 "governance programme scored only %.1f" % s["overall"])
         self.assertIn(s["recommendation"], ("APPLY NOW", "STRONG APPLY", "CONSIDER"))
@@ -187,6 +196,42 @@ class TestFit(unittest.TestCase):
         s = score(p)
         rules = [x["rule"] for x in s["penalties"]]
         self.assertIn("poor_career_alignment", rules)
+
+
+class TestRankFilter(unittest.TestCase):
+    """User-requested top-50 prestige gate."""
+
+    def test_top50_passes(self):
+        s = score(prog(ranking='27'))
+        self.assertTrue(s["rank_ok"])
+        self.assertEqual(s["university_rank"], 27)
+        self.assertNotEqual(s["recommendation"], "FILTERED - RANK")
+
+    def test_outside_top50_is_filtered(self):
+        s = score(prog(ranking='289'))
+        self.assertFalse(s["rank_ok"])
+        self.assertEqual(s["recommendation"], "FILTERED - RANK")
+        self.assertIn("outside top 50", s["rank_note"])
+
+    def test_unranked_is_filtered(self):
+        s = score(prog(ranking=None))
+        self.assertFalse(s["rank_ok"])
+        self.assertIsNone(s["university_rank"])
+
+    def test_filter_does_not_destroy_underlying_score(self):
+        """A filtered programme keeps its real merit score, so turning the
+        filter off restores it rather than requiring a rescore."""
+        p = prog(ranking='289')
+        filtered = score(p)
+        merit = score(p, weights=no_rank_filter())
+        self.assertAlmostEqual(filtered["overall"], merit["overall"], places=1)
+        self.assertNotEqual(merit["recommendation"], "FILTERED - RANK")
+
+    def test_coding_reject_outranks_rank_filter(self):
+        """A coding violation must stay visible as a coding reject, not be
+        relabelled as a ranking problem."""
+        s = score(prog(ranking='289', cs_prereq=1))
+        self.assertEqual(s["recommendation"], "REJECT - CODING")
 
 
 class TestDeadlines(unittest.TestCase):

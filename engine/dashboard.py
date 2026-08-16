@@ -100,12 +100,14 @@ function tab(id,btn){
 }
 function filt(){
   var c=document.getElementById('fc').value,r=document.getElementById('fr').value,
-      code=document.getElementById('fcode').value,q=document.getElementById('fq').value.toLowerCase();
+      code=document.getElementById('fcode').value,q=document.getElementById('fq').value.toLowerCase(),
+      rk=document.getElementById('frank').value;
   document.querySelectorAll('#ptable tbody tr').forEach(function(tr){
     var ok=true;
     if(c&&tr.dataset.country!==c)ok=false;
     if(r&&tr.dataset.rec!==r)ok=false;
     if(code&&parseInt(tr.dataset.coding)>parseInt(code))ok=false;
+    if(rk&&parseInt(tr.dataset.rank)>parseInt(rk))ok=false;
     if(q&&tr.textContent.toLowerCase().indexOf(q)<0)ok=false;
     tr.style.display=ok?'':'none';
   });
@@ -119,7 +121,7 @@ def _cls(v):
 
 def _pill(rec):
     m = {"APPLY NOW": "p-apply", "STRONG APPLY": "p-apply", "CONSIDER": "p-consider",
-         "BACKUP": "p-backup", "DO NOT APPLY": "p-no"}
+         "BACKUP": "p-backup", "DO NOT APPLY": "p-no", "FILTERED - RANK": "p-consider"}
     return m.get(rec, "p-reject")
 
 
@@ -223,23 +225,31 @@ def build(ctx, outdir):
                 "REJECT - CODING", "REJECT - ELIGIBILITY"]:
         A("<option>%s</option>" % esc(rec))
     A("</select>")
+    A("<select id='frank' onchange='filt()'><option value=''>Any ranking</option>"
+      "<option value='50'>Top 50 only</option><option value='100'>Top 100</option>"
+      "<option value='200'>Top 200</option></select>")
     A("<select id='fcode' onchange='filt()'><option value=''>Any coding level</option>")
     for i in range(6):
         A("<option value='%d'>Coding ≤ %d</option>" % (i, i))
     A("</select></div>")
 
     A("<div class='wrap'><table id='ptable'><thead><tr>"
-      "<th>#</th><th>Programme</th><th>University</th><th>Country</th><th>Career</th>"
+      "<th>#</th><th>Programme</th><th>University</th><th>Rank</th><th>Country</th><th>Career</th>"
       "<th>Overall</th><th>Fit</th><th>Admission</th><th>Tuition</th><th>Coding</th>"
       "<th>Visa</th><th>Deadline</th><th>Recommendation</th></tr></thead><tbody>")
     for i, r in enumerate(ranked, 1):
         p, s = r["programme"], r["scored"]
         visa = db.uj((r.get("country") or {}).get("visa"), {}) or {}
-        A("<tr data-country='%s' data-rec='%s' data-coding='%d'>"
-          % (esc(p["country_code"]), esc(s["recommendation"]), s["eligibility"]["coding_band"]))
-        A("<td>%d</td><td><strong>%s</strong></td><td>%s</td><td>%s</td><td>%s</td>"
+        A("<tr data-country='%s' data-rec='%s' data-coding='%d' data-rank='%d'>"
+          % (esc(p["country_code"]), esc(s["recommendation"]), s["eligibility"]["coding_band"],
+             s.get("university_rank") or 9999))
+        _rk = s.get("university_rank")
+        _rkcell = ("<span class='%s'>%s</span>"
+                   % ("s-hi" if _rk and _rk <= 50 else "s-mid" if _rk and _rk <= 200 else "unv",
+                      ("#%d" % _rk) if _rk else "unranked"))
+        A("<td>%d</td><td><strong>%s</strong></td><td>%s</td><td>%s</td><td>%s</td><td>%s</td>"
           % (i, esc(p["name"]), esc((r.get("university") or {}).get("name", "")),
-             esc(p["country_code"]),
+             _rkcell, esc(p["country_code"]),
              esc((r.get("career") or {}).get("name", "—").split(" - ")[0])))
         A("<td class='score %s'>%.1f</td><td>%.1f</td><td>%s</td><td>%s</td>"
           % (_cls(s["overall"]), s["overall"], s["personal_fit"],
@@ -274,6 +284,10 @@ def build(ctx, outdir):
                   % (esc(pen["rule"]), pen["points"], esc(pen["reason"])))
 
         A("<h3>My fit</h3><p>%s</p>" % esc(r["why"]))
+        A("<h3>University ranking</h3><p>%s%s</p>"
+          % (("<strong>#%d</strong>" % s["university_rank"]) if s.get("university_rank")
+             else "<span class='unv'>unranked / DATA NOT VERIFIED</span>",
+             (" — <span class='mut'>%s</span>" % esc(s["rank_note"])) if s.get("rank_note") else ""))
         A("<h3>Admission probability</h3><p><strong>%s</strong> — %s</p>"
           % (esc(s["admission_band"]), esc(s["admission_reason"])))
 

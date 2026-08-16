@@ -77,6 +77,34 @@ def country_score(country, weights):
 # §30 university quality
 # --------------------------------------------------------------------------
 
+def university_rank(prog, uni):
+    """The raw ranking number, or None. Displayed as its own column so the
+    prestige question can be judged directly rather than inferred from the
+    compressed university_quality score."""
+    for src in ((uni or {}).get("qs_rank"), (uni or {}).get("the_rank"), prog.get("ranking")):
+        if src in (None, ""):
+            continue
+        try:
+            return int(re.sub(r"[^0-9]", "", str(src)))
+        except (TypeError, ValueError):
+            continue
+    return None
+
+
+def rank_gate(prog, uni, weights):
+    """Apply the user's prestige filter. Returns (passes, rank, note)."""
+    f = weights.get("filters", {}) or {}
+    rank = university_rank(prog, uni)
+    if not f.get("enforce_rank_filter"):
+        return True, rank, None
+    limit = f.get("min_university_rank", 50)
+    effective = rank if rank is not None else f.get("unranked_treated_as", 9999)
+    if effective <= limit:
+        return True, rank, None
+    return False, rank, ("outside top %d (%s)"
+                         % (limit, ("rank %d" % rank) if rank else "unranked"))
+
+
 def university_quality(prog, uni):
     """0-100. Deliberately compressed: SPEC §30 says career fit beats ranking,
     so a top-10 university earns ~85 and an unranked-but-specialist one ~55,
@@ -431,6 +459,7 @@ RECOMMENDATIONS = [
     ("DO NOT APPLY", "\U0001F534"),
     ("REJECT - CODING", "⛔"),
     ("REJECT - ELIGIBILITY", "⛔"),
+    ("FILTERED - RANK", "\U0001F4CF"),
 ]
 
 
@@ -492,6 +521,13 @@ def score_programme(prog, profile, career, country, uni, weights, today=None):
 
     rec, emoji = recommend(overall, elig, adm_band, fit)
 
+    # Prestige gate (user-requested). Applied AFTER scoring so the underlying
+    # merit stays visible — a filtered-out programme keeps its real score and
+    # is shown in a separate section rather than silently vanishing.
+    rank_ok, uni_rank, rank_note = rank_gate(prog, uni, weights)
+    if not rank_ok and not rec.startswith("REJECT"):
+        rec, emoji = "FILTERED - RANK", "\U0001F4CF"
+
     bucket, days, status = deadline_state(prog, weights, today, profile)
     pw = weights["application_priority"]
     priority = (pw["programme_quality"] * uq + pw["personal_fit"] * fit
@@ -517,6 +553,9 @@ def score_programme(prog, profile, career, country, uni, weights, today=None):
         "roi_ratio": roi_ratio,
         "roi_assumptions": roi_assumptions,
         "university_quality": uq,
+        "university_rank": uni_rank,
+        "rank_ok": rank_ok,
+        "rank_note": rank_note,
         "money_score": money,
         "purpose_score": purpose,
         "balanced_score": balanced,
