@@ -226,17 +226,22 @@ def scholarships_for(prog, cfg):
 # Static remediation knowledge. Priority is NOT hardcoded - it is computed from
 # how often each item appears in the real postings the job-market engine read.
 GAP_LIBRARY = [
+    {"id": "iso27001", "gap": "ISO/IEC 27001 (information security management)",
+     "kind": "certification", "match": ["27001"], "topic_match": ["information security management"],
+     "cost": "Lead Implementer / Lead Auditor courses ~EUR 1,000-2,500",
+     "time": "1-2 months", "prereq": "None",
+     "why": "THE most-named credential in the entire posting corpus by a wide margin. It has no formal prerequisite, it is directly reachable, and it is the common language of every GRC function in Europe. If only one certification gets bought, the evidence says this is it."},
     {"id": "aigp", "gap": "IAPP AIGP (AI Governance Professional)",
-     "kind": "certification", "match": ["aigp", "iapp"],
+     "kind": "certification", "match": ["aigp", "iapp"], "topic_match": ["ai governance", "responsible ai"],
      "cost": "USD 649 member / 799 non-member + USD 295 membership",
      "time": "3-6 months", "prereq": "None",
-     "why": "The only entry-level AI governance credential with no prerequisites. It is the cheapest credible signal that converts 'banking person interested in AI' into 'AI governance professional'."},
+     "why": "The only entry-level AI governance credential with no prerequisites. BUT THE DATA IS SOBERING: it is named in just 13 of 1,438 postings. It is a BET on where the market goes once the AI Act's Annex III obligations land in Dec 2027 - not a response to demand that exists today. Buy it as positioning, with eyes open, not as the thing that gets you hired next year."},
     {"id": "cipp", "gap": "IAPP CIPP/E (privacy, EU)",
-     "kind": "certification", "match": ["cipp", "gdpr", "privacy"],
+     "kind": "certification", "match": ["cipp"], "topic_match": ["gdpr", "privacy", "data protection"],
      "cost": "Similar to AIGP", "time": "3-4 months", "prereq": "None",
      "why": "Privacy is the most mature governance market in Europe and CIPP/E is its standard credential. Pairs naturally with AIGP."},
     {"id": "iso42001", "gap": "ISO/IEC 42001 (AI management system)",
-     "kind": "certification", "match": ["42001", "iso 42001"],
+     "kind": "certification", "match": ["42001", "iso 42001"], "topic_match": [],
      "cost": "Foundation courses ~EUR 500-1,500", "time": "1-2 months", "prereq": "None",
      "why": "The certifiable AI management standard. Auditors and consultancies are hiring specifically against it."},
     {"id": "crisc", "gap": "ISACA CRISC (risk and information systems control)",
@@ -315,18 +320,25 @@ def international_gaps(profile, jm_evidence=None, top_careers=None):
     for g in GAP_LIBRARY:
         if g["id"] in held:
             continue
-        mentions = 0
-        for key, n in demand.items():
-            if any(m in key for m in g["match"]):
-                mentions += n
+        # A posting naming "GDPR" is evidence that PRIVACY KNOWLEDGE matters.
+        # It is NOT evidence that the CIPP/E certificate is demanded. Conflating
+        # the two ranked CIPP/E and CISSP top purely because their topic words
+        # are common, which is a measurement error, not a finding. Counted apart.
+        named = sum(n for key, n in demand.items()
+                    if any(m in key for m in g.get("match", [])))
+        topical = sum(n for key, n in demand.items()
+                      if any(m in key for m in g.get("topic_match", [])))
         entry = dict(g)
-        entry["mentions"] = mentions
-        entry["measured"] = mentions > 0
+        entry["mentions"] = named
+        entry["topic_mentions"] = topical
+        entry["measured"] = named > 0
 
-        # Priority: measured demand dominates; structural and evidence items get
-        # a floor because postings never advertise "bring a portfolio".
+        # Certification demand is scored on the certificate being NAMED.
+        # Topic demand contributes at a heavy discount: it says the subject
+        # matters, not that the badge does.
         base = {"evidence": 45, "structural": 40, "admission": 38}.get(g["kind"], 0)
-        entry["priority"] = mentions * 2 + base
+        reachable = 0 if g.get("prereq", "None").startswith("None") else -8
+        entry["priority"] = named * 2 + topical * 0.15 + base + reachable
         out.append(entry)
 
     out.sort(key=lambda g: -g["priority"])

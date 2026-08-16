@@ -1,6 +1,6 @@
 # GLOBAL MASTER'S INTELLIGENCE REPORT
 
-**2026-08-16** · run `daily-20260816-162332` · 16 programmes scored · 1438 real job postings analysed
+**2026-08-16** · run `daily-20260816-162511` · 16 programmes scored · 1438 real job postings analysed
 
 > Scores are computed from the profile, the verified programme records and measured job-market evidence. Fields marked DATA NOT VERIFIED were not found on an official page and were **not** estimated in their place.
 
@@ -50,8 +50,7 @@
 
 ## 2. 🆕 NEW PROGRAMMES DISCOVERED
 
-- MPA Digital Technologies and Policy
-- MSc Social Science of the Internet
+_None this run — the corpus is unchanged since the last load._
 
 ## 3. 📈 RANKING CHANGES
 
