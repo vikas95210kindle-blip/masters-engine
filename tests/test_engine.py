@@ -207,16 +207,56 @@ class TestRankFilter(unittest.TestCase):
         self.assertEqual(s["university_rank"], 27)
         self.assertNotEqual(s["recommendation"], "FILTERED - RANK")
 
-    def test_outside_top50_is_filtered(self):
-        s = score(prog(ranking='289'))
+    def test_outside_limit_is_filtered(self):
+        limit = WEIGHTS["filters"]["min_university_rank"]
+        s = score(prog(ranking=str(limit + 200)))
         self.assertFalse(s["rank_ok"])
         self.assertEqual(s["recommendation"], "FILTERED - RANK")
-        self.assertIn("outside top 50", s["rank_note"])
+        self.assertIn("outside top %d" % limit, s["rank_note"])
+
+    def test_inside_limit_passes(self):
+        limit = WEIGHTS["filters"]["min_university_rank"]
+        s = score(prog(ranking=str(max(1, limit - 5))))
+        self.assertTrue(s["rank_ok"])
 
     def test_unranked_is_filtered(self):
         s = score(prog(ranking=None))
         self.assertFalse(s["rank_ok"])
         self.assertIsNone(s["university_rank"])
+
+    def test_indian_check_blocks_cs_requirement(self):
+        from engine import applicant
+        p = prog(academic_prereq_families=['cs'])
+        chk = applicant.indian_application_check(p, PROFILE, as_row(COUNTRIES['IE']))
+        self.assertEqual(chk["verdict"], "CANNOT APPLY")
+        self.assertTrue(any('Computer Science' in b for b in chk["blockers"]))
+
+    def test_indian_check_passes_open_programme(self):
+        from engine import applicant
+        p = prog(academic_prereq_families=['any'], work_exp_requirement='preferred')
+        chk = applicant.indian_application_check(p, PROFILE, as_row(COUNTRIES['IE']))
+        self.assertIn(chk["verdict"], ("CAN APPLY", "CAN APPLY - WITH RISKS"))
+        self.assertEqual(chk["blockers"], [])
+
+    def test_online_programme_flagged_no_visa(self):
+        from engine import applicant
+        p = prog(post_study_work_months=0, study_mode='online part-time')
+        chk = applicant.indian_application_check(p, PROFILE, as_row(COUNTRIES['IE']))
+        self.assertTrue(any('no student visa' in w.lower() or 'NO student visa' in w
+                            for w in chk["warnings"]))
+
+    def test_gap_roadmap_ranks_measured_demand_first(self):
+        from engine import applicant, jobmarket
+        cfg = CAREERS
+        ev = jobmarket.run(None, cfg, 'test')["by_id"] if jobmarket.load_postings() else {}
+        gaps = applicant.international_gaps(PROFILE, ev, [c["id"] for c in cfg["careers"][:5]])
+        self.assertTrue(gaps)
+        self.assertEqual(gaps[0]["rank"], 1)
+        self.assertIn(gaps[0]["band"], ("DO FIRST",))
+        # every gap must carry a why and a time cost
+        for g in gaps:
+            self.assertTrue(g["why"])
+            self.assertTrue(g["time"])
 
     def test_filter_does_not_destroy_underlying_score(self):
         """A filtered programme keeps its real merit score, so turning the

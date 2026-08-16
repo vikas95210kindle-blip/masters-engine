@@ -145,7 +145,8 @@ def build(ctx, outdir):
 
     tabs = [("dash", "Dashboard"), ("finder", "Master's Finder"), ("detail", "Programme Detail"),
             ("countries", "Countries"), ("careers", "Careers"), ("jobs", "Jobs"),
-            ("deadlines", "Deadlines"), ("gaps", "Gap Analysis"), ("decision", "Decision")]
+            ("deadlines", "Deadlines"), ("skills", "Skills & Gaps"),
+            ("gaps", "Gap Analysis"), ("decision", "Decision")]
     A("<nav>")
     for i, (tid, label) in enumerate(tabs):
         A("<button class='%s' onclick=\"tab('%s',this)\">%s</button>"
@@ -236,7 +237,7 @@ def build(ctx, outdir):
     A("<div class='wrap'><table id='ptable'><thead><tr>"
       "<th>#</th><th>Programme</th><th>University</th><th>Rank</th><th>Country</th><th>Career</th>"
       "<th>Overall</th><th>Fit</th><th>Admission</th><th>Tuition</th><th>Coding</th>"
-      "<th>Visa</th><th>Deadline</th><th>Recommendation</th></tr></thead><tbody>")
+      "<th>Visa</th><th>Can I apply?</th><th>Deadline</th><th>Recommendation</th></tr></thead><tbody>")
     for i, r in enumerate(ranked, 1):
         p, s = r["programme"], r["scored"]
         visa = db.uj((r.get("country") or {}).get("visa"), {}) or {}
@@ -254,8 +255,14 @@ def build(ctx, outdir):
         A("<td class='score %s'>%.1f</td><td>%.1f</td><td>%s</td><td>%s</td>"
           % (_cls(s["overall"]), s["overall"], s["personal_fit"],
              esc(s["admission_band"]), money(p.get("tuition_eur"))))
-        A("<td>%d/5</td><td>%s</td><td>%s</td><td><span class='pill %s'>%s</span></td></tr>"
+        _ind = r.get("indian") or {}
+        _iv = _ind.get("verdict", "—")
+        _ipill = ("p-apply" if _iv == "CAN APPLY" else "p-consider" if _iv.startswith("CAN APPLY")
+                  else "p-no" if _iv == "CANNOT APPLY" else "p-reject")
+        A("<td>%d/5</td><td>%s</td><td><span class='pill %s' title='%s'>%s</span></td>"
+          "<td>%s</td><td><span class='pill %s'>%s</span></td></tr>"
           % (s["eligibility"]["coding_band"], esc(visa.get("flag", "—")),
+             _ipill, esc(_ind.get("summary", "")), esc(_iv),
              esc(p.get("application_deadline") or s["deadline_bucket"]),
              _pill(s["recommendation"]), esc(s["recommendation"])))
     A("</tbody></table></div></section>")
@@ -330,6 +337,35 @@ def build(ctx, outdir):
              "%s months" % p.get("post_study_work_months")
              if p.get("post_study_work_months") else "<span class='unv'>NONE</span>"))
         A("<p class='mut'>%s</p>" % esc(visa.get("why_flag", "")))
+
+        ind = r.get("indian") or {}
+        A("<h3>Can I apply? — %s</h3>" % esc(ind.get("verdict", "unknown")))
+        A("<p class='mut'>%s</p>" % esc(ind.get("summary", "")))
+        A("<div class='wrap'><table><thead><tr><th>Requirement</th><th>Status</th>"
+          "<th>Detail</th></tr></thead><tbody>")
+        _sc = {"OK": "b-ver", "ADVANTAGE": "b-ver", "RISK": "b-est",
+               "BLOCKED": "b-unk", "UNKNOWN": "b-unk", "INFO": "b-prob"}
+        for c in ind.get("checks", []):
+            A("<tr><td>%s</td><td><span class='b %s'>%s</span></td><td class='mut'>%s</td></tr>"
+              % (esc(c["requirement"]), _sc.get(c["status"], "b-est"),
+                 esc(c["status"]), esc(c["detail"])))
+        A("</tbody></table></div>")
+
+        schols = r.get("scholarships") or []
+        if schols:
+            A("<h3>Scholarships you could win</h3><div class='wrap'><table><thead><tr>"
+              "<th>Scholarship</th><th>Fit</th><th>Covers</th><th>Why / risk</th>"
+              "</tr></thead><tbody>")
+            for sch in schols:
+                _f = sch.get("applicant_fit", "")
+                _fc = ("b-ver" if _f == "STRONG" else "b-est" if _f == "MEDIUM" else "b-unk")
+                A("<tr><td><strong>%s</strong><div class='mut'>%s</div></td>"
+                  "<td><span class='b %s'>%s</span></td><td class='mut'>%s</td>"
+                  "<td class='mut'>%s<br><em>%s</em></td></tr>"
+                  % (esc(sch["name"]), esc(sch.get("amount_note", "")), _fc, esc(_f),
+                     esc(sch.get("covers", "")), esc(sch.get("fit_reason", "")),
+                     esc(sch.get("fit_risk", ""))))
+            A("</tbody></table></div>")
 
         A("<h3>Requirements</h3><ul>")
         A("<li>Academic: %s %s</li>" % (esc(p.get("academic_prereq") or "DATA NOT VERIFIED"),
@@ -460,6 +496,37 @@ def build(ctx, outdir):
                  esc(r["scored"]["deadline_status"]),
                  _pill(r["scored"]["recommendation"]), esc(r["scored"]["recommendation"])))
         A("</tbody></table></div>")
+    A("</section>")
+
+    # -------------------------------------------------------------- skills
+    A("<section id='skills'><h2>What to fix to compete internationally</h2>")
+    A("<p class='mut'>Ranked by how often each item is actually named in the "
+      "%d real job postings matched to your top career tracks — not by opinion. "
+      "Items with a measured count are demanded by real employers right now.</p>"
+      % ctx["jobmarket"]["postings_loaded"])
+    roadmap = ctx.get("gap_roadmap") or []
+    for band in ("DO FIRST", "NEXT", "LATER"):
+        rows = [g for g in roadmap if g["band"] == band]
+        if not rows:
+            continue
+        A("<h3>%s</h3><div class='wrap'><table><thead><tr><th>#</th><th>Gap</th>"
+          "<th>Type</th><th>Employer mentions</th><th>Cost</th><th>Time</th>"
+          "<th>Why it matters</th></tr></thead><tbody>" % esc(band))
+        for g in rows:
+            A("<tr><td class='mut'>%d</td><td><strong>%s</strong></td>"
+              "<td><span class='b b-prob'>%s</span></td>"
+              "<td>%s</td><td class='mut'>%s</td><td class='mut'>%s</td>"
+              "<td class='mut'>%s</td></tr>"
+              % (g["rank"], esc(g["gap"]), esc(g["kind"]),
+                 ("<strong>%d</strong>" % g["mentions"]) if g["measured"]
+                 else "<span class='unv'>not measured</span>",
+                 esc(g.get("cost", "")), esc(g.get("time", "")), esc(g["why"])))
+        A("</tbody></table></div>")
+    A("<div class='warn'>Prerequisite reality check: <b>AAISM requires CISM first "
+      "and AAIA requires CISA first</b> — neither is an entry credential. "
+      "CISSP needs five years across two security domains, which banking "
+      "operations does not supply. <b>AIGP has no prerequisites at all</b>, "
+      "which is why it sits at the top of this list.</div>")
     A("</section>")
 
     # ---------------------------------------------------------------- gaps

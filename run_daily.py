@@ -17,7 +17,7 @@ import sys
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
-from engine import dashboard, db, jobmarket, load, report, scoring
+from engine import applicant, dashboard, db, jobmarket, load, report, scoring
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
 REPORTS = os.path.join(ROOT, "reports")
@@ -58,6 +58,7 @@ def main():
     profile = loaded["profile"]
     careers_cfg = loaded["careers"]
     weights = load.load_json("weights.json")
+    scholarships_cfg = load.load_json("scholarships.json")
     print("loaded %d programmes, %d countries, %d careers"
           % (loaded["programme_count"], len(loaded["countries"]),
              len(careers_cfg["careers"])))
@@ -140,9 +141,12 @@ def main():
             "breakdown": db.js(s["breakdown"]), "computed_at": db.now(),
         }, ("programme_id", "run_id"))
 
+        ind = applicant.indian_application_check(p, profile, country)
+        schols = applicant.scholarships_for(p, scholarships_cfg)
         ranked.append({"programme": p, "scored": s, "career": career,
                        "country": country, "university": uni, "why": why,
                        "gaps": gaps, "outcomes": outcomes,
+                       "indian": ind, "scholarships": schols,
                        "salary": report.salary_projection(country, career, s),
                        "should_apply": report.should_i_apply(s, p)})
 
@@ -168,6 +172,8 @@ def main():
 
     # ---- §33 challenges, §32 arbitrage ------------------------------------
     challenges = jobmarket.challenge(careers_cfg, jm["by_id"], careers_ranked)
+    top_career_ids = [c["career_id"] for c in careers_ranked[:5]]
+    gap_roadmap = applicant.international_gaps(profile, jm["by_id"], top_career_ids)
     arb = jobmarket.arbitrage(careers_cfg, jm["by_id"], profile)
 
     # ---- §34.9 today's three actions --------------------------------------
@@ -199,6 +205,7 @@ def main():
         "countries_ranked": countries_ranked, "challenges": challenges,
         "arbitrage": arb, "actions": actions, "top5": top5,
         "new_programmes": new_programmes, "score_changes": score_changes,
+        "gap_roadmap": gap_roadmap, "scholarships_cfg": scholarships_cfg,
         "changes": loaded["changes"], "weights": weights, "top_n": args.top,
     }
 

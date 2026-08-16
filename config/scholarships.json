@@ -1,0 +1,162 @@
+{
+  "_comment": "Scholarships an INDIAN national can actually win. Eligibility rules verified 2026-08-16 from search results; amounts and deadlines change annually, so every record carries its own confidence. Nothing here is a promise - these are application routes, not funding.",
+  "verified_on": "2026-08-16",
+
+  "scholarships": [
+    {
+      "id": "chevening",
+      "name": "Chevening Scholarship",
+      "provider": "UK Government (FCDO)",
+      "countries": ["GB"],
+      "covers": "Full: tuition, living stipend, flights, visa",
+      "amount_note": "Fully funded, one-year UK master's only",
+      "indian_eligible": true,
+      "india_allocation": "Up to 65 awards for India annually",
+      "requirements": [
+        "Indian citizenship",
+        "Recognised undergraduate degree",
+        "MINIMUM 2 YEARS work experience",
+        "Apply to THREE different eligible UK courses",
+        "Hold an unconditional offer from one by the stated July deadline",
+        "Return to India for at least 2 years after the award"
+      ],
+      "applicant_fit": "STRONG",
+      "fit_reason": "The 2-year work-experience floor is the single most common barrier and he clears it five times over. Chevening actively favours mid-career professionals with a clear leadership narrative - which is exactly his profile. His 10 years of banking regulation is an asset here, not the liability it is at universities that prefer recent graduates.",
+      "fit_risk": "The 2-year return-to-India condition directly conflicts with using the degree as an immigration instrument. If the objective is to STAY in Europe, Chevening undermines it. This is a genuine strategic conflict, not a detail.",
+      "confidence": "PROBABLY CORRECT",
+      "source": "search result 2026-08-16; verify at chevening.org before relying on it"
+    },
+    {
+      "id": "commonwealth",
+      "name": "Commonwealth Scholarship",
+      "provider": "Commonwealth Scholarship Commission (UK)",
+      "countries": ["GB"],
+      "covers": "Full: tuition, travel, living expenses",
+      "amount_note": "Fully funded",
+      "indian_eligible": true,
+      "requirements": [
+        "Citizen of a Commonwealth country (India qualifies)",
+        "Usually targeted at candidates who could not otherwise afford to study in the UK",
+        "Development-focused study rationale usually expected"
+      ],
+      "applicant_fit": "MEDIUM",
+      "fit_reason": "He is eligible on nationality and the award is fully funded.",
+      "fit_risk": "Selection leans heavily toward development impact and toward candidates without means. A self-funding banking professional targeting a private-sector governance career is not the archetype.",
+      "confidence": "ESTIMATED",
+      "source": "search result 2026-08-16; verify at cscuk.fcdo.gov.uk"
+    },
+    {
+      "id": "jn-tata",
+      "name": "J.N. Tata Endowment",
+      "provider": "Tata Trusts (India)",
+      "countries": ["*"],
+      "covers": "Loan scholarship",
+      "amount_note": "INR 1,00,000 to 10,00,000 (roughly EUR 1,000 to 10,000) - partial, not full",
+      "indian_eligible": true,
+      "requirements": [
+        "Indian citizen",
+        "AGE UNDER 45",
+        "Recognised bachelor's degree",
+        "Minimum 60% in the last academic examination"
+      ],
+      "applicant_fit": "STRONG",
+      "fit_reason": "He meets every stated criterion: Indian citizen, comfortably under 45, First Class B.Tech well above the 60% floor. No country restriction, so it works for Ireland, the Netherlands or the UK alike.",
+      "fit_risk": "It is a LOAN scholarship and partial. At EUR 1,000-10,000 it dents a EUR 45,000 UCL bill rather than solving it.",
+      "confidence": "PROBABLY CORRECT",
+      "source": "search result 2026-08-16; verify at jntataendowment.org"
+    },
+    {
+      "id": "inlaks",
+      "name": "Inlaks Shivdasani Scholarship",
+      "provider": "Inlaks Shivdasani Foundation (India)",
+      "countries": ["GB", "US", "EU"],
+      "covers": "Tuition, living, health insurance, one-way travel",
+      "amount_note": "Up to approximately USD 100,000",
+      "indian_eligible": true,
+      "requirements": [
+        "Indian citizen resident in India",
+        "Top-rated American, European or UK institution",
+        "Minimum 65% for humanities / 70% for science subjects",
+        "AGE LIMIT APPLIES - typically under 30 at the time of application"
+      ],
+      "applicant_fit": "LIKELY INELIGIBLE",
+      "fit_reason": "He clears the academic threshold with a First Class B.Tech.",
+      "fit_risk": "BLOCKING: Inlaks applies an age ceiling (commonly 30). He graduated in 2015, so he is very likely over it. Verify the exact current limit before spending any effort - if the ceiling is 30, this route is closed regardless of merit.",
+      "confidence": "ESTIMATED",
+      "source": "search result 2026-08-16 states the percentage thresholds; the age limit is from general knowledge and is NOT verified. Check inlaksfoundation.org."
+    },
+    {
+      "id": "erasmus-mundus",
+      "name": "Erasmus Mundus Joint Masters",
+      "provider": "European Commission",
+      "countries": ["IE", "NL", "DE", "BE", "FR", "AT", "SE", "DK", "FI"],
+      "covers": "Full: tuition, travel, installation, monthly allowance",
+      "amount_note": "Fully funded, typically 1,400 EUR/month plus tuition",
+      "indian_eligible": true,
+      "requirements": [
+        "Open to all nationalities including India",
+        "Must apply to a specific EMJM consortium programme, not to a university directly",
+        "Bachelor's degree",
+        "Apply through the consortium, usually with deadlines in Dec-Jan"
+      ],
+      "applicant_fit": "MEDIUM",
+      "fit_reason": "Fully funded and open to Indian nationals with no age limit and no return requirement - which makes it strictly better than Chevening for someone who wants to stay in Europe. EMILDAI (already in the corpus) is an EMJM-style joint programme.",
+      "fit_risk": "You cannot pick any programme - only the specific consortia in the EMJM catalogue, and very few are non-coding governance programmes. Competition is severe.",
+      "confidence": "ESTIMATED",
+      "source": "general knowledge; verify the current catalogue at erasmus-plus.ec.europa.eu"
+    },
+    {
+      "id": "clarendon",
+      "name": "Clarendon Fund",
+      "provider": "University of Oxford",
+      "countries": ["GB"],
+      "covers": "Full tuition plus living stipend",
+      "amount_note": "Approximately 170 awards annually, fully funded",
+      "indian_eligible": true,
+      "requirements": [
+        "Automatic consideration for all Oxford graduate applicants",
+        "No separate application",
+        "Awarded on academic merit and potential"
+      ],
+      "applicant_fit": "MEDIUM",
+      "fit_reason": "No separate application and no nationality restriction, so applying to Oxford at all puts him in the pool.",
+      "fit_risk": "Extremely competitive and merit-based against a global field of academic high-achievers. A 2015 B.Tech with a professional rather than research record is not the typical profile.",
+      "confidence": "PROBABLY CORRECT",
+      "source": "Oxford OII programme page, 2026-08-16"
+    },
+    {
+      "id": "oii-shirley",
+      "name": "OII Shirley Scholarships",
+      "provider": "Oxford Internet Institute",
+      "countries": ["GB"],
+      "covers": "Departmental award",
+      "amount_note": "DATA NOT VERIFIED",
+      "indian_eligible": true,
+      "requirements": ["All OII MSc applicants are considered automatically"],
+      "applicant_fit": "MEDIUM",
+      "fit_reason": "Automatic consideration, no extra application.",
+      "fit_risk": "Amount unverified; may be partial.",
+      "confidence": "ESTIMATED",
+      "source": "Oxford OII programme page, 2026-08-16"
+    },
+    {
+      "id": "galway-merit",
+      "name": "Business Merit Scholarship",
+      "provider": "University of Galway",
+      "countries": ["IE"],
+      "covers": "Up to 50% of tuition",
+      "amount_note": "Up to EUR 10,750 against the EUR 21,500 non-EU fee",
+      "indian_eligible": true,
+      "requirements": [
+        "First-class honours (H1) or international equivalent in the primary degree",
+        "Automatic consideration - no separate application",
+        "Competitive"
+      ],
+      "applicant_fit": "STRONG",
+      "fit_reason": "His B.Tech is First Class, which is the stated trigger. Automatic consideration means zero additional effort. Halving Galway's fee to about EUR 10,750 would make it by far the best value option in the corpus.",
+      "fit_risk": "Competitive rather than guaranteed, and Indian First Class to Irish H1 equivalence is an assumption that should be confirmed with the admissions office.",
+      "confidence": "VERIFIED",
+      "source": "University of Galway programme page, 2026-08-14"
+    }
+  ]
+}

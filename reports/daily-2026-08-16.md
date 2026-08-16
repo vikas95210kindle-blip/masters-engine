@@ -1,6 +1,6 @@
 # GLOBAL MASTER'S INTELLIGENCE REPORT
 
-**2026-08-16** · run `daily-20260816-144654` · 14 programmes scored · 1438 real job postings analysed
+**2026-08-16** · run `daily-20260816-162332` · 16 programmes scored · 1438 real job postings analysed
 
 > Scores are computed from the profile, the verified programme records and measured job-market evidence. Fields marked DATA NOT VERIFIED were not found on an official page and were **not** estimated in their place.
 
@@ -12,12 +12,12 @@
 | 2 | MSc in Cybersecurity Management (TU441) | TU Dublin | unranked | IE | Cybersecurity GRC Manage | **78.4** | 72.4 | HIGH | EUR 21,750 | 2/5 | GREEN | UNKNOWN (UNKNOWN) | 📏 FILTERED - RANK |
 | 3 | MSc Ethical and Responsible Artificial Intel | Ulster University | unranked | GB | AI Governance / Responsi | **75.1** | 71.3 | HIGH | DATA NOT VERIFIED | 1/5 | AMBER | UNKNOWN (UNKNOWN) | 📏 FILTERED - RANK |
 | 4 | Master of Public Policy (digital governance  | Hertie School | unranked | DE | AI Risk & Regulatory Gov | **71.4** | 68.4 | MEDIUM-HIGH | DATA NOT VERIFIED | 2/5 | AMBER | UNKNOWN (UNKNOWN) | 📏 FILTERED - RANK |
-| 5 | Advanced Master of Laws in Technology Govern | University of Amsterdam | #55 | NL | AI Governance / Responsi | **70.5** | 70.2 | MEDIUM | DATA NOT VERIFIED | 0/5 | GREEN | ROLLING (ROLLING) | 📏 FILTERED - RANK |
+| 5 | Advanced Master of Laws in Technology Govern | University of Amsterdam | #55 | NL | AI Governance / Responsi | **70.5** | 70.2 | MEDIUM | DATA NOT VERIFIED | 0/5 | GREEN | ROLLING (ROLLING) | 🟢 STRONG APPLY |
 | 6 | Data and Artificial Intelligence Ethics MSc | University of Edinburgh | #27 | GB | AI Governance / Responsi | **70.3** | 68.9 | MEDIUM | DATA NOT VERIFIED | 1/5 | AMBER | PAST CYCLE - REOPENS (261 days) | 🟢 STRONG APPLY |
-| 7 | MSc Information Management - Strategy and Go | Tilburg University | #371 | NL | Data & AI Governance Man | **63.6** | 59.2 | MEDIUM | DATA NOT VERIFIED | 2/5 | GREEN | UNKNOWN (UNKNOWN) | 📏 FILTERED - RANK |
-| 8 | MSc in Compliance | University College Dublin | #171 | IE | AI-enabled Financial Cri | **60.5** | 83.0 | HIGH | EUR 14,060 | 0/5 | GREEN | OPEN NOW (33 days) | 📏 FILTERED - RANK |
-| 9 | European Master in Law, Data and Artificial  | Dublin City University | #421 | IE | AI Governance / Responsi | **59.0** | 69.5 | HIGH | EUR 41,838 | 2/5 | GREEN | PAST CYCLE - REOPENS (286 days) | 📏 FILTERED - RANK |
-| 10 | Executive Master Compliance & Integrity Mana | Vrije Universiteit Amsterd | #220 | NL | AI-enabled Financial Cri | **56.5** | 78.4 | MEDIUM-HIGH | EUR 20,995 | 0/5 | GREEN | UNKNOWN (UNKNOWN) | 📏 FILTERED - RANK |
+| 7 | MPA Digital Technologies and Policy | University College London | #9 | GB | AI Governance / Responsi | **65.1** | 58.2 | LOW | EUR 45,080 | 2/5 | AMBER | PAST CYCLE - REOPENS (314 days) | 🟡 CONSIDER |
+| 8 | MSc Social Science of the Internet | University of Oxford | #3 | GB | AI Governance / Responsi | **64.3** | 54.3 | LOW | DATA NOT VERIFIED | 3/5 | AMBER | OPEN NOW (145 days) | 🟡 CONSIDER |
+| 9 | MSc Information Management - Strategy and Go | Tilburg University | #371 | NL | Data & AI Governance Man | **63.6** | 59.2 | MEDIUM | DATA NOT VERIFIED | 2/5 | GREEN | UNKNOWN (UNKNOWN) | 📏 FILTERED - RANK |
+| 10 | MSc in Compliance | University College Dublin | #171 | IE | AI-enabled Financial Cri | **60.5** | 83.0 | HIGH | EUR 14,060 | 0/5 | GREEN | OPEN NOW (33 days) | 📏 FILTERED - RANK |
 
 ### Detailed reasoning — top 3
 
@@ -50,7 +50,8 @@
 
 ## 2. 🆕 NEW PROGRAMMES DISCOVERED
 
-_None this run — the corpus is unchanged since the last load._
+- MPA Digital Technologies and Policy
+- MSc Social Science of the Internet
 
 ## 3. 📈 RANKING CHANGES
 
@@ -61,9 +62,12 @@ _No previous run to compare against. Baseline established today._
 **DEADLINE IN 60 DAYS**
 - MSc in Compliance — 2026-09-18 (FILTERED - RANK)
 
+**BEYOND 90 DAYS**
+- MSc Social Science of the Internet — 2027-01-08 (CONSIDER)
+
 **ROLLING**
 - MSc (Cybersecurity Risk Management) — no date on record (FILTERED - RANK)
-- Advanced Master of Laws in Technology Governance (Advanced LLM) — no date on record (FILTERED - RANK)
+- Advanced Master of Laws in Technology Governance (Advanced LLM) — no date on record (STRONG APPLY)
 
 **UNKNOWN**
 - MSc in Cybersecurity Management (TU441) — no date on record (FILTERED - RANK)
@@ -78,12 +82,17 @@ _No previous run to compare against. Baseline established today._
 **NEXT CYCLE (projected 2027-05-04)**
 - Data and Artificial Intelligence Ethics MSc — 2026-05-04 (STRONG APPLY)
 
+**NEXT CYCLE (projected 2027-06-26)**
+- MPA Digital Technologies and Policy — 2026-06-26 (CONSIDER)
+
 **NEXT CYCLE (projected 2027-05-29)**
 - European Master in Law, Data and Artificial Intelligence (EMILDAI) — 2026-05-29 (FILTERED - RANK)
 
 ## 5. 💰 SCHOLARSHIPS
 
 - **MSc (Cybersecurity Risk Management)** — Scholarships verified on the official page: Business Merit Scholarships up to 50% of tuition for H1 degree holders (automatic consideration), Global Scholarships for non-EU, Postgraduate Excellence Scholarships EUR 1,500
+- **MPA Digital Technologies and Policy** — STRONGEST TOP-50 CANDIDATE FOUND. UCL is QS ~9 and the programme is genuinely non-coding. RISK: entry requires a 2:1 'in a relevant discipline' - a B.Tech in Biotechnology is STEM but not obviously relevant to digital po
+- **MSc Social Science of the Internet** — HIGHEST PRESTIGE IN THE CORPUS and the timing is right - the 2026-27 cycle is closed, and applications for 2027-28 open next, which is exactly his target intake. Two real caveats. (1) The required Statistics Core is a ge
 - **MSc in Compliance** — STRATEGIC OUTLIER. Best career-content fit and lowest cost of anything here, and the only programme with an explicit admission route for experienced professionals. But it is ONLINE, so it delivers ZERO immigration value:
 
 ## 6. 🌍 COUNTRIES
@@ -147,7 +156,7 @@ Sample of 1143 postings. If this stays low, the master's is being bought as an I
 
 ## 10. 🎯 TODAY'S THREE ACTIONS
 
-1. Start the application for **Data and Artificial Intelligence Ethics MSc** (University of Edinburgh) — priority score 64.8, PAST CYCLE - REOPENS.
+1. Start the application for **Advanced Master of Laws in Technology Governance (Advanced LLM)** (University of Amsterdam) — priority score 65.7, ROLLING.
 2. Verify tuition for **MSc Ethical and Responsible Artificial Intelligence** — it is in the top 8 but its ROI cannot be computed without a fee figure.
 3. Book the IAPP AIGP exam for February 2027 — it has no prerequisites and is the cheapest credential that closes the largest gap.
 
@@ -157,7 +166,16 @@ Sample of 1143 postings. If this stays low, the master's is being bought as an I
 
 ### If you could apply to only 5 programmes today
 
-**1. Data and Artificial Intelligence Ethics MSc — University of Edinburgh**
+**1. Advanced Master of Laws in Technology Governance (Advanced LLM) — University of Amsterdam**
+
+1. *Why:* You already have roughly 10 years of banking experience covering KYC/AML, payments, compliance and process digitisation. This programme's own material uses the same vocabulary you work in (governance, regulat), so your experience reads as directly relevant rather than as a career detour. It adds governance and risk expertise at coding intensity 0/5 (no coding), so it does not require you to become
+2. *Expected career:* AI Governance / Responsible AI Manager (cross-industry)
+3. *Admission probability:* MEDIUM — 10 years of relevant experience is an active advantage (experience is preferred here); top-150 university, moderately competitive; rolling admissions favour an early, well-prepared
+4. *Cost:* DATA NOT VERIFIED tuition
+5. *Deadline:* ROLLING
+6. *Biggest risk:* BLOCKING ISSUE: the page states applicants already hold a Master's degree. He does not - his highest qualification is a B.Tech. Advanced LLMs in the Dutch system are typically second master's degrees. Until that is clarified with admissions, treat this as very likely ineligible. Excellent content fi
+
+**2. Data and Artificial Intelligence Ethics MSc — University of Edinburgh**
 
 1. *Why:* You already have roughly 10 years of banking experience covering KYC/AML, payments, compliance and process digitisation. This programme's own material uses the same vocabulary you work in (compliance, financial, regulat, risk), so your experience reads as directly relevant rather than as a career detour. It adds governance and risk expertise at coding intensity 1/5 (minimal technical literacy), so
 2. *Expected career:* AI Governance / Responsible AI Manager (cross-industry)

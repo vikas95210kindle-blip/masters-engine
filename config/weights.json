@@ -25,10 +25,11 @@
   "filters": {
     "_comment": "User-requested prestige filter. NOTE THE TENSION: SPEC §30 says career fit must be able to beat ranking, and the measured evidence says a master's is named in only ~5% of real postings - so employer demand for prestige is weak for THIS career. The filter is therefore applied as a visible gate with the excluded programmes still listed, not as a silent deletion. Set enforce_rank_filter to false to restore pure career-fit ranking.",
     "enforce_rank_filter": true,
-    "min_university_rank": 50,
+    "min_university_rank": 100,
     "unranked_treated_as": 9999,
     "rank_source": "ESTIMATED - QS ranks in programmes.seed.json were carried in from general knowledge and have NOT been verified against qs.com this run. Verify before treating the filter output as authoritative.",
     "require_scholarship_for_indians": false,
+    "require_indian_applicable": true,
     "require_international_eligible": true
   },
 
