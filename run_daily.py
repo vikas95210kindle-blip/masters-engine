@@ -17,7 +17,7 @@ import sys
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
-from engine import applicant, dashboard, db, jobmarket, load, report, scoring
+from engine import applicant, dashboard, db, jobmarket, load, profile_builder, report, salary, scoring
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
 REPORTS = os.path.join(ROOT, "reports")
@@ -174,6 +174,12 @@ def main():
     challenges = jobmarket.challenge(careers_cfg, jm["by_id"], careers_ranked)
     top_career_ids = [c["career_id"] for c in careers_ranked[:5]]
     gap_roadmap = applicant.international_gaps(profile, jm["by_id"], top_career_ids)
+    posts = jobmarket.load_postings(jm["source"])
+    salary_careers = salary.by_career(posts, careers_cfg, jobmarket)
+    salary_markets = salary.by_country(posts)
+    plan = profile_builder.build_plan(profile, gap_roadmap, salary_careers,
+                                      careers_ranked[0]["career_id"] if careers_ranked else None)
+    ready = profile_builder.readiness(profile, gap_roadmap)
     arb = jobmarket.arbitrage(careers_cfg, jm["by_id"], profile)
 
     # ---- §34.9 today's three actions --------------------------------------
@@ -206,6 +212,8 @@ def main():
         "arbitrage": arb, "actions": actions, "top5": top5,
         "new_programmes": new_programmes, "score_changes": score_changes,
         "gap_roadmap": gap_roadmap, "scholarships_cfg": scholarships_cfg,
+        "salary_careers": salary_careers, "salary_markets": salary_markets,
+        "plan": plan, "readiness": ready,
         "changes": loaded["changes"], "weights": weights, "top_n": args.top,
     }
 

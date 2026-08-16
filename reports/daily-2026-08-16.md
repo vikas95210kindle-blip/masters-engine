@@ -1,6 +1,6 @@
 # GLOBAL MASTER'S INTELLIGENCE REPORT
 
-**2026-08-16** · run `daily-20260816-162511` · 16 programmes scored · 1438 real job postings analysed
+**2026-08-16** · run `daily-20260816-164131` · 16 programmes scored · 1438 real job postings analysed
 
 > Scores are computed from the profile, the verified programme records and measured job-market evidence. Fields marked DATA NOT VERIFIED were not found on an official page and were **not** estimated in their place.
 
@@ -13,11 +13,11 @@
 | 3 | MSc Ethical and Responsible Artificial Intel | Ulster University | unranked | GB | AI Governance / Responsi | **75.1** | 71.3 | HIGH | DATA NOT VERIFIED | 1/5 | AMBER | UNKNOWN (UNKNOWN) | 📏 FILTERED - RANK |
 | 4 | Master of Public Policy (digital governance  | Hertie School | unranked | DE | AI Risk & Regulatory Gov | **71.4** | 68.4 | MEDIUM-HIGH | DATA NOT VERIFIED | 2/5 | AMBER | UNKNOWN (UNKNOWN) | 📏 FILTERED - RANK |
 | 5 | Advanced Master of Laws in Technology Govern | University of Amsterdam | #55 | NL | AI Governance / Responsi | **70.5** | 70.2 | MEDIUM | DATA NOT VERIFIED | 0/5 | GREEN | ROLLING (ROLLING) | 🟢 STRONG APPLY |
-| 6 | Data and Artificial Intelligence Ethics MSc | University of Edinburgh | #27 | GB | AI Governance / Responsi | **70.3** | 68.9 | MEDIUM | DATA NOT VERIFIED | 1/5 | AMBER | PAST CYCLE - REOPENS (261 days) | 🟢 STRONG APPLY |
+| 6 | Data and Artificial Intelligence Ethics MSc | University of Edinburgh | #34 | GB | AI Governance / Responsi | **70.3** | 68.9 | MEDIUM | DATA NOT VERIFIED | 1/5 | AMBER | PAST CYCLE - REOPENS (261 days) | 🟢 STRONG APPLY |
 | 7 | MPA Digital Technologies and Policy | University College London | #9 | GB | AI Governance / Responsi | **65.1** | 58.2 | LOW | EUR 45,080 | 2/5 | AMBER | PAST CYCLE - REOPENS (314 days) | 🟡 CONSIDER |
 | 8 | MSc Social Science of the Internet | University of Oxford | #3 | GB | AI Governance / Responsi | **64.3** | 54.3 | LOW | DATA NOT VERIFIED | 3/5 | AMBER | OPEN NOW (145 days) | 🟡 CONSIDER |
 | 9 | MSc Information Management - Strategy and Go | Tilburg University | #371 | NL | Data & AI Governance Man | **63.6** | 59.2 | MEDIUM | DATA NOT VERIFIED | 2/5 | GREEN | UNKNOWN (UNKNOWN) | 📏 FILTERED - RANK |
-| 10 | MSc in Compliance | University College Dublin | #171 | IE | AI-enabled Financial Cri | **60.5** | 83.0 | HIGH | EUR 14,060 | 0/5 | GREEN | OPEN NOW (33 days) | 📏 FILTERED - RANK |
+| 10 | European Master in Law, Data and Artificial  | Dublin City University | #421 | IE | AI Governance / Responsi | **59.0** | 69.5 | HIGH | EUR 41,838 | 2/5 | GREEN | PAST CYCLE - REOPENS (286 days) | 📏 FILTERED - RANK |
 
 ### Detailed reasoning — top 3
 
@@ -54,7 +54,7 @@ _None this run — the corpus is unchanged since the last load._
 
 ## 3. 📈 RANKING CHANGES
 
-_No previous run to compare against. Baseline established today._
+- **MSc in Compliance** — 60.5 → 56.8 (-3.7)
 
 ## 4. ⏰ DEADLINES
 

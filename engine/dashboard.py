@@ -145,7 +145,8 @@ def build(ctx, outdir):
 
     tabs = [("dash", "Dashboard"), ("finder", "Master's Finder"), ("detail", "Programme Detail"),
             ("countries", "Countries"), ("careers", "Careers"), ("jobs", "Jobs"),
-            ("deadlines", "Deadlines"), ("skills", "Skills & Gaps"),
+            ("deadlines", "Deadlines"), ("plan", "My Plan"), ("salary", "Salaries"),
+            ("skills", "Skills & Gaps"),
             ("gaps", "Gap Analysis"), ("decision", "Decision")]
     A("<nav>")
     for i, (tid, label) in enumerate(tabs):
@@ -496,6 +497,104 @@ def build(ctx, outdir):
                  esc(r["scored"]["deadline_status"]),
                  _pill(r["scored"]["recommendation"]), esc(r["scored"]["recommendation"])))
         A("</tbody></table></div>")
+    A("</section>")
+
+
+    # ---------------------------------------------------------------- plan
+    A("<section id='plan'><h2>Your plan — what to do, starting this week</h2>")
+    rd = ctx.get("readiness") or {}
+    if rd:
+        A("<div class='card' style='display:flex;gap:22px;align-items:center;flex-wrap:wrap'>")
+        A("<div><div style='font-family:var(--mono);font-size:40px;font-weight:700;color:%s'>%d</div>"
+          "<div class='mut'>international readiness</div></div>"
+          % ("#3fb950" if rd["overall"] >= 60 else "#d29922" if rd["overall"] >= 40 else "#f85149",
+             rd["overall"]))
+        A("<div style='flex:1;min-width:280px'>")
+        for d in rd["dimensions"]:
+            A("<div style='display:flex;align-items:center;gap:10px;margin-bottom:5px;font-size:12px'>"
+              "<span style='width:250px;color:var(--dim)'>%s</span>"
+              "<span style='flex:1;height:6px;background:#1a1f28;border-radius:3px;overflow:hidden'>"
+              "<i style='display:block;height:100%%;width:%d%%;background:%s'></i></span>"
+              "<span style='width:32px;text-align:right;font-family:var(--mono);color:var(--dim)'>%d</span></div>"
+              % (esc(d["name"]), d["score"],
+                 "#3fb950" if d["score"] >= 60 else "#d29922" if d["score"] >= 30 else "#f85149",
+                 d["score"]))
+        A("</div></div>")
+        A("<div class='warn'>%s</div>" % esc(rd["verdict"]))
+
+    plan = ctx.get("plan") or {}
+    for ph in plan.get("phases", []):
+        A("<h3>%s — %s</h3><div class='wrap'><table><thead><tr><th>Type</th>"
+          "<th>Action</th><th>Time</th><th>Why it matters</th></tr></thead><tbody>"
+          % (esc(ph["window"]), esc(ph["theme"])))
+        for it in ph["items"]:
+            A("<tr><td><span class='b b-prob'>%s</span></td><td><strong>%s</strong>%s</td>"
+              "<td class='mut'>%s</td><td class='mut'>%s</td></tr>"
+              % (esc(it["kind"]), esc(it["name"]),
+                 (" <span class='mut'>· %s employer mentions</span>" % it["demand"])
+                 if it.get("demand") else "",
+                 esc(it.get("time", "")), esc(it["why"])))
+        A("</tbody></table></div>")
+
+    A("<h3>Daily and weekly habits</h3><div class='wrap'><table><thead><tr><th>Habit</th>"
+      "<th>Cadence</th><th>Effort</th><th>Why</th><th>How you know it worked</th>"
+      "</tr></thead><tbody>")
+    for h in plan.get("habits", []):
+        A("<tr><td><strong>%s</strong><div class='mut'>%s</div></td><td>%s</td><td class='mut'>%s</td>"
+          "<td class='mut'>%s</td><td class='mut'>%s</td></tr>"
+          % (esc(h["name"]), esc(h["what"]), esc(h["cadence"]), esc(h["effort"]),
+             esc(h["why"]), esc(h.get("measure", ""))))
+    A("</tbody></table></div>")
+
+    A("<h3>Evidence to build (nobody can fake these)</h3><div class='wrap'><table><thead><tr>"
+      "<th>Artefact</th><th>Time</th><th>Why</th></tr></thead><tbody>")
+    for a in plan.get("artefacts", []):
+        A("<tr><td><strong>%s</strong><div class='mut'>%s</div></td><td class='mut'>%s</td>"
+          "<td class='mut'>%s</td></tr>"
+          % (esc(a["name"]), esc(a["what"]), esc(a["time"]), esc(a["why"])))
+    A("</tbody></table></div>")
+    A("</section>")
+
+    # -------------------------------------------------------------- salary
+    A("<section id='salary'><h2>Salaries — measured from real postings</h2>")
+    A("<p class='mut'>Parsed from job ads that state an actual figure. Every row shows its "
+      "sample size; where fewer than five postings state a salary, no median is claimed. "
+      "Non-EUR converted at assumed rates (GBP 1.16, USD 0.92) — the conversion is an "
+      "assumption, the underlying figures are not.</p>")
+    A("<h3>By career track</h3><div class='wrap'><table><thead><tr><th>Career</th><th>n</th>"
+      "<th>P25</th><th>Median</th><th>P75</th><th>Range</th></tr></thead><tbody>")
+    sc_sal = ctx.get("salary_careers") or {}
+    for cid, r in sorted(sc_sal.items(), key=lambda x: -(x[1].get("median_eur") or 0)):
+        if r.get("available"):
+            A("<tr><td><strong>%s</strong></td><td class='n'>%d</td><td class='n'>&euro;%s</td>"
+              "<td class='n' style='color:var(--acc);font-weight:700'>&euro;%s</td>"
+              "<td class='n'>&euro;%s</td><td class='mut'>&euro;%s - &euro;%s</td></tr>"
+              % (esc(r["name"]), r["n"], format(r["p25_eur"], ","), format(r["median_eur"], ","),
+                 format(r["p75_eur"], ","), format(r["min_eur"], ","), format(r["max_eur"], ",")))
+        else:
+            A("<tr><td>%s</td><td class='n'>%d</td><td colspan='4' class='unv'>%s</td></tr>"
+              % (esc(r["name"]), r.get("n", 0), esc(r.get("note", ""))))
+    A("</tbody></table></div>")
+
+    A("<h3>By market</h3><div class='wrap'><table><thead><tr><th>Market</th><th>n</th>"
+      "<th>P25</th><th>Median</th><th>P75</th></tr></thead><tbody>")
+    for m, r in sorted((ctx.get("salary_markets") or {}).items(),
+                       key=lambda x: -(x[1].get("median_eur") or 0)):
+        if r.get("available"):
+            A("<tr><td><strong>%s</strong></td><td class='n'>%d</td><td class='n'>&euro;%s</td>"
+              "<td class='n' style='color:var(--acc);font-weight:700'>&euro;%s</td>"
+              "<td class='n'>&euro;%s</td></tr>"
+              % (esc(m), r["n"], format(r["p25_eur"], ","), format(r["median_eur"], ","),
+                 format(r["p75_eur"], ",")))
+        else:
+            A("<tr><td>%s</td><td class='n'>%d</td><td colspan='3' class='unv'>no stated salaries</td></tr>"
+              % (esc(m), r.get("n", 0)))
+    A("</tbody></table></div>")
+    A("<div class='note'><b>What this does not tell you:</b> these are salaries for people "
+      "already doing the job, not for graduates entering it. Programme-specific graduate "
+      "salary data barely exists for master's degrees — universities rarely publish it and "
+      "the UK's LEO dataset is largely first-degree. Rather than invent a number per "
+      "programme, the engine shows the market you are aiming at.</div>")
     A("</section>")
 
     # -------------------------------------------------------------- skills
