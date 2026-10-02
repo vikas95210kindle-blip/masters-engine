@@ -1,6 +1,6 @@
 # GLOBAL MASTER'S INTELLIGENCE REPORT
 
-**2026-10-02** · run `daily-20261002-112635` · 16 programmes scored · 1438 real job postings analysed
+**2026-10-02** · run `daily-20261002-113007` · 16 programmes scored · 1438 real job postings analysed
 
 > Scores are computed from the profile, the verified programme records and measured job-market evidence. Fields marked DATA NOT VERIFIED were not found on an official page and were **not** estimated in their place.
 
