@@ -1,6 +1,6 @@
 # GLOBAL MASTER'S INTELLIGENCE REPORT
 
-**2026-10-03** · run `daily-20261003-065113` · 21 programmes scored · 1438 real job postings analysed
+**2026-10-03** · run `daily-20261003-065615` · 21 programmes scored · 1438 real job postings analysed
 
 > Scores are computed from the profile, the verified programme records and measured job-market evidence. Fields marked DATA NOT VERIFIED were not found on an official page and were **not** estimated in their place.
 
@@ -54,11 +54,7 @@ _None this run — the corpus is unchanged since the last load._
 
 ## 3. 📈 RANKING CHANGES
 
-- **London Business School MBA** — 14.1 → 67.5 (+53.4)
-- **HEC Paris MBA** — 13.6 → 67.0 (+53.4)
-- **INSEAD MBA** — 7.7 → 61.1 (+53.4)
-- **IIM Ahmedabad PGPX (one-year MBA)** — 0.0 → 49.8 (+49.8)
-- **Oxford Executive MBA** — 0.0 → 41.5 (+41.5)
+_No previous run to compare against. Baseline established today._
 
 ## 4. ⏰ DEADLINES
 
@@ -100,7 +96,7 @@ _None this run — the corpus is unchanged since the last load._
 - **MSc Social Science of the Internet** — HIGHEST PRESTIGE IN THE CORPUS and the timing is right - the 2026-27 cycle is closed, and applications for 2027-28 open next, which is exactly his target intake. Two real caveats. (1) The required Statistics Core is a ge
 - **INSEAD MBA** — QS Global MBA #8, QS EMBA #9. Ten months is the shortest top-10 MBA, which lowers opportunity cost. All-in roughly EUR 140,000 - about 2.8x the self-funding ceiling.
 - **MSc in Compliance** — STRATEGIC OUTLIER. Best career-content fit and lowest cost of anything here, and the only programme with an explicit admission route for experienced professionals. But it is ONLINE, so it delivers ZERO immigration value:
-- **IIM Ahmedabad PGPX (one-year MBA)** — QS Business & Management subject #21 with employer reputation #21 - better employer standing than HEC Paris (#29) or LBS (#36). No visa risk, no relocation cost, and it fits Track A. Its QS GLOBAL MBA rank was not confir
+- **IIM Ahmedabad PGPX (one-year MBA)** — QS Business & Management subject #21, employer reputation #21 - better employer standing than HEC Paris (#29) or LBS (#36). At roughly EUR 38,500 ALL-IN including accommodation it is the only MBA here that fits inside th
 - **Oxford Executive MBA** — QS EMBA #1 in the world. CRITICAL: modular/part-time EMBAs confer NO student visa and NO post-study work route, so this cannot function as an immigration instrument - the same reason UCD Compliance and VU Amsterdam are p
 
 ## 6. 🌍 COUNTRIES

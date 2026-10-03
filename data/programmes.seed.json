@@ -1237,7 +1237,7 @@
       "department": "HEC Paris MBA",
       "language": "English",
       "tuition_currency": "EUR",
-      "living_cost_eur": 22000,
+      "living_cost_eur": 25300,
       "scholarship_available": 1,
       "application_deadline": null,
       "deadline_type": "UNKNOWN",
@@ -1275,7 +1275,7 @@
       "study_mode": "full-time on-campus",
       "tuition_amount": 102000,
       "tuition_eur": 102000,
-      "tuition_note": "EUR 102,000 for the January 2027 intake (up from EUR 98,000 in Jan 2025). Total cost of attendance reported at EUR 120,000-130,000. Tuition from aggregator reporting, not the school's own fee page - PROBABLY CORRECT, not VERIFIED. Confirm on the official site before relying on it.",
+      "tuition_note": "EUR 102,000 total for BOTH the Jan 2027 and Sept 2027 intakes: EUR 9,000 deposit + EUR 47,000 + EUR 46,000 instalments. VERIFIED from the school's own fee page, 2026-10-03. The figure is published only as an image on the fees page, so it was read from the image itself rather than page text.",
       "ranking": 5,
       "visa_route": "France student visa (VLS-TS); APS post-study job-search permit",
       "post_study_work_months": 24,
@@ -1287,18 +1287,19 @@
         "fincrime_ai"
       ],
       "confidence": {
-        "tuition": "PROBABLY CORRECT",
+        "tuition": "VERIFIED",
         "ranking": "VERIFIED",
         "gmat_required": "PROBABLY CORRECT",
         "deadline": "UNKNOWN",
-        "ielts": "UNKNOWN"
+        "ielts": "UNKNOWN",
+        "living_cost": "VERIFIED"
       },
       "evidence_urls": [
-        "https://www.hec.edu/en/mba-programs/mba",
-        "https://www.mim-essay.com/hec-paris-mba-fees"
+        "https://www.hec.edu/en/mba-executive-mba/mba/admissions/fees-funding"
       ],
       "last_verified": "2026-10-03",
-      "notes": "QS Global MBA #5 and QS EMBA #2. Tuition alone is 2x the stated EUR 50,000 self-funding ceiling; with living costs it is roughly 2.6x."
+      "notes": "QS Global MBA #5 and QS EMBA #2. Tuition alone is 2x the stated EUR 50,000 self-funding ceiling; with living costs it is roughly 2.6x.",
+      "living_note": "EUR 25,300 over 16 months, itemised by HEC: accommodation from EUR 10,400, books EUR 1,000, meals EUR 6,000, miscellaneous EUR 3,200, transport EUR 4,700. HEC notes roughly EUR 32,000 for students living on campus with a partner. VERIFIED from the school's own fee page, 2026-10-03."
     },
     {
       "country_code": "FR",
@@ -1345,7 +1346,7 @@
       "study_mode": "full-time on-campus",
       "tuition_amount": 109860,
       "tuition_eur": 109860,
-      "tuition_note": "EUR 109,860 for August 2026 / January 2027 intakes. Living costs reported around EUR 30,000 (Fontainebleau) or EUR 32,000 (Singapore). Tuition from aggregator reporting, not the school's own fee page - PROBABLY CORRECT, not VERIFIED. Confirm on the official site before relying on it.",
+      "tuition_note": "EUR 109,860 for the August 2026 AND January 2027 intakes, inclusive of all applicable taxes. A non-refundable first instalment of EUR 12,000 falls due about four weeks after an offer. VERIFIED from the school's own fee page, 2026-10-03.",
       "ranking": 8,
       "visa_route": "France student visa; or Singapore campus",
       "post_study_work_months": 24,
@@ -1356,18 +1357,19 @@
         "tech_risk_compliance"
       ],
       "confidence": {
-        "tuition": "PROBABLY CORRECT",
+        "tuition": "VERIFIED",
         "ranking": "VERIFIED",
         "gmat_required": "PROBABLY CORRECT",
         "deadline": "UNKNOWN",
-        "ielts": "UNKNOWN"
+        "ielts": "UNKNOWN",
+        "living_cost": "VERIFIED"
       },
       "evidence_urls": [
-        "https://www.insead.edu/master-programmes/mba",
-        "https://www.mim-essay.com/insead-mba-fees"
+        "https://www.insead.edu/master-programmes/master-business-administration/financing"
       ],
       "last_verified": "2026-10-03",
-      "notes": "QS Global MBA #8, QS EMBA #9. Ten months is the shortest top-10 MBA, which lowers opportunity cost. All-in roughly EUR 140,000 - about 2.8x the self-funding ceiling."
+      "notes": "QS Global MBA #8, QS EMBA #9. Ten months is the shortest top-10 MBA, which lowers opportunity cost. All-in roughly EUR 140,000 - about 2.8x the self-funding ceiling.",
+      "living_note": "EUR 30,000 estimated for Fontainebleau, EUR 32,000 for Singapore. VERIFIED from the school's own fee page, 2026-10-03."
     },
     {
       "country_code": "GB",
@@ -1414,7 +1416,7 @@
       "study_mode": "full-time on-campus",
       "tuition_amount": 123950,
       "tuition_eur": 143782,
-      "tuition_note": "GBP 123,950 for the 2026/27 intake. Converted at an ASSUMED GBP 1.16 rate. Tuition from aggregator reporting, not the school's own fee page - PROBABLY CORRECT, not VERIFIED. Confirm on the official site before relying on it.",
+      "tuition_note": "GBP 123,950 for the 2026 intake, covering the full 15-21 month programme whatever exit point is chosen, plus a GBP 400 Student Association fee. Commitment fee GBP 3,500 and reservation fee GBP 6,500 are deducted from the total. VERIFIED from the school's own fee page, 2026-10-03. Converted at an ASSUMED GBP 1.16. LBS does NOT state a living-cost estimate; the EUR 28,000 here is my own assumption for London over 21 months and is not from LBS.",
       "ranking": 6,
       "visa_route": "UK Student visa; Graduate Route post-study",
       "post_study_work_months": 24,
@@ -1426,11 +1428,12 @@
         "fincrime_ai"
       ],
       "confidence": {
-        "tuition": "PROBABLY CORRECT",
+        "tuition": "VERIFIED",
         "ranking": "VERIFIED",
         "gmat_required": "PROBABLY CORRECT",
         "deadline": "UNKNOWN",
-        "ielts": "UNKNOWN"
+        "ielts": "UNKNOWN",
+        "living_cost": "ESTIMATED"
       },
       "evidence_urls": [
         "https://www.london.edu/masters-degrees/mba/fees-financing-and-scholarships"
@@ -1483,7 +1486,7 @@
       "study_mode": "part-time modular executive",
       "tuition_amount": null,
       "tuition_eur": null,
-      "tuition_note": "DATA NOT VERIFIED - not checked against the official fee page this run.",
+      "tuition_note": "DATA NOT VERIFIED. The Said Business School fees page sits behind a Cloudflare bot check. Anti-bot systems are not bypassed, so this figure remains uncollected - check it manually at sbs.ox.ac.uk.",
       "ranking": 1,
       "visa_route": "NONE - modular executive format does not confer a student visa",
       "post_study_work_months": 0,
@@ -1503,7 +1506,7 @@
         "https://www.sbs.ox.ac.uk/programmes/mbas/executive-mba"
       ],
       "last_verified": "2026-10-03",
-      "notes": "QS EMBA #1 in the world. CRITICAL: modular/part-time EMBAs confer NO student visa and NO post-study work route, so this cannot function as an immigration instrument - the same reason UCD Compliance and VU Amsterdam are penalised."
+      "notes": "QS EMBA #1 in the world. CRITICAL: modular/part-time EMBAs confer NO student visa and NO post-study work route, so this cannot function as an immigration instrument - the same reason UCD Compliance and VU Amsterdam are penalised. Tuition could not be collected: the official page is behind a bot check."
     },
     {
       "country_code": "IN",
@@ -1511,8 +1514,8 @@
       "degree": "MBA",
       "department": "IIM Ahmedabad",
       "language": "English",
-      "tuition_currency": "EUR",
-      "living_cost_eur": null,
+      "tuition_currency": "INR",
+      "living_cost_eur": 0,
       "scholarship_available": 1,
       "application_deadline": null,
       "deadline_type": "UNKNOWN",
@@ -1548,9 +1551,9 @@
       "url": "https://www.iima.ac.in/programmes/pgpx",
       "duration_months": 12,
       "study_mode": "full-time on-campus",
-      "tuition_amount": null,
-      "tuition_eur": null,
-      "tuition_note": "DATA NOT VERIFIED - not checked this run. Reported to be far below European MBAs; confirm on the official page.",
+      "tuition_amount": 3500000,
+      "tuition_eur": 38500,
+      "tuition_note": "INR 35,00,000 for the 2026-27 batch (single student housing); INR 37,10,000 with married student housing. VERIFIED from the school's own fee page, 2026-10-03. This is a BUNDLED fee: IIM-A states it covers tuition, books and course materials, ACCOMMODATION, library, computing and network. Excludes the International Immersion Programme and utilities. Converted at an ASSUMED INR 0.011 - the conversion is an assumption, the INR figure is not.",
       "ranking": 21,
       "visa_route": "None required - home country",
       "post_study_work_months": 0,
@@ -1563,16 +1566,18 @@
         "ai_gov_fs"
       ],
       "confidence": {
-        "tuition": "UNKNOWN",
+        "tuition": "VERIFIED",
         "ranking": "VERIFIED",
         "deadline": "UNKNOWN",
-        "ielts": "UNKNOWN"
+        "ielts": "UNKNOWN",
+        "living_cost": "VERIFIED"
       },
       "evidence_urls": [
-        "https://www.iima.ac.in/programmes/pgpx"
+        "https://iima.ac.in/academics/MBA-PGPX/admission/fee-structure"
       ],
       "last_verified": "2026-10-03",
-      "notes": "QS Business & Management subject #21 with employer reputation #21 - better employer standing than HEC Paris (#29) or LBS (#36). No visa risk, no relocation cost, and it fits Track A. Its QS GLOBAL MBA rank was not confirmed and may differ from the subject rank."
+      "notes": "QS Business & Management subject #21, employer reputation #21 - better employer standing than HEC Paris (#29) or LBS (#36). At roughly EUR 38,500 ALL-IN including accommodation it is the only MBA here that fits inside the EUR 50,000 self-funding ceiling, and it costs less than a third of HEC. No visa, so it scores badly for Europe - but it is the natural Track A instrument.",
+      "living_note": "Set to 0 deliberately: accommodation is already inside the bundled fee, so adding a living-cost line would double-count. Utilities, the International Immersion Programme and personal spending are excluded and are NOT quantified here."
     }
   ],
   "universities": [
@@ -1746,5 +1751,6 @@
     }
   ],
   "ranking_note": "Rankings verified 2026-08-16 where marked VERIFIED. QS 2026 confirmed: UCL #9, Edinburgh #34 (my earlier #27 was WRONG). Oxford reported best-in-Europe. UCD 'close to top 100' so the earlier #171 was also wrong. THE and ARWU positions are NOT yet collected - the engine currently filters on QS alone, which is a single-source dependency worth removing.",
-  "mba_note": "MBA/EMBA added 2026-10-03. Ranks are from the QS Global MBA 2026 and QS EMBA 2026 rankings (separate publications from the by-Subject workbook) and are VERIFIED. Tuition is from aggregator reporting and is PROBABLY CORRECT, not VERIFIED - confirm on each school's own fee page. GMAT averages, deadlines and IELTS bands are NOT yet collected."
+  "mba_note": "MBA/EMBA added 2026-10-03. Ranks are from the QS Global MBA 2026 and QS EMBA 2026 rankings (separate publications from the by-Subject workbook) and are VERIFIED. Tuition is from aggregator reporting and is PROBABLY CORRECT, not VERIFIED - confirm on each school's own fee page. GMAT averages, deadlines and IELTS bands are NOT yet collected.",
+  "tuition_verification_note": "Tuition verified against official pages 2026-10-03: HEC EUR 102,000 (read from the fee IMAGE on hec.edu), INSEAD EUR 109,860, LBS GBP 123,950, IIM-A INR 35,00,000. Oxford EMBA could NOT be verified - the page is behind a Cloudflare bot check and bypassing anti-bot systems is out of bounds. All four aggregator figures proved correct."
 }
