@@ -1,9 +1,8 @@
 {
   "_comment": "SPEC §1 + §26. This file is the single source of truth for the applicant profile. It is read fresh on every run; edit it and rankings change. Never edit scoring code to fix a profile problem.",
   "profile_id": "vikas",
-  "profile_version": 1,
-  "last_updated": "2026-08-12",
-
+  "profile_version": 2,
+  "last_updated": "2026-10-03",
   "identity": {
     "nationality": "India",
     "residence_country": "India",
@@ -11,7 +10,6 @@
     "self_fund_ceiling_eur": 50000,
     "self_fund_note": "Confirmed able to self-fund ~EUR 40-50k (source: user, Aug 2026)."
   },
-
   "education": [
     {
       "degree": "B.Tech",
@@ -26,7 +24,6 @@
       "confidence": "VERIFIED"
     }
   ],
-
   "experience": [
     {
       "employer": "Union Bank of India",
@@ -34,7 +31,9 @@
       "start_year": 2015,
       "end_year": null,
       "years": 10,
-      "titles": ["Banking operations / officer track"],
+      "titles": [
+        "Banking operations / officer track"
+      ],
       "domains": [
         "banking operations",
         "KYC",
@@ -54,36 +53,58 @@
         "financial systems",
         "technology deployment in a regulated environment"
       ],
-      "stakeholders": ["IT", "business", "compliance"],
+      "stakeholders": [
+        "IT",
+        "business",
+        "compliance"
+      ],
       "confidence": "VERIFIED"
     }
   ],
-
   "skills": {
     "strong": [
-      "KYC", "AML", "financial crime", "customer due diligence", "payments",
-      "transaction banking", "regulatory compliance", "banking operations",
-      "process digitisation", "requirements gathering", "stakeholder management",
-      "risk and controls", "customer data management"
+      "KYC",
+      "AML",
+      "financial crime",
+      "customer due diligence",
+      "payments",
+      "transaction banking",
+      "regulatory compliance",
+      "banking operations",
+      "process digitisation",
+      "requirements gathering",
+      "stakeholder management",
+      "risk and controls",
+      "customer data management"
     ],
     "working": [
-      "API-integrated workflows", "technology deployment", "vendor/IT liaison",
+      "API-integrated workflows",
+      "technology deployment",
+      "vendor/IT liaison",
       "digital transformation programmes"
     ],
     "absent_and_intentionally_so": [
-      "Python", "Java", "C++", "SQL development", "software engineering",
-      "machine learning", "statistical modelling", "data engineering"
+      "Python",
+      "Java",
+      "C++",
+      "SQL development",
+      "software engineering",
+      "machine learning",
+      "statistical modelling",
+      "data engineering"
     ]
   },
-
   "certifications": {
     "held": [],
     "in_progress": [],
     "planned": [
-      {"name": "IAPP AIGP", "target": "2027-02", "prerequisite": "none"}
+      {
+        "name": "IAPP AIGP",
+        "target": "2027-02",
+        "prerequisite": "none"
+      }
     ]
   },
-
   "english": {
     "medium_of_instruction_english": true,
     "moi_certificate_obtainable": true,
@@ -91,15 +112,15 @@
     "expected_ielts_band": null,
     "note": "Indian B.Tech taught in English. Many EU universities accept an MOI letter; many do not. Treat exemption as PROBABLY AVAILABLE, never VERIFIED, unless the programme page says so."
   },
-
   "tests": {
     "gre": false,
     "gmat": false,
     "willing_to_take_gre": false,
-    "willing_to_take_gmat": false,
-    "willing_to_take_ielts": true
+    "willing_to_take_gmat": true,
+    "willing_to_take_ielts": true,
+    "gmat_note": "Changed 2026-10-03. Was false, set in August. Evidence it is now wrong: an active GMAT training system has been under development in ~/Movies/gmat-780-ai since September 2026 (122 tests passing, ~690 practice items), which only makes sense if the GMAT is being taken. Flagging rather than assuming: if the GMAT is NOT actually planned, set this back to false and every MBA returns to REJECT - ELIGIBILITY.",
+    "gmat_status": "preparing; no official score yet"
   },
-
   "hard_constraints": {
     "_comment": "SPEC §2. These are non-negotiable and are enforced as hard rejects, not soft penalties.",
     "no_coding_career": true,
@@ -108,57 +129,98 @@
     "reject_if_cs_degree_required": true,
     "reject_if_programming_is_major_prerequisite": true,
     "excluded_career_families": [
-      "software engineering", "data science", "machine learning engineering",
-      "AI engineering", "data engineering", "DevOps", "cloud engineering",
+      "software engineering",
+      "data science",
+      "machine learning engineering",
+      "AI engineering",
+      "data engineering",
+      "DevOps",
+      "cloud engineering",
       "quantitative modelling"
     ],
     "desirable_technical_literacy": [
-      "AI literacy", "AI concepts", "technology literacy", "data governance",
-      "model governance", "technical understanding without implementation"
+      "AI literacy",
+      "AI concepts",
+      "technology literacy",
+      "data governance",
+      "model governance",
+      "technical understanding without implementation"
     ]
   },
-
   "objective": {
     "_comment": "SPEC §3 + §51. Seed hypothesis only - the career engine re-tests it every run (§33).",
     "seed_target_identity": "AI Governance & AI Risk Manager for financial institutions, specialising in KYC/AML, payments, customer-data platforms and regulatory compliance",
     "seed_is_a_hypothesis": true,
     "long_term_titles": [
-      "Director", "Head of AI Governance", "Chief AI Officer", "AI Risk Director",
-      "Technology Risk Director", "CISO / GRC leadership",
-      "Global Financial Crime leadership", "Responsible AI leadership",
-      "International consulting", "Big Tech governance / risk"
+      "Director",
+      "Head of AI Governance",
+      "Chief AI Officer",
+      "AI Risk Director",
+      "Technology Risk Director",
+      "CISO / GRC leadership",
+      "Global Financial Crime leadership",
+      "Responsible AI leadership",
+      "International consulting",
+      "Big Tech governance / risk"
     ],
     "target_employers": [
-      "global banks", "Big 4", "consulting firms", "fintech", "RegTech",
-      "AI companies", "cloud providers", "major technology companies",
+      "global banks",
+      "Big 4",
+      "consulting firms",
+      "fintech",
+      "RegTech",
+      "AI companies",
+      "cloud providers",
+      "major technology companies",
       "international organisations"
     ],
-    "international_organisation_interest": ["UN", "World Bank", "IFIs", "development institutions"]
+    "international_organisation_interest": [
+      "UN",
+      "World Bank",
+      "IFIs",
+      "development institutions"
+    ]
   },
-
   "preferences": {
     "priority_countries": [
-      "Ireland", "Netherlands", "Germany", "Belgium", "Luxembourg",
-      "United Kingdom", "Switzerland", "Denmark", "Sweden", "Norway",
-      "Finland", "France", "Austria"
+      "Ireland",
+      "Netherlands",
+      "Germany",
+      "Belgium",
+      "Luxembourg",
+      "United Kingdom",
+      "Switzerland",
+      "Denmark",
+      "Sweden",
+      "Norway",
+      "Finland",
+      "France",
+      "Austria"
     ],
     "secondary_countries": [
-      "United States", "Canada", "Australia", "Singapore",
-      "United Arab Emirates", "New Zealand"
+      "United States",
+      "Canada",
+      "Australia",
+      "Singapore",
+      "United Arab Emirates",
+      "New Zealand"
     ],
     "earliest_intake": "2027-09",
     "max_duration_months": 24,
-    "study_mode": ["full-time on-campus", "full-time"],
+    "study_mode": [
+      "full-time on-campus",
+      "full-time"
+    ],
     "balance": {
       "_comment": "SPEC §53. 1.0 = pure money maximisation, 0.0 = pure purpose/impact.",
       "money_weight": 0.7,
       "purpose_weight": 0.3
     }
   },
-
   "context_notes": [
     "Age/career stage: ~10 years post-graduation. Programmes that require a recent bachelor or that cap work experience are a mismatch risk - check explicitly.",
     "A master's is being bought partly as an IMMIGRATION INSTRUMENT (post-study work rights + salary-threshold qualification), not only as education. Score accordingly.",
-    "Ireland Critical Skills permit threshold is materially lower WITH a relevant degree. A B.Tech in Biotechnology is unlikely to count as relevant to a governance role - this is the single strongest argument for the master's."
+    "Ireland Critical Skills permit threshold is materially lower WITH a relevant degree. A B.Tech in Biotechnology is unlikely to count as relevant to a governance role - this is the single strongest argument for the master's.",
+    "An MBA/EMBA track was added on 2026-10-03. This is a genuine strategic fork, not an extension of the governance-master's plan: MBAs cost 2-3.5x the stated self-funding ceiling, require the GMAT, and lead to consulting/finance/general management rather than AI governance. The engine scores both so the trade-off is explicit rather than assumed."
   ]
 }
