@@ -1,0 +1,656 @@
+<title>Dukaan Desk</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: a seller's ledger. Sticky tab strip on top, one working sheet per tab, numbers in mono. */
+:root{
+  --paper:#f5f7fa; --sheet:#ffffff; --ink:#14213d; --muted:#5b6478; --rule:#dde2ea;
+  --accent:#d98e04; --accent-ink:#4a2f00; --accent-soft:#fdf1d8;
+  --good:#127a46; --good-soft:#e2f4ea; --bad:#b42318; --bad-soft:#fde8e6; --warn:#9a6700; --warn-soft:#fff4d6;
+  --f-display:"Bricolage Grotesque",ui-sans-serif,system-ui,sans-serif;
+  --f-body:"IBM Plex Sans",ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --paper:#0e1422; --sheet:#151d2e; --ink:#e7ebf3; --muted:#9aa3b8; --rule:#29334a;
+  --accent:#f0a92a; --accent-ink:#1a1000; --accent-soft:#3a2a0b;
+  --good:#4cc68a; --good-soft:#123326; --bad:#ff7b6e; --bad-soft:#3a1714; --warn:#f2c14e; --warn-soft:#33290d; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --paper:#0e1422; --sheet:#151d2e; --ink:#e7ebf3; --muted:#9aa3b8; --rule:#29334a;
+  --accent:#f0a92a; --accent-ink:#1a1000; --accent-soft:#3a2a0b;
+  --good:#4cc68a; --good-soft:#123326; --bad:#ff7b6e; --bad-soft:#3a1714; --warn:#f2c14e; --warn-soft:#33290d; color-scheme:dark}
+
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{background:var(--paper);color:var(--ink);font:15px/1.55 var(--f-body)}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--ink)}
+.wrap{max-width:1040px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+header.top{background:var(--ink);color:var(--paper)}
+header.top .wrap{padding-block:20px 14px;display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 16px}
+header.top h1{font:800 28px/1.1 var(--f-display);margin:0;letter-spacing:-.01em}
+header.top h1 span{color:var(--accent)}
+header.top p{margin:0;color:color-mix(in srgb,var(--paper) 75%,transparent);font-size:13px}
+nav.tabs{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--ink);border-bottom:3px solid var(--accent)}
+nav.tabs .wrap{display:flex;gap:2px;overflow-x:auto;scrollbar-width:none}
+nav.tabs a{flex:none;color:color-mix(in srgb,var(--paper) 70%,transparent);text-decoration:none;padding:10px 12px;font-weight:500;font-size:14px;border-radius:6px 6px 0 0}
+nav.tabs a[aria-current="page"]{background:var(--accent);color:var(--accent-ink)}
+nav.tabs a:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
+main .wrap{padding-block:22px 60px}
+section.view{display:grid;gap:18px}
+h2{font:800 24px/1.2 var(--f-display);margin:0;text-wrap:balance}
+h3{font:600 17px/1.3 var(--f-display);margin:0 0 8px;text-wrap:balance}
+.lede{color:var(--muted);max-width:68ch;margin:4px 0 0}
+.sheet{background:var(--sheet);border:1px solid var(--rule);border-radius:10px;padding:18px;min-width:0}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:18px}
+.fields{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,150px),1fr));gap:10px 12px}
+label.f{display:grid;gap:3px;font-size:12px;font-weight:600;color:var(--muted);letter-spacing:.02em}
+label.f.wide{grid-column:1/-1}
+input,select,textarea{font:inherit;font-size:15px;color:var(--ink);background:var(--paper);border:1px solid var(--rule);border-radius:6px;padding:8px 9px;width:100%;min-width:0}
+input[type=number]{font-family:var(--f-mono);font-variant-numeric:tabular-nums}
+input:focus-visible,select:focus-visible,textarea:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+textarea{min-height:70px;resize:vertical}
+button{font:600 14px var(--f-body);border-radius:6px;padding:9px 14px;border:1px solid var(--ink);background:var(--ink);color:var(--paper);cursor:pointer}
+button.ghost{background:transparent;color:var(--ink);border-color:var(--rule)}
+button.accent{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+button.small{padding:4px 9px;font-size:12px}
+button:disabled{opacity:.5;cursor:not-allowed}
+.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.num{font-family:var(--f-mono);font-variant-numeric:tabular-nums}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,150px),1fr));gap:10px}
+.kpi{border-top:3px solid var(--rule);padding-top:8px}
+.kpi b{display:block;font:500 22px/1.2 var(--f-mono);font-variant-numeric:tabular-nums}
+.kpi small{color:var(--muted);font-size:12px;text-transform:uppercase;letter-spacing:.05em}
+.kpi.good{border-color:var(--good)} .kpi.good b{color:var(--good)}
+.kpi.bad{border-color:var(--bad)} .kpi.bad b{color:var(--bad)}
+.kpi.warn{border-color:var(--warn)}
+.pill{display:inline-block;font-size:12px;font-weight:600;padding:2px 9px;border-radius:999px;background:var(--rule);color:var(--ink);white-space:nowrap}
+.pill.good{background:var(--good-soft);color:var(--good)} .pill.bad{background:var(--bad-soft);color:var(--bad)} .pill.warn{background:var(--warn-soft);color:var(--warn)}
+.note{background:var(--accent-soft);border-left:4px solid var(--accent);padding:10px 14px;border-radius:0 8px 8px 0;font-size:14px}
+.note.bad{background:var(--bad-soft);border-color:var(--bad)}
+.tablewrap{overflow-x:auto;margin-inline:-4px}
+table{border-collapse:collapse;width:100%;font-size:14px}
+th{font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);text-align:left;font-weight:600;padding:6px 8px;border-bottom:2px solid var(--rule);white-space:nowrap}
+td{padding:7px 8px;border-bottom:1px solid var(--rule);vertical-align:top}
+td.n,th.n{text-align:right;font-family:var(--f-mono);font-variant-numeric:tabular-nums;white-space:nowrap}
+.empty{color:var(--muted);font-size:14px;padding:12px 0}
+.check{display:grid;grid-template-columns:auto 1fr;gap:10px;align-items:start;padding:9px 0;border-bottom:1px dashed var(--rule)}
+.check input{width:20px;height:20px;margin-top:2px;accent-color:var(--good)}
+.check.done span{color:var(--muted);text-decoration:line-through}
+.check small{display:block;color:var(--muted);font-size:13px;text-decoration:none}
+.phase{font:600 12px var(--f-body);letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin-top:14px}
+.verdict{font:800 20px/1.2 var(--f-display)}
+.status{font-size:13px;color:var(--muted)}
+.tool{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 12px;padding:10px 0;border-bottom:1px solid var(--rule)}
+.tool p{margin:0;color:var(--muted);font-size:14px;grid-column:1/-1}
+.tool a{color:var(--ink);font-weight:600}
+.stage{position:relative;display:inline-block;max-width:100%;touch-action:none;border:1px solid var(--rule);background:#fff}
+.stage canvas{display:block;max-width:100%;height:auto}
+.sel{position:absolute;border:2px solid var(--accent);background:color-mix(in srgb,var(--accent) 18%,transparent);pointer-events:none}
+.out{white-space:pre-wrap;background:var(--paper);border:1px solid var(--rule);border-radius:8px;padding:12px;font-size:14px;min-height:60px}
+.bar{height:14px;border-radius:3px;display:flex;overflow:hidden;background:var(--rule)}
+.bar i{display:block;height:100%}
+.legend{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:13px;color:var(--muted)}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:5px;vertical-align:-1px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+
+<header class="top"><div class="wrap">
+  <h1>Dukaan <span>Desk</span></h1>
+  <p>Plan, price, source, stock, ship. One desk for a ₹10,000 marketplace start.</p>
+</div></header>
+<nav class="tabs" aria-label="Sections"><div class="wrap" id="tabs">
+  <a href="#plan">Start plan</a><a href="#price">Price check</a><a href="#budget">₹10k planner</a>
+  <a href="#stock">Stock &amp; orders</a><a href="#suppliers">Suppliers</a><a href="#labels">Label cropper</a>
+  <a href="#listing">Listing writer</a><a href="#tools">Tools &amp; channels</a>
+</div></nav>
+
+<main><div class="wrap">
+
+<!-- START PLAN -->
+<section class="view" id="v-plan">
+  <div>
+    <h2>Start plan</h2>
+    <p class="lede">What you can do tonight, and what has to wait for approvals and stock. Ticks save automatically.</p>
+  </div>
+  <div class="note bad"><b>No tool can promise a 100% return.</b> Your return depends on the products you choose, the fees each marketplace charges you, and how many orders come back. Use <a href="#price">Price check</a> to see the real profit per order before you spend a rupee on stock. Seller accounts need KYC and approval, so the first sale is days away, not tonight.</div>
+  <div class="sheet">
+    <div class="row" style="justify-content:space-between"><h3 style="margin:0">Checklist</h3><span class="status" id="plan-status">Loading saved ticks…</span></div>
+    <div id="checklist"></div>
+  </div>
+</section>
+
+<!-- PRICE CHECK -->
+<section class="view" id="v-price" hidden>
+  <div>
+    <h2>Price check</h2>
+    <p class="lede">Profit per order after marketplace fees, GST and returns. Fees change often and differ by category, so copy them from the fee/commission page in your seller panel. The numbers below are an example product, not real fees.</p>
+  </div>
+  <div class="grid2">
+    <div class="sheet">
+      <h3>Product &amp; channel</h3>
+      <div class="fields">
+        <label class="f wide">Product<input id="c-name" value="Example: steel spice rack"></label>
+        <label class="f">Channel<select id="c-channel"></select></label>
+        <label class="f">Selling price ₹<input id="c-price" type="number" inputmode="decimal" value="349"></label>
+        <label class="f">Buy price / unit ₹<input id="c-buy" type="number" inputmode="decimal" value="120"></label>
+        <label class="f">Freight to you / unit ₹<input id="c-freight" type="number" inputmode="decimal" value="10"></label>
+        <label class="f">Packaging / unit ₹<input id="c-pack" type="number" inputmode="decimal" value="8"></label>
+        <label class="f">GST rate on sale %<input id="c-gst" type="number" inputmode="decimal" value="18"></label>
+        <label class="f">GST paid on purchase / unit ₹<input id="c-itc" type="number" inputmode="decimal" value="0"></label>
+      </div>
+      <h3 style="margin-top:16px">Marketplace fees <span class="status">(example values: replace with your seller panel's)</span></h3>
+      <div class="fields">
+        <label class="f">Commission %<input id="c-comm" type="number" inputmode="decimal" value="10"></label>
+        <label class="f">Fixed / closing fee ₹<input id="c-fixed" type="number" inputmode="decimal" value="0"></label>
+        <label class="f">Shipping you pay ₹<input id="c-ship" type="number" inputmode="decimal" value="60"></label>
+        <label class="f">Ads per order ₹<input id="c-ads" type="number" inputmode="decimal" value="0"></label>
+        <label class="f">Return rate %<input id="c-rr" type="number" inputmode="decimal" value="20"></label>
+        <label class="f">Loss per return ₹<input id="c-rcost" type="number" inputmode="decimal" value="60"></label>
+      </div>
+      <div class="row" style="margin-top:14px">
+        <button class="ghost small" id="c-savefees">Save these fees for this channel</button>
+        <button class="small" id="c-addproduct">Add to my products</button>
+        <span class="status" id="c-msg"></span>
+      </div>
+    </div>
+    <div class="sheet" aria-live="polite">
+      <h3>Result</h3>
+      <div class="verdict" id="r-verdict">–</div>
+      <p class="status" id="r-why"></p>
+      <div class="kpis" style="margin-top:10px">
+        <div class="kpi" id="k-ppo"><small>Profit / order</small><b id="r-ppo">–</b></div>
+        <div class="kpi"><small>Margin on price</small><b id="r-margin">–</b></div>
+        <div class="kpi"><small>Return on stock cash</small><b id="r-roi">–</b></div>
+        <div class="kpi"><small>Orders for ₹10k profit</small><b id="r-n10">–</b></div>
+      </div>
+      <div class="tablewrap" style="margin-top:14px"><table><tbody id="r-break"></tbody></table></div>
+      <p class="status">Loss per return covers reverse shipping and damaged stock. Many sellers lose more on returns than they expect; keep it honest.</p>
+    </div>
+  </div>
+</section>
+
+<!-- BUDGET -->
+<section class="view" id="v-budget" hidden>
+  <div>
+    <h2>₹10k planner</h2>
+    <p class="lede">Split the starting money and see what it can earn with the profit per order from Price check. This is arithmetic on your own numbers, not a forecast.</p>
+  </div>
+  <div class="grid2">
+    <div class="sheet">
+      <h3>Split the money</h3>
+      <div class="fields">
+        <label class="f">Total budget ₹<input id="b-total" type="number" value="10000"></label>
+        <label class="f">Stock ₹<input id="b-stock" type="number" value="6000"></label>
+        <label class="f">Samples ₹<input id="b-samples" type="number" value="800"></label>
+        <label class="f">Packaging ₹<input id="b-pack" type="number" value="700"></label>
+        <label class="f">Ads ₹<input id="b-ads" type="number" value="1000"></label>
+        <label class="f">Reserve (returns, fees) ₹<input id="b-res" type="number" value="1500"></label>
+      </div>
+      <div style="margin-top:14px"><div class="bar" id="b-bar"></div><div class="legend" id="b-legend" style="margin-top:6px"></div></div>
+      <p class="status" id="b-left"></p>
+      <h3 style="margin-top:14px">Sales assumptions</h3>
+      <div class="fields">
+        <label class="f">Sell-through per cycle %<input id="b-st" type="number" value="60"></label>
+        <label class="f">Cycles in 3 months<input id="b-cyc" type="number" value="3"></label>
+      </div>
+      <p class="status">A cycle = buy stock, sell it, get paid out, buy again. Marketplace payouts arrive days after delivery, so cash is tied up between cycles.</p>
+    </div>
+    <div class="sheet" aria-live="polite">
+      <h3>What the numbers say</h3>
+      <p class="status" id="b-basis"></p>
+      <div class="kpis">
+        <div class="kpi"><small>Units you can buy</small><b id="b-units">–</b></div>
+        <div class="kpi"><small>Profit, cycle 1</small><b id="b-p1">–</b></div>
+        <div class="kpi"><small>Profit, all cycles</small><b id="b-pall">–</b></div>
+        <div class="kpi"><small>Return on ₹ spent</small><b id="b-ret">–</b></div>
+      </div>
+      <h3 style="margin-top:16px">What your targets need</h3>
+      <div class="tablewrap"><table>
+        <thead><tr><th>Target profit</th><th class="n">Orders needed</th><th class="n">Per day over 90 days</th></tr></thead>
+        <tbody id="b-targets"></tbody>
+      </table></div>
+      <p class="status">Profit from each cycle is put back into stock, so a working product grows the stock budget over time. A product that loses money per order loses more the more it sells.</p>
+    </div>
+  </div>
+</section>
+
+<!-- STOCK & ORDERS -->
+<section class="view" id="v-stock" hidden>
+  <div>
+    <h2>Stock &amp; orders</h2>
+    <p class="lede">One list of products and every order from every channel. Logging an order takes the stock down; marking a return puts it back.</p>
+  </div>
+  <div class="note" id="db-note" hidden></div>
+  <div class="sheet">
+    <div class="kpis" id="s-kpis">
+      <div class="kpi"><small>Stock value at cost</small><b id="s-val">–</b></div>
+      <div class="kpi"><small>Orders</small><b id="s-orders">–</b></div>
+      <div class="kpi"><small>Sales</small><b id="s-rev">–</b></div>
+      <div class="kpi" id="s-profk"><small>Profit (est.)</small><b id="s-prof">–</b></div>
+    </div>
+    <div class="tablewrap" style="margin-top:14px"><table>
+      <thead><tr><th>Channel</th><th class="n">Orders</th><th class="n">Returns</th><th class="n">Sales ₹</th><th class="n">Profit ₹</th></tr></thead>
+      <tbody id="s-bychannel"></tbody>
+    </table></div>
+  </div>
+  <div class="grid2">
+    <div class="sheet">
+      <h3>Products</h3>
+      <form id="p-form" class="fields">
+        <label class="f wide">Name<input id="p-name" required placeholder="Steel spice rack"></label>
+        <label class="f">SKU<input id="p-sku" placeholder="RACK-01"></label>
+        <label class="f">Landed cost ₹<input id="p-cost" type="number" step="0.01" required></label>
+        <label class="f">Price ₹<input id="p-price" type="number" step="0.01"></label>
+        <label class="f">Stock<input id="p-stock" type="number" value="0"></label>
+        <div class="row" style="grid-column:1/-1"><button type="submit" id="p-save">Save product</button><span class="status" id="p-msg"></span></div>
+      </form>
+    </div>
+    <div class="sheet">
+      <h3>Log an order</h3>
+      <form id="o-form" class="fields">
+        <label class="f wide">Product<select id="o-product" required></select></label>
+        <label class="f">Channel<select id="o-channel"></select></label>
+        <label class="f">Qty<input id="o-qty" type="number" value="1" min="1"></label>
+        <label class="f">Sold at ₹ (total)<input id="o-sold" type="number" step="0.01" required></label>
+        <label class="f">Fees + shipping ₹<input id="o-fees" type="number" step="0.01" value="0"></label>
+        <label class="f">Order ID<input id="o-ref" placeholder="from seller panel"></label>
+        <div class="row" style="grid-column:1/-1"><button type="submit" id="o-save">Log order</button><span class="status" id="o-msg"></span></div>
+      </form>
+    </div>
+  </div>
+  <div class="sheet">
+    <h3>Product list</h3>
+    <div class="tablewrap"><table>
+      <thead><tr><th>Product</th><th>SKU</th><th class="n">Cost</th><th class="n">Price</th><th class="n">Stock</th><th></th></tr></thead>
+      <tbody id="p-list"></tbody>
+    </table></div>
+  </div>
+  <div class="sheet">
+    <h3>Orders</h3>
+    <div class="tablewrap"><table>
+      <thead><tr><th>Date</th><th>Product</th><th>Channel</th><th class="n">Qty</th><th class="n">Sold ₹</th><th class="n">Profit ₹</th><th>Status</th></tr></thead>
+      <tbody id="o-list"></tbody>
+    </table></div>
+    <div class="row" style="margin-top:10px"><button class="ghost small" id="o-csv">Download orders (CSV)</button><span class="status" id="o-csvmsg"></span></div>
+  </div>
+</section>
+
+<!-- SUPPLIERS -->
+<section class="view" id="v-suppliers" hidden>
+  <div>
+    <h2>Suppliers</h2>
+    <p class="lede">Every quote in one place. Ask for a sample before any bulk order, and compare landed cost (price + freight + GST you can't claim), not the headline price.</p>
+  </div>
+  <div class="grid2">
+    <div class="sheet">
+      <h3>Add a quote</h3>
+      <form id="sup-form" class="fields">
+        <label class="f">Supplier<input id="sup-name" required></label>
+        <label class="f">Source<select id="sup-src"><option>IndiaMART</option><option>Udaan</option><option>Alibaba</option><option>Local wholesale market</option><option>Other</option></select></label>
+        <label class="f wide">Product<input id="sup-prod" required></label>
+        <label class="f">Price / unit ₹<input id="sup-price" type="number" step="0.01"></label>
+        <label class="f">MOQ<input id="sup-moq" type="number"></label>
+        <label class="f">Freight ₹ (total)<input id="sup-freight" type="number" step="0.01"></label>
+        <label class="f">Status<select id="sup-status"><option>Asked for quote</option><option>Sample ordered</option><option>Sample OK</option><option>Rejected</option><option>Ordered</option></select></label>
+        <label class="f wide">Contact / notes<input id="sup-notes"></label>
+        <div class="row" style="grid-column:1/-1"><button type="submit">Save quote</button><span class="status" id="sup-msg"></span></div>
+      </form>
+    </div>
+    <div class="sheet">
+      <h3>Before you pay a supplier</h3>
+      <div class="check"><span>•</span><span>Pay only through the platform or to a business account that matches the GST/company name on the quote.<small>Advance payment to a personal UPI for a "factory" is the most common way new sellers lose money.</small></span></div>
+      <div class="check"><span>•</span><span>Order a sample and test it the way a buyer would.<small>Most returns come from "not as shown" and quality, which a sample catches.</small></span></div>
+      <div class="check"><span>•</span><span>Get the invoice with GST shown if you are GST-registered.<small>Without it you cannot claim the GST you paid.</small></span></div>
+      <div class="check"><span>•</span><span>Check the product is allowed on your channel.<small>Branded goods without authorisation, and some categories, need approval or documents.</small></span></div>
+    </div>
+  </div>
+  <div class="sheet">
+    <h3>Quotes</h3>
+    <div class="tablewrap"><table>
+      <thead><tr><th>Supplier</th><th>Source</th><th>Product</th><th class="n">₹/unit</th><th class="n">MOQ</th><th class="n">Landed/unit</th><th>Status</th><th></th></tr></thead>
+      <tbody id="sup-list"></tbody>
+    </table></div>
+  </div>
+</section>
+
+<!-- LABELS -->
+<section class="view" id="v-labels" hidden>
+  <div>
+    <h2>Label cropper</h2>
+    <p class="lede">Turn the A4 label/invoice PDF from your seller panel into labels that fit a 4×6 thermal printer. Drag a box around the label on page 1; the same box is cut from every page. The file stays on your device.</p>
+  </div>
+  <div class="sheet">
+    <div class="row">
+      <label class="f" style="flex:1 1 220px">Label PDF<input type="file" id="l-file" accept="application/pdf"></label>
+      <label class="f" style="flex:0 1 200px">Saved crop<select id="l-preset"><option value="">Draw your own</option><option value="tophalf">Top half</option><option value="topleft">Top-left quarter</option></select></label>
+    </div>
+    <p class="status" id="l-msg">Load a PDF to begin.</p>
+    <div id="l-stagewrap" hidden>
+      <div class="stage" id="l-stage"><canvas id="l-canvas"></canvas><div class="sel" id="l-sel" hidden></div></div>
+      <div class="row" style="margin-top:10px">
+        <input id="l-presetname" placeholder="Name this crop (e.g. Meesho)" style="max-width:240px">
+        <button class="ghost" id="l-savepreset">Save crop</button>
+        <button class="accent" id="l-go" disabled>Crop all pages &amp; download</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LISTING -->
+<section class="view" id="v-listing" hidden>
+  <div>
+    <h2>Listing writer</h2>
+    <p class="lede">Write a title, bullet points and description from facts you give it. It only uses what you type, so put in real sizes, materials and what's in the box. Check every line before you publish; a wrong claim causes returns.</p>
+  </div>
+  <div class="grid2">
+    <div class="sheet">
+      <div class="fields">
+        <label class="f wide">Product<input id="w-name" value="Example: stainless steel 3-tier spice rack"></label>
+        <label class="f">Channel<select id="w-channel"></select></label>
+        <label class="f">Language<select id="w-lang"><option>English</option><option>Hindi</option><option>English + Hindi</option></select></label>
+        <label class="f wide">Facts (one per line)<textarea id="w-facts" rows="6">Material: stainless steel
+Size: 40 x 12 x 30 cm
+Holds 18 jars (jars not included)
+Wall-mount or countertop
+Screws included</textarea></label>
+        <label class="f wide">Words buyers search<input id="w-kw" value="spice rack, kitchen organiser, masala rack"></label>
+      </div>
+      <div class="row" style="margin-top:12px">
+        <button id="w-go">Write listing</button>
+        <button class="ghost" id="w-stop" hidden>Stop</button>
+        <button class="ghost" id="w-copyprompt">Copy prompt for ChatGPT / Gemini</button>
+      </div>
+      <p class="status" id="w-msg"></p>
+    </div>
+    <div class="sheet">
+      <div class="row" style="justify-content:space-between"><h3 style="margin:0">Draft</h3><button class="ghost small" id="w-copy">Copy</button></div>
+      <div class="out" id="w-out" style="margin-top:10px">Your draft appears here.</div>
+    </div>
+  </div>
+</section>
+
+<!-- TOOLS -->
+<section class="view" id="v-tools" hidden>
+  <div>
+    <h2>Tools &amp; channels</h2>
+    <p class="lede">Every tool from the list you shared, what it does, and whether it is worth paying for at ₹10,000. Several are replaced by a tab on this desk.</p>
+  </div>
+  <div class="grid2" id="tools-grid"></div>
+</section>
+
+</div></main>
+
+<script>
+/* ---------- helpers ---------- */
+const $=s=>document.querySelector(s);
+const num=id=>{const v=parseFloat($(id).value);return isFinite(v)?v:0};
+const inr=(v,d=0)=>(v<0?"−₹":"₹")+Math.abs(v).toLocaleString("en-IN",{maximumFractionDigits:d,minimumFractionDigits:d});
+const esc=s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const store={get(k,d){try{const v=localStorage.getItem("dd:"+k);return v?JSON.parse(v):d}catch{return d}},set(k,v){try{localStorage.setItem("dd:"+k,JSON.stringify(v))}catch{}}};
+const CHANNELS=["Meesho","Amazon","Flipkart","Own website / WhatsApp","Blinkit","Zepto","Swiggy Instamart","Flipkart Minutes","BigBasket","Other"];
+for(const id of ["#c-channel","#o-channel","#w-channel"]) $(id).innerHTML=CHANNELS.slice(0,4).concat(["Other"]).map(c=>`<option>${c}</option>`).join("");
+async function copy(text,msgEl){try{await navigator.clipboard.writeText(text);if(msgEl)msgEl.textContent="Copied."}catch{if(msgEl)msgEl.textContent="Copy blocked here. Select the text and copy it by hand."}}
+
+/* ---------- routing ---------- */
+const VIEWS=["plan","price","budget","stock","suppliers","labels","listing","tools"];
+function route(){const h=location.hash.slice(1);const v=VIEWS.includes(h)?h:"plan";
+  for(const x of VIEWS) $("#v-"+x).hidden=x!==v;
+  document.querySelectorAll("#tabs a").forEach(a=>a.setAttribute("aria-current",a.getAttribute("href")==="#"+v?"page":"false"));
+  if(v==="labels") loadPdfLibs();}
+addEventListener("hashchange",route);
+
+/* ---------- data layer: db capability, falls back to this browser ---------- */
+let db=null; const cache={products:[],orders:[],suppliers:[]}; let checks={}; let fees={};
+const local={products:store.get("products",[]),orders:store.get("orders",[]),suppliers:store.get("suppliers",[])};
+const uid=()=>Date.now().toString(36)+Math.random().toString(36).slice(2,7);
+async function put(col,id,data){ if(db){await db.collection(col).doc(id).set(data)} else {const arr=local[col];const i=arr.findIndex(x=>x.id===id);const row={...data,id};i>=0?arr[i]=row:arr.push(row);store.set(col,arr);cache[col]=arr.slice();renderAll()} }
+async function del(col,id){ if(db){await db.collection(col).doc(id).delete()} else {local[col]=local[col].filter(x=>x.id!==id);store.set(col,local[col]);cache[col]=local[col].slice();renderAll()} }
+async function putSetting(name,data){ if(db) await db.collection("settings").doc(name).set(data); else store.set("set:"+name,data) }
+
+function useLocal(why){ db=null; const n=$("#db-note"); n.hidden=false; n.textContent=why;
+  for(const k of Object.keys(cache)) cache[k]=local[k].slice();
+  checks=store.get("set:checklist",{}); fees=store.get("set:fees",{}); $("#plan-status").textContent="Saved on this device only."; renderAll(); renderChecklist(); applyFees(); }
+
+(async()=>{
+  for(const k of Object.keys(cache)) cache[k]=local[k].slice(); renderAll();
+  const timer=setTimeout(()=>{ if(!db) useLocal("Saving on this device only: the shared store did not answer. Your entries stay in this browser.") },10000);
+  let d=null; try{ d=await window.claude?.use?.("db") }catch{}
+  if(!d){ clearTimeout(timer); useLocal("Saving on this device only. Open this page signed in to claude.ai to keep your records across devices."); return; }
+  db=d; let first=true;
+  for(const col of ["products","orders","suppliers"]){
+    db.collection(col).onSnapshot(s=>{ clearTimeout(timer); cache[col]=s.docs.map(x=>({...x.data(),id:x.id})); renderAll(); },
+      e=>{ $("#db-note").hidden=false; $("#db-note").textContent="Could not load saved "+col+" ("+e.code+"). Reload the page to try again."; });
+  }
+  db.collection("settings").onSnapshot(s=>{ clearTimeout(timer);
+    for(const x of s.docs){ if(x.id==="checklist") checks=x.data()||{}; if(x.id==="fees") fees=x.data()||{}; }
+    $("#plan-status").textContent="Ticks are saved."; renderChecklist(); if(first){first=false; applyFees();} },()=>{});
+})();
+
+/* ---------- start plan ---------- */
+const PLAN=[
+ ["Tonight","docs","Gather your documents","PAN, Aadhaar, a bank account in your name, an email and phone number, and the pickup address. GSTIN if you have one; each seller portal states what it accepts without one, so read its registration page."],
+ ["Tonight","channel","Choose one channel to start","Start on one marketplace, not seven. Open its seller registration page and start KYC tonight. Compare its fees in Price check first."],
+ ["Tonight","shortlist","Shortlist 3 products in Price check","Keep only products that still make money with a realistic return rate. Low-priced, light, unbreakable, non-branded items are the usual starting point."],
+ ["Tonight","quotes","Ask 3 suppliers for quotes and samples","IndiaMART or Udaan for domestic stock. Log every quote in Suppliers."],
+ ["Tonight","budget","Fix the split in ₹10k planner","Keep a reserve for returns and fees. Spend on stock only after a sample passes."],
+ ["This week","approve","Finish KYC and get the seller account approved","Approval time is set by the marketplace. Watch your email for document requests."],
+ ["This week","photos","Photograph the sample and make images in Canva","Plain white background, every angle, a size reference, and the box contents."],
+ ["This week","list","Write and publish listings","Use Listing writer, then check every claim against the sample."],
+ ["This week","pack","Buy packaging and a label printer or print at a shop","Poly mailers or boxes sized to the product, tape, and A4 labels until volume justifies a 4×6 printer."],
+ ["Weeks 2–4","stock","Buy a small first batch","Only for the product whose sample passed and whose listing is live."],
+ ["Weeks 2–4","orders","Ship every order the same day and log it in Stock & orders","Late dispatch hurts your listing rank on every marketplace."],
+ ["Weeks 2–4","review","Review profit per product every Sunday","Drop products with high returns. Reorder the ones that sell."],
+ ["Later","more","Add a second marketplace once one is profitable","Same products, same desk; pick the channel in each order."],
+ ["Later","qc","Look at quick commerce once you have a brand","Blinkit, Zepto, Swiggy Instamart, Flipkart Minutes and BigBasket buy from brands and distributors with repeat demand. Read each one's seller or brand-partner page for its current requirements."]
+];
+function renderChecklist(){ let html="",ph=""; const done=PLAN.filter(p=>checks[p[1]]).length;
+  for(const [phase,key,t,s] of PLAN){ if(phase!==ph){ph=phase;html+=`<div class="phase">${phase}</div>`}
+    html+=`<label class="check${checks[key]?" done":""}"><input type="checkbox" id="ck-${key}" data-k="${key}"${checks[key]?" checked":""}><span>${esc(t)}<small>${esc(s)}</small></span></label>` }
+  $("#checklist").innerHTML=`<p class="status">${done} of ${PLAN.length} done</p>`+html; }
+$("#checklist").addEventListener("change",e=>{const k=e.target.dataset.k;if(!k)return;checks={...checks,[k]:e.target.checked};renderChecklist();
+  putSetting("checklist",checks).catch(()=>{$("#plan-status").textContent="Could not save that tick. Check your connection."});});
+renderChecklist();
+
+/* ---------- price check ---------- */
+function calc(){
+  const price=num("#c-price"),buy=num("#c-buy"),fr=num("#c-freight"),pk=num("#c-pack"),g=num("#c-gst")/100,itc=num("#c-itc");
+  const comm=num("#c-comm")/100*price,fixed=num("#c-fixed"),ship=num("#c-ship"),ads=num("#c-ads"),rr=Math.min(num("#c-rr"),100)/100,rcost=num("#c-rcost");
+  const gstOut=price*g/(1+g), gstNet=Math.max(gstOut-itc,0);
+  const landed=buy+fr+pk;
+  const perSale=price-gstNet-comm-fixed-ship-landed-ads;
+  const ppo=(1-rr)*perSale - rr*rcost;
+  return {price,landed,gstNet,comm,fixed,ship,ads,rr,rcost,perSale,ppo,margin:price?ppo/price:0,roi:landed?ppo/landed:0};
+}
+function renderCalc(){ const r=calc();
+  $("#r-ppo").textContent=inr(r.ppo,1); $("#r-margin").textContent=(r.margin*100).toFixed(1)+"%"; $("#r-roi").textContent=(r.roi*100).toFixed(0)+"%";
+  $("#r-n10").textContent=r.ppo>0?Math.ceil(10000/r.ppo).toLocaleString("en-IN"):"never";
+  const k=$("#k-ppo"); k.className="kpi "+(r.ppo<=0?"bad":r.margin<0.12?"warn":"good");
+  let v,why; if(r.ppo<=0){v="Loses money";why="Each order costs you money after fees and returns. Raise the price, cut cost, or drop it."}
+  else if(r.margin<0.12){v="Thin";why="Under 12% of price left. One bad week of returns wipes it out."}
+  else if(r.roi<0.4){v="Works, slowly";why="Profitable, but each rupee of stock earns under 40 paise per sale."}
+  else {v="Worth testing";why="Healthy profit per order with these fees and this return rate. Test with a sample before buying stock."}
+  $("#r-verdict").textContent=v; $("#r-verdict").style.color=r.ppo<=0?"var(--bad)":r.margin<0.12?"var(--warn)":"var(--good)"; $("#r-why").textContent=why;
+  const rows=[["Selling price",r.price],["GST you owe (after purchase credit)",-r.gstNet],["Commission",-r.comm],["Fixed / closing fee",-r.fixed],["Shipping",-r.ship],["Landed cost (buy + freight + pack)",-r.landed],["Ads",-r.ads],["Profit if delivered",r.perSale,1],[`Expected after ${(r.rr*100).toFixed(0)}% returns`,r.ppo,1]];
+  $("#r-break").innerHTML=rows.map(([l,v,b])=>`<tr><td${b?' style="font-weight:600"':""}>${l}</td><td class="n"${b?' style="font-weight:600"':""}>${inr(v,1)}</td></tr>`).join("");
+  renderBudget(); }
+const FEE_IDS=["c-comm","c-fixed","c-ship","c-ads","c-rr","c-rcost"];
+function applyFees(){ const f=fees[$("#c-channel").value]; if(f) for(const id of FEE_IDS) if(f[id]!=null) $("#"+id).value=f[id]; renderCalc(); }
+$("#c-channel").addEventListener("change",applyFees);
+$("#v-price").addEventListener("input",renderCalc);
+$("#c-savefees").onclick=async()=>{ const f={}; for(const id of FEE_IDS) f[id]=num("#"+id); fees={...fees,[$("#c-channel").value]:f};
+  try{await putSetting("fees",fees); $("#c-msg").textContent="Fees saved for "+$("#c-channel").value+"."}catch{$("#c-msg").textContent="Could not save. Check your connection."} };
+$("#c-addproduct").onclick=async()=>{ const r=calc(); const name=$("#c-name").value.trim()||"Untitled product";
+  try{await put("products",uid(),{name,sku:"",cost:+r.landed.toFixed(2),price:r.price,stock:0,createdAt:Date.now()}); $("#c-msg").textContent="Added to Stock & orders."}catch{$("#c-msg").textContent="Could not save. Check your connection."} };
+
+/* ---------- ₹10k planner ---------- */
+const BUD=[["b-stock","Stock","var(--ink)"],["b-samples","Samples","var(--muted)"],["b-pack","Packaging","var(--accent)"],["b-ads","Ads","var(--warn)"],["b-res","Reserve","var(--good)"]];
+function renderBudget(){ const total=num("#b-total"); const parts=BUD.map(([id,l,c])=>[num("#"+id),l,c]); const used=parts.reduce((a,p)=>a+p[0],0);
+  $("#b-bar").innerHTML=parts.map(([v,,c])=>`<i style="width:${total?Math.max(0,v/Math.max(total,used)*100):0}%;background:${c}"></i>`).join("");
+  $("#b-legend").innerHTML=parts.map(([v,l,c])=>`<span><i style="background:${c}"></i>${l} ${inr(v)}</span>`).join("");
+  const left=total-used; $("#b-left").textContent=left>=0?inr(left)+" not allocated.":"Over budget by "+inr(-left)+".";
+  $("#b-left").style.color=left<0?"var(--bad)":"";
+  const r=calc(); $("#b-basis").textContent=`Using "${$("#c-name").value||"your product"}" from Price check: landed cost ${inr(r.landed,1)}, profit ${inr(r.ppo,1)} per order after returns.`;
+  const units=r.landed>0?Math.floor(num("#b-stock")/r.landed):0; const st=Math.min(num("#b-st"),100)/100; const cyc=Math.max(1,Math.round(num("#b-cyc")));
+  // each cycle reinvests: stock money grows by profit of the previous cycle
+  let stockCash=num("#b-stock"), totalProfit=0, p1=0;
+  for(let i=0;i<cyc;i++){ const u=r.landed>0?Math.floor(stockCash/r.landed):0; const p=u*st*r.ppo; if(i===0)p1=p; totalProfit+=p; stockCash=Math.max(0,stockCash+p); }
+  totalProfit-=num("#b-samples"); // packaging and ads are per-order costs in Price check; their budgets are the cash that pays for them
+  $("#b-units").textContent=units.toLocaleString("en-IN"); $("#b-p1").textContent=inr(p1); $("#b-pall").textContent=inr(totalProfit);
+  $("#b-ret").textContent=total?((totalProfit/total)*100).toFixed(0)+"%":"–";
+  $("#b-pall").style.color=totalProfit<0?"var(--bad)":""; $("#b-ret").style.color=totalProfit<0?"var(--bad)":"";
+  $("#b-targets").innerHTML=[10000,25000,50000].map(t=>{const n=r.ppo>0?Math.ceil(t/r.ppo):null;return `<tr><td class="num">${inr(t)}</td><td class="n">${n?n.toLocaleString("en-IN"):"not reachable"}</td><td class="n">${n?(n/90).toFixed(1):"–"}</td></tr>`}).join("");
+}
+$("#v-budget").addEventListener("input",renderBudget);
+
+/* ---------- stock & orders ---------- */
+const STATUSES=["New","Shipped","Delivered","Returned","Cancelled"];
+function orderProfit(o){ if(o.status==="Cancelled") return 0; if(o.status==="Returned") return -(o.fees||0); return (o.sold||0)-(o.fees||0)-(o.cost||0)*(o.qty||1); }
+function renderAll(){
+  const P=cache.products.slice().sort((a,b)=>(a.name||"").localeCompare(b.name||"")); const O=cache.orders.slice().sort((a,b)=>(b.createdAt||0)-(a.createdAt||0));
+  const sel=$("#o-product"), cur=sel.value;
+  sel.innerHTML=P.length?P.map(p=>`<option value="${esc(p.id)}">${esc(p.name)} (${p.stock||0} in stock)</option>`).join(""):`<option value="">Add a product first</option>`; if(cur) sel.value=cur;
+  $("#p-list").innerHTML=P.length?P.map(p=>`<tr><td>${esc(p.name)}</td><td>${esc(p.sku)}</td><td class="n">${inr(p.cost||0,1)}</td><td class="n">${p.price?inr(p.price):"–"}</td><td class="n">${(p.stock||0)<=2?`<span class="pill ${(p.stock||0)<=0?"bad":"warn"}">${p.stock||0}</span>`:p.stock}</td><td class="n"><button class="ghost small" data-restock="${esc(p.id)}">+10</button> <button class="ghost small" data-delp="${esc(p.id)}">Remove</button></td></tr>`).join(""):`<tr><td colspan="6" class="empty">No products yet. Add one above, or send one here from Price check.</td></tr>`;
+  $("#o-list").innerHTML=O.length?O.map(o=>{const pr=orderProfit(o);return `<tr><td class="num">${new Date(o.createdAt||0).toLocaleDateString("en-IN",{day:"2-digit",month:"short"})}</td><td>${esc(o.productName)}${o.ref?`<br><span class="status">${esc(o.ref)}</span>`:""}</td><td>${esc(o.channel)}</td><td class="n">${o.qty}</td><td class="n">${inr(o.sold||0)}</td><td class="n" style="color:${pr<0?"var(--bad)":"var(--good)"}">${inr(pr)}</td><td><select class="ostat" id="os-${esc(o.id)}" data-oid="${esc(o.id)}" aria-label="Order status">${STATUSES.map(s=>`<option${s===o.status?" selected":""}>${s}</option>`).join("")}</select></td></tr>`}).join(""):`<tr><td colspan="7" class="empty">No orders yet. Log the first one when it arrives in your seller panel.</td></tr>`;
+  const live=O.filter(o=>o.status!=="Cancelled");
+  $("#s-val").textContent=inr(P.reduce((a,p)=>a+(p.cost||0)*Math.max(p.stock||0,0),0));
+  $("#s-orders").textContent=live.length; $("#s-rev").textContent=inr(live.filter(o=>o.status!=="Returned").reduce((a,o)=>a+(o.sold||0),0));
+  const prof=O.reduce((a,o)=>a+orderProfit(o),0); $("#s-prof").textContent=inr(prof); $("#s-profk").className="kpi "+(O.length?(prof<0?"bad":"good"):"");
+  const by={}; for(const o of live){const c=by[o.channel]||(by[o.channel]={n:0,r:0,s:0,p:0});c.n++;if(o.status==="Returned")c.r++;else c.s+=o.sold||0;c.p+=orderProfit(o)}
+  const ch=Object.entries(by); $("#s-bychannel").innerHTML=ch.length?ch.map(([k,c])=>`<tr><td>${esc(k)}</td><td class="n">${c.n}</td><td class="n">${c.r}${c.n?` <span class="status">(${Math.round(c.r/c.n*100)}%)</span>`:""}</td><td class="n">${inr(c.s)}</td><td class="n">${inr(c.p)}</td></tr>`).join(""):`<tr><td colspan="5" class="empty">Channel totals appear after the first order.</td></tr>`;
+  const S=cache.suppliers.slice().sort((a,b)=>(b.createdAt||0)-(a.createdAt||0));
+  $("#sup-list").innerHTML=S.length?S.map(s=>{const landed=s.price!=null&&s.moq?(s.price+(s.freight||0)/s.moq):null;const cls={"Sample OK":"good","Ordered":"good","Rejected":"bad","Sample ordered":"warn"}[s.status]||"";return `<tr><td>${esc(s.name)}${s.notes?`<br><span class="status">${esc(s.notes)}</span>`:""}</td><td>${esc(s.src)}</td><td>${esc(s.prod)}</td><td class="n">${s.price!=null?inr(s.price,2):"–"}</td><td class="n">${s.moq??"–"}</td><td class="n">${landed!=null?inr(landed,2):"–"}</td><td><span class="pill ${cls}">${esc(s.status)}</span></td><td class="n"><button class="ghost small" data-dels="${esc(s.id)}">Remove</button></td></tr>`}).join(""):`<tr><td colspan="8" class="empty">No quotes yet. Add the first supplier you contact.</td></tr>`;
+}
+$("#p-form").addEventListener("submit",async e=>{e.preventDefault(); const b=$("#p-save"); b.disabled=true;
+  try{await put("products",uid(),{name:$("#p-name").value.trim(),sku:$("#p-sku").value.trim(),cost:num("#p-cost"),price:num("#p-price")||null,stock:Math.round(num("#p-stock")),createdAt:Date.now()});
+    e.target.reset(); $("#p-stock").value=0; $("#p-msg").textContent="Saved."}catch{$("#p-msg").textContent="Could not save. Check your connection."} b.disabled=false;});
+$("#o-form").addEventListener("submit",async e=>{e.preventDefault(); const p=cache.products.find(x=>x.id===$("#o-product").value); if(!p){$("#o-msg").textContent="Add a product first.";return}
+  const qty=Math.max(1,Math.round(num("#o-qty"))); const b=$("#o-save"); b.disabled=true;
+  try{ await put("orders",uid(),{productId:p.id,productName:p.name,channel:$("#o-channel").value,qty,sold:num("#o-sold"),fees:num("#o-fees"),cost:p.cost||0,ref:$("#o-ref").value.trim(),status:"New",createdAt:Date.now()});
+    await put("products",p.id,{...strip(p),stock:(p.stock||0)-qty});
+    $("#o-msg").textContent=(p.stock||0)-qty<0?"Logged. Stock is now below zero; check your count.":"Logged. Stock updated."; $("#o-sold").value="";$("#o-ref").value="";
+  }catch{$("#o-msg").textContent="Could not save. Check your connection."} b.disabled=false;});
+const strip=o=>{const {id,...r}=o;return r};
+document.addEventListener("click",async e=>{const t=e.target;
+  if(t.dataset.restock){const p=cache.products.find(x=>x.id===t.dataset.restock); if(p) put("products",p.id,{...strip(p),stock:(p.stock||0)+10}).catch(()=>{});}
+  if(t.dataset.delp){ if(t.dataset.armed){del("products",t.dataset.delp).catch(()=>{})} else {t.dataset.armed=1;t.textContent="Tap again to remove"} }
+  if(t.dataset.dels){ if(t.dataset.armed){del("suppliers",t.dataset.dels).catch(()=>{})} else {t.dataset.armed=1;t.textContent="Tap again to remove"} }
+});
+document.addEventListener("change",async e=>{const t=e.target; if(!t.dataset.oid) return; const o=cache.orders.find(x=>x.id===t.dataset.oid); if(!o) return;
+  const was=o.status,now=t.value; await put("orders",o.id,{...strip(o),status:now}).catch(()=>{});
+  const back=(s)=>s==="Returned"||s==="Cancelled"; const p=cache.products.find(x=>x.id===o.productId);
+  if(p&&back(now)!==back(was)) put("products",p.id,{...strip(p),stock:(p.stock||0)+(back(now)?o.qty:-o.qty)}).catch(()=>{});});
+$("#o-csv").onclick=async()=>{ const head=["date","order_id","product","channel","qty","sold","fees","cost_per_unit","profit","status"];
+  const rows=cache.orders.map(o=>[new Date(o.createdAt||0).toISOString().slice(0,10),o.ref,o.productName,o.channel,o.qty,o.sold,o.fees,o.cost,orderProfit(o).toFixed(2),o.status]);
+  const csv=[head,...rows].map(r=>r.map(v=>`"${String(v??"").replace(/"/g,'""')}"`).join(",")).join("\n");
+  const dl=await window.claude?.use?.("downloads").catch(()=>null); if(!dl){$("#o-csvmsg").textContent="Downloads aren't available in this view.";return}
+  try{await dl.save({filename:"orders.csv",data:csv});$("#o-csvmsg").textContent="Saved."}catch(e){$("#o-csvmsg").textContent=e.code==="declined"?"Download cancelled.":"Could not save the file."} };
+
+$("#sup-form").addEventListener("submit",async e=>{e.preventDefault(); const v=id=>$(id).value.trim(); const n=id=>$(id).value===""?null:num(id);
+  try{await put("suppliers",uid(),{name:v("#sup-name"),src:v("#sup-src"),prod:v("#sup-prod"),price:n("#sup-price"),moq:n("#sup-moq"),freight:n("#sup-freight"),status:v("#sup-status"),notes:v("#sup-notes"),createdAt:Date.now()});
+    e.target.reset(); $("#sup-msg").textContent="Saved."}catch{$("#sup-msg").textContent="Could not save. Check your connection."}});
+
+/* ---------- label cropper ---------- */
+let libsP=null, pdfBytes=null, pageView=null, scale=1, selRect=null;
+function loadScript(src){return new Promise((ok,no)=>{const s=document.createElement("script");s.src=src;s.onload=ok;s.onerror=()=>no(new Error(src));document.head.appendChild(s)})}
+function loadPdfLibs(){ if(!libsP){ const b="https://cdnjs.cloudflare.com/ajax/libs/";
+  libsP=Promise.all([loadScript(b+"pdf.js/3.11.174/pdf.min.js").then(()=>loadScript(b+"pdf.js/3.11.174/pdf.worker.min.js")),loadScript(b+"pdf-lib/1.17.1/pdf-lib.min.js")])
+   .then(()=>{ pdfjsLib.GlobalWorkerOptions.workerSrc=b+"pdf.js/3.11.174/pdf.worker.min.js"; })
+   .catch(()=>{ libsP=null; $("#l-msg").textContent="The PDF tools did not load. Check your connection and open this tab again."; throw 0; }); }
+  return libsP; }
+const presets=()=>({tophalf:{x:0,y:0,w:1,h:.5},topleft:{x:0,y:0,w:.5,h:.5},...store.get("crops",{})});
+function refreshPresetSelect(){ const custom=store.get("crops",{}); $("#l-preset").innerHTML=`<option value="">Draw your own</option><option value="tophalf">Top half</option><option value="topleft">Top-left quarter</option>`+Object.keys(custom).map(k=>`<option value="${esc(k)}">${esc(k)}</option>`).join(""); }
+refreshPresetSelect();
+function drawSel(){ const el=$("#l-sel"); if(!selRect){el.hidden=true;$("#l-go").disabled=true;return}
+  const c=$("#l-canvas"), k=c.getBoundingClientRect().width/c.width; el.hidden=false;
+  Object.assign(el.style,{left:selRect.x*c.width*k+"px",top:selRect.y*c.height*k+"px",width:selRect.w*c.width*k+"px",height:selRect.h*c.height*k+"px"}); $("#l-go").disabled=false; }
+addEventListener("resize",drawSel);
+$("#l-file").addEventListener("change",async e=>{ const f=e.target.files[0]; if(!f) return; $("#l-msg").textContent="Opening…";
+  try{ await loadPdfLibs(); pdfBytes=new Uint8Array(await f.arrayBuffer());
+    const doc=await pdfjsLib.getDocument({data:pdfBytes.slice()}).promise; const page=await doc.getPage(1);
+    const base=page.getViewport({scale:1}); scale=Math.min(2, 1100/base.width); const vp=page.getViewport({scale});
+    const c=$("#l-canvas"); c.width=vp.width; c.height=vp.height; await page.render({canvasContext:c.getContext("2d"),viewport:vp}).promise;
+    pageView={pages:doc.numPages,rotate:page.rotate}; $("#l-stagewrap").hidden=false;
+    $("#l-msg").textContent=`${doc.numPages} page${doc.numPages>1?"s":""}. Drag over the label on page 1, or pick a saved crop.`+(page.rotate?" This PDF is rotated; check the result before printing.":"");
+    const p=presets()[$("#l-preset").value]; selRect=p?{...p}:null; drawSel();
+  }catch(err){ if(err!==0) $("#l-msg").textContent="Could not open that file. Is it a PDF?"; } });
+$("#l-preset").addEventListener("change",()=>{ const p=presets()[$("#l-preset").value]; selRect=p?{...p}:selRect; drawSel(); });
+(()=>{ const st=$("#l-stage"); let start=null;
+  const pt=e=>{const r=$("#l-canvas").getBoundingClientRect();return {x:Math.min(1,Math.max(0,(e.clientX-r.left)/r.width)),y:Math.min(1,Math.max(0,(e.clientY-r.top)/r.height))}};
+  st.addEventListener("pointerdown",e=>{start=pt(e);st.setPointerCapture(e.pointerId);selRect=null;});
+  st.addEventListener("pointermove",e=>{ if(!start) return; const p=pt(e); selRect={x:Math.min(start.x,p.x),y:Math.min(start.y,p.y),w:Math.abs(p.x-start.x),h:Math.abs(p.y-start.y)}; drawSel(); });
+  st.addEventListener("pointerup",()=>{ start=null; if(selRect&&(selRect.w<.03||selRect.h<.03)){selRect=null;} drawSel(); });
+})();
+$("#l-savepreset").onclick=()=>{ const n=$("#l-presetname").value.trim(); if(!n||!selRect){$("#l-msg").textContent="Draw a box and type a name first.";return}
+  const c=store.get("crops",{}); c[n]=selRect; store.set("crops",c); refreshPresetSelect(); $("#l-preset").value=n; $("#l-msg").textContent=`Saved "${n}" on this device.`; };
+$("#l-go").onclick=async()=>{ if(!pdfBytes||!selRect) return; const b=$("#l-go"); b.disabled=true; $("#l-msg").textContent="Cropping…";
+  try{ const doc=await PDFLib.PDFDocument.load(pdfBytes.slice()); const pages=doc.getPages();
+    for(const pg of pages){ const box=pg.getCropBox(); const x=box.x+selRect.x*box.width, w=selRect.w*box.width, h=selRect.h*box.height, y=box.y+box.height-(selRect.y*box.height)-h;
+      pg.setMediaBox(x,y,w,h); pg.setCropBox(x,y,w,h); }
+    const out=await doc.save(); const dl=await window.claude?.use?.("downloads").catch(()=>null);
+    if(!dl){$("#l-msg").textContent="Cropped, but downloads aren't available in this view.";return}
+    await dl.save({filename:"labels-cropped.pdf",data:new Blob([out])}); $("#l-msg").textContent=`Saved ${pages.length} cropped page${pages.length>1?"s":""}. Print at 100% / actual size on 4×6 labels.`;
+  }catch(e){ $("#l-msg").textContent=e&&e.code==="declined"?"Download cancelled.":"Could not crop this PDF. It may be password-protected."; } finally{ b.disabled=false; } };
+
+/* ---------- listing writer ---------- */
+function listingPrompt(){ return `Write a marketplace product listing for ${$("#w-channel").value} in ${$("#w-lang").value}.
+Use ONLY the facts below. Do not add any claim, certification, size, material, warranty or quantity that is not in the facts. If something a buyer would need is missing, list it under "Missing facts".
+
+Product: ${$("#w-name").value}
+Facts:
+${$("#w-facts").value}
+Search words buyers use: ${$("#w-kw").value}
+
+Return plain text in this order:
+TITLE (under 150 characters, main search words first, no ALL CAPS, no promotional words like "best" or "No.1")
+BULLETS (5 short points: what it is, size, material, use, what's in the box)
+DESCRIPTION (80-120 words)
+SEARCH KEYWORDS (comma-separated, not repeating the title)
+MISSING FACTS (what the seller should add)`; }
+let wctl=null;
+$("#w-copyprompt").onclick=()=>copy(listingPrompt(),$("#w-msg"));
+$("#w-copy").onclick=()=>copy($("#w-out").textContent,$("#w-msg"));
+$("#w-stop").onclick=()=>wctl?.abort();
+(async()=>{ const s=await window.claude?.use?.("sample").catch(()=>null);
+  if(!s){ $("#w-go").hidden=true; $("#w-msg").textContent="Writing here isn't available in this view. Copy the prompt into ChatGPT or Gemini instead."; return; }
+  $("#w-go").onclick=async()=>{ wctl=new AbortController(); $("#w-go").disabled=true; $("#w-stop").hidden=false; $("#w-out").textContent="Thinking…"; $("#w-msg").textContent="";
+    try{ const {truncated}=await s(listingPrompt(),{signal:wctl.signal,modelTier:"quick",onText:({text})=>{$("#w-out").textContent=text}}); if(truncated) $("#w-msg").textContent="Cut short. Try fewer facts."; }
+    catch(e){ $("#w-out").textContent=e.text||""; $("#w-msg").textContent={cancelled:"Stopped.",not_granted:"Writing was not allowed. Copy the prompt instead.",rate_limited:"Too many requests. Wait a minute and try again."}[e.code]||"Could not write the listing. Copy the prompt instead."; if(e.code==="not_granted") $("#w-go").hidden=true; }
+    finally{ $("#w-go").disabled=false; $("#w-stop").hidden=true; } };
+})();
+
+/* ---------- tools ---------- */
+const TOOLS=[
+ ["Product research",[
+  ["Jungle Scout, Helium 10, SellerSprite","https://www.junglescout.com","Paid","Amazon sales estimates and keyword data, sold as monthly subscriptions. At ₹10,000 a subscription eats the stock budget. Start with the marketplace's own search bar, best-seller lists and the reviews on competing listings."]]],
+ ["Invoice / label crop",[
+  ["PDF croppers","#labels","Built in","The Label cropper tab does this on your device, for any marketplace's label PDF."]]],
+ ["Product sourcing",[
+  ["IndiaMART","https://www.indiamart.com","Free to search","Directory of Indian manufacturers and wholesalers. You negotiate directly, so verify the supplier before paying."],
+  ["Udaan","https://udaan.com","Free to join","B2B wholesale app with platform-handled payment and delivery."],
+  ["Alibaba","https://www.alibaba.com","Import","Overseas suppliers. Importing adds customs duty, an import-export code and long shipping times. Leave it until a product is proven."]]],
+ ["Photo editing",[
+  ["Canva","https://www.canva.com","Free plan","Enough for white-background product images and infographics."],
+  ["Adobe Photoshop","https://www.adobe.com/products/photoshop.html","Paid","Not needed to start."]]],
+ ["Product details",[
+  ["ChatGPT / Gemini","#listing","Built in","The Listing writer tab writes listings here, or copies a ready prompt for ChatGPT or Gemini."]]],
+ ["Packaging",[
+  ["Local wholesale market","#budget","Cash","Wholesale markets sell poly mailers, boxes and tape in bulk. Buy sizes that fit your product; marketplaces charge shipping by weight and size."]]],
+ ["Inventory & orders",[
+  ["Unicommerce, Browntape","https://unicommerce.com","Paid","Multi-channel order and inventory software. Worth it once you sell on several marketplaces at volume. Until then, Stock & orders covers it."],
+  ["Oberlo","https://www.shopify.com","Closed","Shopify shut Oberlo down in 2022. Skip it."]]],
+ ["GST / billing",[
+  ["Vyapar, Zoho Books","https://vyaparapp.in","Paid plans","GST invoicing and returns filing. Marketplaces issue the customer invoice for orders placed on them; you need billing software for direct sales and your own records."]]]
+];
+const CH=[
+ ["Meesho","https://supplier.meesho.com","Start here or Amazon","Marketplace for low-priced, unbranded goods. Read the supplier registration page for current documents and fees."],
+ ["Amazon","https://sell.amazon.in","Start here or Meesho","Largest audience. Fees differ by category; see the Seller Central fee schedule before pricing."],
+ ["Flipkart","https://seller.flipkart.com","Second channel","Similar to Amazon. Add it once one channel is profitable."],
+ ["Blinkit, Zepto, Swiggy Instamart, Flipkart Minutes, BigBasket","#plan","Later","Quick-commerce and grocery apps stock goods in their own dark stores and buy from brands and distributors. They are not a place for a first ₹10,000 of unbranded stock."]
+];
+$("#tools-grid").innerHTML=`<div class="sheet"><h3>From your list</h3>${TOOLS.map(([cat,items])=>`<div class="phase">${cat}</div>`+items.map(([n,u,tag,d])=>`<div class="tool"><a href="${u}"${u.startsWith("http")?' target="_blank" rel="noopener"':""}>${n}</a><span class="pill ${tag==="Built in"?"good":tag==="Paid"||tag==="Closed"||tag==="Import"?"warn":""}">${tag}</span><p>${d}</p></div>`).join("")).join("")}</div>
+<div class="sheet"><h3>Where to sell</h3>${CH.map(([n,u,tag,d])=>`<div class="tool"><a href="${u}"${u.startsWith("http")?' target="_blank" rel="noopener"':""}>${n}</a><span class="pill ${tag==="Later"?"warn":"good"}">${tag}</span><p>${d}</p></div>`).join("")}
+<div class="note" style="margin-top:12px">This desk does not scrape or log in to any marketplace. Scraping breaks their terms and can get a seller account suspended. Copy fees from your seller panel and log orders by hand; at a few orders a day that takes minutes.</div></div>`;
+
+renderCalc(); route();
+</script>
